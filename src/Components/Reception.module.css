@@ -1,0 +1,12 @@
+.tableDiv{
+    /*border: 1px solid aliceblue;*/
+}
+table{
+
+    border-collapse: collapse;
+    border: 1px solid aliceblue;
+}
+tr,th,td{
+    border: 1px solid skyblue;
+    padding: 0.5rem;
+}
