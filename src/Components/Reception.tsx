@@ -1,6 +1,8 @@
 //imports
 import React, {useState} from "react";
 import s from './Reception.module.css'
+import {Patients} from "./Patients/Patients";
+import {Filters} from "./Filters/Filters";
 
 //types
 type PatientsPropsType = {
@@ -15,6 +17,8 @@ export function Reception(props: any) {
         [
             {
                 id: 1,
+                date: '16.12.2021',
+                covid: false,
                 namePatient: 'Пашкевич Е.В.',
                 year: 1997,
                 sex: 'м',
@@ -26,6 +30,8 @@ export function Reception(props: any) {
             },
             {
                 id: 2,
+                date: '16.12.2021',
+                covid: true,
                 namePatient: 'Иванов И.И.',
                 year: 1978,
                 sex: 'м',
@@ -37,6 +43,8 @@ export function Reception(props: any) {
             },
             {
                 id: 3,
+                date: '16.12.2021',
+                covid: false,
                 namePatient: 'Петров И.В.',
                 year: 1987,
                 sex: 'м',
@@ -48,6 +56,8 @@ export function Reception(props: any) {
             },
             {
                 id: 2,
+                date: '16.12.2021',
+                covid: true,
                 namePatient: 'Васильева И.В.',
                 year: 1956,
                 sex: 'ж',
@@ -64,9 +74,13 @@ export function Reception(props: any) {
     return (
         <div className={s.tableDiv}>
 
+            <Filters />
+
             <table>
                 <tr>
                     <th>№ п/п</th>
+                    <th>Дата</th>
+                    <th>Covid+</th>
                     <th>ФИО</th>
                     <th>Год</th>
                     <th>Пол</th>
@@ -77,7 +91,8 @@ export function Reception(props: any) {
                     <th>Заключение:</th>
                 </tr>
 
-                <Patient patients={patients} setPatients={setPatients}/>
+                <Patients patients={patients}
+                          setPatients={setPatients}/>
 
             </table>
 
@@ -85,29 +100,3 @@ export function Reception(props: any) {
     )
 }
 
-export function Patient(props: any) {
-
-    const removeResearch = (id:number) => {
-        props.setPatients(props.patients.filter((p:any) => p.id !== id ))
-    }
-
-    return (
-        <>
-        {props.patients.map((t: any) => {
-                return (
-                    <tr key={t.id}>
-                        <td>{t.id}</td>
-                        <td>{t.namePatient}</td>
-                        <td>{t.year}</td>
-                        <td>{t.sex}</td>
-                        <td>{t.adress}</td>
-                        <td>{t.research}</td>
-                        <td>{t.dose}</td>
-                        <td>{t.description}</td>
-                        <td>{t.conclusion}</td>
-                        <td><button onClick={ () => removeResearch(t.id)}>x</button></td>
-                    </tr>
-                )
-            })}
-        </>)
-}
