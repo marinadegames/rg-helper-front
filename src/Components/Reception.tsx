@@ -55,7 +55,7 @@ export function Reception(props: any) {
                 conclusion: 'ОХ ШОП 1 степени. Рек-но КТ ШОП. Аномалия Киммерле'
             },
             {
-                id: 2,
+                id: 4,
                 date: '16.12.2021',
                 covid: true,
                 namePatient: 'Васильева И.В.',
@@ -70,6 +70,10 @@ export function Reception(props: any) {
 
         ]
     )
+
+    const removeResearch = (id:number) => {
+        setPatients(patients.filter((p:any) => p.id !== id ))
+    }
 
     return (
         <div className={s.tableDiv}>
@@ -92,7 +96,9 @@ export function Reception(props: any) {
                 </tr>
 
                 <Patients patients={patients}
-                          setPatients={setPatients}/>
+                          setPatients={setPatients}
+                          removeResearch={removeResearch}
+                />
 
             </table>
 

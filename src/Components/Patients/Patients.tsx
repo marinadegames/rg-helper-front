@@ -4,10 +4,6 @@ import s from './Patients.module.css'
 
 // components
 export function Patients(props: any) {
-    const removeResearch = (id:number) => {
-        props.setPatients(props.patients.filter((p:any) => p.id !== id ))
-    }
-
 
     let checkCovid = (c:boolean) => {
         if (c) return '+'
@@ -17,7 +13,7 @@ export function Patients(props: any) {
         <>
             {props.patients.map((t: any) => {
                 return (
-                    <tr key={t.id}>
+                    <tr id={t.id}>
                         <td>{t.id}</td>
                         <td>{t.date}</td>
                         <td className={s.covid}>{checkCovid(t.covid)}</td>
@@ -29,7 +25,10 @@ export function Patients(props: any) {
                         <td>{t.dose}</td>
                         <td>{t.description}</td>
                         <td>{t.conclusion}</td>
-                        <td><button onClick={ () => removeResearch(t.id)}>x</button></td>
+                        <td><button className={s.btnDeletePatient}
+                                    onClick={ () => props.removeResearch(t.id)}>
+                            X
+                        </button></td>
                     </tr>
                 )
             })}
