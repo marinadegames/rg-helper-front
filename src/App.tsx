@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from './App.module.css';
 import {Reception} from "./Components/Reception";
 
@@ -11,7 +11,6 @@ function App() {
       <h1>Rg-helper</h1>
 
         <Reception />
-
     </div>
   );
 }

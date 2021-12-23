@@ -1,12 +1,15 @@
 .tableDiv{
     /*border: 1px solid aliceblue;*/
 }
+table {
+    width: 100%;
+}
 table{
-
+    border: 1px solid #c4d7f8;
     border-collapse: collapse;
-    border: 1px solid aliceblue;
+
 }
 tr,th,td{
-    border: 1px solid skyblue;
+    border: 1px solid #658f9d;
     padding: 0.5rem;
 }

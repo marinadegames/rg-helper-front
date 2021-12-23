@@ -1,7 +1,12 @@
 //imports
 import React, {useState} from "react";
 import s from './Reception.module.css'
+<<<<<<< HEAD
 import {v1} from "uuid";
+=======
+import {Patients} from "./Patients/Patients";
+import {Filters} from "./Filters/Filters";
+>>>>>>> 5493a642360134c16bd8539d87d52589e498c5fd
 
 //types
 type PatientsPropsType = {
@@ -15,8 +20,14 @@ export function Reception(props: any) {
     const [patients, setPatients] = useState(
         [
             {
+<<<<<<< HEAD
                 id: v1(),
                 num: 1,
+=======
+                id: 1,
+                date: '16.12.2021',
+                covid: false,
+>>>>>>> 5493a642360134c16bd8539d87d52589e498c5fd
                 namePatient: 'Пашкевич Е.В.',
                 year: 1997,
                 sex: 'м',
@@ -27,8 +38,14 @@ export function Reception(props: any) {
                 conclusion: 'N'
             },
             {
+<<<<<<< HEAD
                 id: v1(),
                 num: 2,
+=======
+                id: 2,
+                date: '16.12.2021',
+                covid: true,
+>>>>>>> 5493a642360134c16bd8539d87d52589e498c5fd
                 namePatient: 'Иванов И.И.',
                 year: 1978,
                 sex: 'м',
@@ -39,8 +56,14 @@ export function Reception(props: any) {
                 conclusion: 'ЗАКЛЮЧЕНИЕ'
             },
             {
+<<<<<<< HEAD
                 id: v1(),
                 num: 3,
+=======
+                id: 3,
+                date: '16.12.2021',
+                covid: false,
+>>>>>>> 5493a642360134c16bd8539d87d52589e498c5fd
                 namePatient: 'Петров И.В.',
                 year: 1987,
                 sex: 'м',
@@ -51,8 +74,14 @@ export function Reception(props: any) {
                 conclusion: 'ОХ ШОП 1 степени. Рек-но КТ ШОП. Аномалия Киммерле'
             },
             {
+<<<<<<< HEAD
                 id: v1(),
                 num: 4,
+=======
+                id: 4,
+                date: '16.12.2021',
+                covid: true,
+>>>>>>> 5493a642360134c16bd8539d87d52589e498c5fd
                 namePatient: 'Васильева И.В.',
                 year: 1956,
                 sex: 'ж',
@@ -66,16 +95,25 @@ export function Reception(props: any) {
         ]
     )
 
+<<<<<<< HEAD
     const removeResearch = (num:number) => {
         setPatients(patients.filter((p:any) => p.num !== num))
+=======
+    const removeResearch = (id:number) => {
+        setPatients(patients.filter((p:any) => p.id !== id ))
+>>>>>>> 5493a642360134c16bd8539d87d52589e498c5fd
     }
 
     return (
         <div className={s.tableDiv}>
 
+            <Filters />
+
             <table>
                 <tr>
                     <th>№ п/п</th>
+                    <th>Дата</th>
+                    <th>Covid+</th>
                     <th>ФИО</th>
                     <th>Год</th>
                     <th>Пол</th>
@@ -86,7 +124,10 @@ export function Reception(props: any) {
                     <th>Заключение:</th>
                 </tr>
 
-                <Patient patients={patients} setPatients={setPatients}/>
+                <Patients patients={patients}
+                          setPatients={setPatients}
+                          removeResearch={removeResearch}
+                />
 
             </table>
 
@@ -94,6 +135,7 @@ export function Reception(props: any) {
     )
 }
 
+<<<<<<< HEAD
 export function Patient(props: any) {
 
 
@@ -117,3 +159,5 @@ export function Patient(props: any) {
             })}
         </>)
 }
+=======
+>>>>>>> 5493a642360134c16bd8539d87d52589e498c5fd
