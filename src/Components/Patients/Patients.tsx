@@ -3,7 +3,7 @@ import React from "react";
 import s from './Patients.module.css'
 
 // components
-export function Patients(props: any) {
+export function Patient(props: any) {
 
     let checkCovid = (c:boolean) => {
         if (c) return '+'
@@ -13,8 +13,8 @@ export function Patients(props: any) {
         <>
             {props.patients.map((t: any) => {
                 return (
-                    <tr id={t.id}>
-                        <td>{t.id}</td>
+                    <tr key={t.id}>
+                        <td>{t.num}</td>
                         <td>{t.date}</td>
                         <td className={s.covid}>{checkCovid(t.covid)}</td>
                         <td>{t.namePatient}</td>
