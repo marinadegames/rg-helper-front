@@ -5,8 +5,8 @@
 
 ### ⚕ Versions:   
 ☢️`v0.0.1` - create app  
-🦷`v0.0.2` - add `useState` and `table patients`
-
+🦷`v0.0.2` - add `useState` and `table patients`  
+🆔`v0.0.3` - add `uuid`
 
 
 ## 🌠 Per aspera ad astra ⭐ 

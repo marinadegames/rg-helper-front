@@ -1,6 +1,7 @@
 //imports
 import React, {useState} from "react";
 import s from './Reception.module.css'
+import {v1} from "uuid";
 
 //types
 type PatientsPropsType = {
@@ -14,7 +15,8 @@ export function Reception(props: any) {
     const [patients, setPatients] = useState(
         [
             {
-                id: 1,
+                id: v1(),
+                num: 1,
                 namePatient: 'Пашкевич Е.В.',
                 year: 1997,
                 sex: 'м',
@@ -25,7 +27,8 @@ export function Reception(props: any) {
                 conclusion: 'N'
             },
             {
-                id: 2,
+                id: v1(),
+                num: 2,
                 namePatient: 'Иванов И.И.',
                 year: 1978,
                 sex: 'м',
@@ -36,7 +39,8 @@ export function Reception(props: any) {
                 conclusion: 'ЗАКЛЮЧЕНИЕ'
             },
             {
-                id: 3,
+                id: v1(),
+                num: 3,
                 namePatient: 'Петров И.В.',
                 year: 1987,
                 sex: 'м',
@@ -47,7 +51,8 @@ export function Reception(props: any) {
                 conclusion: 'ОХ ШОП 1 степени. Рек-но КТ ШОП. Аномалия Киммерле'
             },
             {
-                id: 2,
+                id: v1(),
+                num: 4,
                 namePatient: 'Васильева И.В.',
                 year: 1956,
                 sex: 'ж',
@@ -60,6 +65,10 @@ export function Reception(props: any) {
 
         ]
     )
+
+    const removeResearch = (num:number) => {
+        setPatients(patients.filter((p:any) => p.num !== num))
+    }
 
     return (
         <div className={s.tableDiv}>
@@ -87,16 +96,13 @@ export function Reception(props: any) {
 
 export function Patient(props: any) {
 
-    const removeResearch = (id:number) => {
-        props.setPatients(props.patients.filter((p:any) => p.id !== id ))
-    }
 
     return (
         <>
         {props.patients.map((t: any) => {
                 return (
                     <tr key={t.id}>
-                        <td>{t.id}</td>
+                        <td>{t.num}</td>
                         <td>{t.namePatient}</td>
                         <td>{t.year}</td>
                         <td>{t.sex}</td>
@@ -105,7 +111,7 @@ export function Patient(props: any) {
                         <td>{t.dose}</td>
                         <td>{t.description}</td>
                         <td>{t.conclusion}</td>
-                        <td><button onClick={ () => removeResearch(t.id)}>x</button></td>
+                        <td><button onClick={ () => props.removeResearch(t.id)}>x</button></td>
                     </tr>
                 )
             })}
