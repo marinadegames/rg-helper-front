@@ -20,7 +20,7 @@ export function Patient(props: any) {
                         <td>{t.namePatient}</td>
                         <td>{t.year}</td>
                         <td>{t.sex}</td>
-                        <td>{t.adress}</td>
+                        <td>{t.address}</td>
                         <td>{t.research}</td>
                         <td>{t.dose}</td>
                         <td>{t.description}</td>

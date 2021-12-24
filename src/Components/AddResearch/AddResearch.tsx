@@ -6,39 +6,38 @@ import {v1} from "uuid";
 
 //types
 type SexType = {
-    sex: 'M' | 'W'
+    sex: 'М' | 'Ж'
 }
 
 // components
 export function AddResearch(props: any) {
 
-    const [newDate, setNewDate] = useState<string>()
-    console.log(typeof newDate)
-    const [newCheckCovid, setNewCheckCovid] = useState<any>()
-    const [newName, setNewName] = useState<string>('')
-    const [newYear, setNewYear] = useState<any>()
-    const [newSex, setNewSex] = useState<string>()
-    const [newAdress, setNewAdress] = useState<any>()
-    const [newResearch, setNewResearch] = useState<any>()
-    const [newDose, setNewDose] = useState<any>()
+    let [newDate, setNewDate] = useState<string>()
+    let [newCheckCovid, setNewCheckCovid] = useState<any>()
+    let [newName, setNewName] = useState<string>('')
+    let [newYear, setNewYear] = useState<any>()
+    let [newSex, setNewSex] = useState<string>()
+    let [newAddress, setNewAddress] = useState<string>()
+    let [newResearch, setNewResearch] = useState<any>()
+    let [newDose, setNewDose] = useState<any>()
 
     const onChange_NewDate = (event: ChangeEvent<HTMLInputElement>) => {
-        setNewDate(event.currentTarget.value)
+        setNewDate(event.target.value)
     }
     const onChange_newCheckCovid = (event: ChangeEvent<HTMLInputElement>) => {
         setNewCheckCovid(event.currentTarget.value)
     }
     const onChange_NewName = (event: ChangeEvent<HTMLInputElement>) => {
-        setNewName(event.currentTarget.value)
+        setNewName(event.target.value)
     }
     const onChange_newYear = (event: ChangeEvent<HTMLInputElement>) => {
         setNewYear(event.currentTarget.value)
     }
-    const onChange_newSex = (sex: 'M' | 'W') => {
-        'M' ? setNewSex('M') : setNewSex('W')
+    const onChange_newSex = (sex: 'М' | 'Ж') => {
+        sex === 'М' ? setNewSex('М') : setNewSex('Ж')
     }
-    const onChange_newAdress = (event: ChangeEvent<HTMLInputElement>) => {
-        setNewAdress(event.currentTarget.value)
+    const onChange_newAddress = (event: ChangeEvent<HTMLInputElement>) => {
+        setNewAddress(event.currentTarget.value)
     }
     const onChange_newResearch = (event: ChangeEvent<HTMLInputElement>) => {
         setNewResearch(event.currentTarget.value)
@@ -48,17 +47,24 @@ export function AddResearch(props: any) {
     }
 
 
-    const addResearch = () => {
-        props.addResearchBtn(
-            newDate,
-            newCheckCovid,
-            newName,
-            newYear,
-            newSex,
-            newAdress,
-            newResearch,
-            newDose,
-        )
+    const addResearchBtn = () => {
+        let newPatient = {
+            id: v1(),
+            num: props.patients[props.patients.length - 1].num + 1,
+            date: newDate,
+            covid: newCheckCovid,
+            namePatient: newName,
+            year: newYear,
+            sex: newSex,
+            address: newAddress,
+            research: newResearch,
+            dose: newDose,
+            description: '...',
+            conclusion: '...',
+        }
+        let newPatients = [ ...props.patients, newPatient]
+        props.setPatients(newPatients)
+        console.log(newPatients)
     }
 
     return (
@@ -108,7 +114,7 @@ export function AddResearch(props: any) {
                                    name='sex'
                                    id={'man'}
                                    value={newSex}
-                                   onChange={() => onChange_newSex('M')}
+                                   onChange={() => onChange_newSex('М')}
                                    className={s.checkBoxSize}/>
                             <label>М</label>
                         </div>
@@ -117,29 +123,26 @@ export function AddResearch(props: any) {
                                    name="sex"
                                    id={'woman'}
                                    value={newSex}
-                                   onChange={() => onChange_newSex('W')}
+                                   onChange={() => onChange_newSex('Ж')}
                                    className={s.checkBoxSize}/>
                             <label>Ж</label>
                         </div>
                     </form>
                 </td>
                 <td>
-                    <input id={'adress'}
-                           onChange={onChange_newAdress}
-                           value={newAdress}/>
+                    <input onChange={onChange_newAddress}
+                           value={newAddress}/>
                 </td>
                 <td>
-                    <input id={'research'}
-                           value={newResearch}
+                    <input value={newResearch}
                            onChange={onChange_newResearch}/>
                 </td>
-                <td><input id={'dose'}
-                           type={'number'}
+                <td><input type={'number'}
                            value={newDose}
                            onChange={onChange_newDose}/></td>
                 <td>
                     <button className={s.btnAddResearch}
-                            onClick={addResearch}>
+                            onClick={addResearchBtn}>
                         +
                     </button>
                 </td>

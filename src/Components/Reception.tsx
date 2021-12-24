@@ -24,7 +24,7 @@ export function Reception(props: any) {
                 namePatient: 'Пашкевич Е.В.',
                 year: 1997,
                 sex: 'м',
-                adress: 'пр-т Дзерж 11-593',
+                address: 'пр-т Дзерж 11-593',
                 research: 'ОГК',
                 dose: 0.18,
                 description: '...',
@@ -38,7 +38,7 @@ export function Reception(props: any) {
                 namePatient: 'Иванов И.И.',
                 year: 1978,
                 sex: 'м',
-                adress: 'пр-т Пушкина 90-234',
+                address: 'пр-т Пушкина 90-234',
                 research: 'ОГК',
                 dose: 0.18,
                 description: '...',
@@ -52,7 +52,7 @@ export function Reception(props: any) {
                 namePatient: 'Петров И.В.',
                 year: 1987,
                 sex: 'м',
-                adress: 'пр-т Фрунзе 921-234',
+                address: 'пр-т Фрунзе 921-234',
                 research: 'ШОП + ГОП',
                 dose: 0.24,
                 description: '...',
@@ -66,7 +66,7 @@ export function Reception(props: any) {
                 namePatient: 'Васильева И.В.',
                 year: 1956,
                 sex: 'ж',
-                adress: 'ул. Р.Л. 197',
+                address: 'ул. Р.Л. 197',
                 research: 'тб суставы',
                 dose: 0.05,
                 description: '...',
@@ -78,26 +78,6 @@ export function Reception(props: any) {
 
     const removeResearch = (id: number) => {
         setPatients(patients.filter((p: any) => p.id !== id))
-    }
-
-    const addResearchBtn = (props: any) => {
-        let newPatient = {
-            id: v1(),
-            num: patients[patients.length - 1].num + 1,
-            date: props.newDate,
-            covid: props.newCheckCovi,
-            namePatient: props.newName,
-            year: props.newYear,
-            sex: props.newSex,
-            adress: props.newAdress,
-            research: props.newResearch,
-            dose: props.newDose,
-            description: '...',
-            conclusion: '...',
-        }
-        let newPatients = [ ...patients, newPatient]
-        setPatients(newPatients)
-        console.log(newPatient)
     }
 
     return (
@@ -130,7 +110,7 @@ export function Reception(props: any) {
 
             <h3 className={s.titleAddResearch}>Добаавить пациента:</h3>
             <AddResearch patients={patients}
-                         addResearchBtn={addResearchBtn}/>
+                         setPatients={setPatients}/>
 
         </div>
     )

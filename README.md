@@ -9,7 +9,8 @@
 🆔`v0.0.3` - add `uuid`
 ✔️`v0.0.3` - add `filters` (in progress... not working!!!)  
 🎎`v0.0.4` - add button `delete` patient => working!  |  + `layout`  
-🧢`v0.0.5` - add panel for `add patients` 
+🧢`v0.0.5` - add panel for `add patients`  
+💁`v0.0.6` - added the ability `add patients`
 
 
 ## 🌠 Per aspera ad astra ⭐ 
