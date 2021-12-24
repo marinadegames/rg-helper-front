@@ -5,13 +5,13 @@
 
 ### ⚕ Versions:   
 ☢️`v0.0.1` - create app  
-🦷`v0.0.2` - add `useState` and `table patients`  
-🆔`v0.0.3` - add `uuid`
-✔️`v0.0.3` - add `filters` (in progress... not working!!!)  
-🎎`v0.0.4` - add button `delete` patient => working!  |  + `layout`  
-🧢`v0.0.5` - add panel for `add patients`  
-💁`v0.0.6` - added the ability `add patients` | fix `checkbox-covid`
-
+🦷`v0.0.2` - added `useState` and `table patients`  
+🆔`v0.0.3` - added `uuid`
+✔️`v0.0.3` - added `filters` (in progress... not working!!!)  
+🎎`v0.0.4` - added button `delete` patient => working!  |  + `layout`  
+🧢`v0.0.5` - added panel for `add patients`  
+💁`v0.0.6` - added the ability `add patients` | fix `checkbox-covid`  
+🐜`v0.0.7` - added `ANT design` (NOT USED)
 
 ## 🌠 Per aspera ad astra ⭐ 
 

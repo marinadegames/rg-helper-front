@@ -2,7 +2,7 @@
 import React, {ChangeEvent, useState} from "react";
 import s from './AddResearch.module.css'
 import {v1} from "uuid";
-import {log} from "util";
+import { DatePicker, Space } from 'antd';
 
 
 //types
@@ -66,6 +66,15 @@ export function AddResearch(props: any) {
         let newPatients = [ ...props.patients, newPatient]
         props.setPatients(newPatients)
         console.log(newPatients)
+        setNewDate('')
+        setNewCheckCovid('')
+        setNewName('')
+        setNewYear('')
+        setNewSex('')
+        setNewAddress('')
+        setNewResearch('')
+        setNewDose('')
+
     }
 
     return (
