@@ -1,9 +1,18 @@
 .checkBoxSize{
-    width: 1.5rem;
-    height: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1rem;
+    height: 1rem;
     cursor: pointer;
     padding: 0;
     margin: 0;
+}
+input{
+    padding: 0;
+    margin: 0;
+    height: 2rem;
+    font-size: 1.5rem;
 }
 .btnAddResearch{
     height: 3rem;
@@ -14,18 +23,6 @@
     font-size: 20px;
     font-weight: 800;
 }
-
-.table {
-    width: 100%;
-}
-table{
-    border: 1px solid #c4d7f8;
-    border-collapse: collapse;
-}
-tr,th,td{
-    border: 1px solid #658f9d;
-    padding: 0.5rem;
-}
 .covidCheck{
     font-weight: 800;
     font-size: 30px;
@@ -34,4 +31,8 @@ tr,th,td{
 }
 .divSex{
     display: flex;
+}
+.table td{
+    margin: 0;
+    padding: 1rem;
 }

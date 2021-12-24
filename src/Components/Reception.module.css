@@ -1,10 +1,5 @@
-.tableDiv{
-    /*border: 1px solid aliceblue;*/
-}
-table {
-    width: 100%;
-}
 table{
+    width: 100%;
     border: 1px solid #c4d7f8;
     border-collapse: collapse;
 }

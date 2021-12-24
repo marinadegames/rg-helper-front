@@ -78,7 +78,7 @@ export function AddResearch(props: any) {
     }
 
     return (
-        <table>
+        <table className={s.table}>
             <tr>
                 <th>№ п/п</th>
                 <th>Дата</th>
@@ -93,7 +93,7 @@ export function AddResearch(props: any) {
             </tr>
 
 
-            <tr key='9999'>
+            <tr key={props.id}>
                 <td>{props.patients[props.patients.length - 1].num + 1}</td>
                 <td><input type={'date'}
                            onChange={onChange_NewDate}
