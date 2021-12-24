@@ -2,6 +2,7 @@
 import React, {ChangeEvent, useState} from "react";
 import s from './AddResearch.module.css'
 import {v1} from "uuid";
+import {log} from "util";
 
 
 //types
@@ -13,7 +14,7 @@ type SexType = {
 export function AddResearch(props: any) {
 
     let [newDate, setNewDate] = useState<string>()
-    let [newCheckCovid, setNewCheckCovid] = useState<any>()
+    let [newCheckCovid, setNewCheckCovid] = useState<any>(false)
     let [newName, setNewName] = useState<string>('')
     let [newYear, setNewYear] = useState<any>()
     let [newSex, setNewSex] = useState<string>()
@@ -25,7 +26,7 @@ export function AddResearch(props: any) {
         setNewDate(event.target.value)
     }
     const onChange_newCheckCovid = (event: ChangeEvent<HTMLInputElement>) => {
-        setNewCheckCovid(event.currentTarget.value)
+        event.target.checked ? setNewCheckCovid(true) : setNewCheckCovid(false)
     }
     const onChange_NewName = (event: ChangeEvent<HTMLInputElement>) => {
         setNewName(event.target.value)
