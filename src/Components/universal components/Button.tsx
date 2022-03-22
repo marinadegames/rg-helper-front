@@ -3,7 +3,7 @@ import s from './Button.module.css'
 
 type PropsType = {
     title: string
-    icon?: ImageData
+    icon?: any
     callback?: () => void
 }
 

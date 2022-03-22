@@ -1,0 +1,22 @@
+.Sidebar {
+    @apply
+    w-1/4
+    min-h-full
+    flex
+    justify-between
+    flex-col
+    rounded-lg
+    py-2.5
+    px-3
+    bg-gray-800
+
+}
+
+.sidebar_container {
+    @apply
+    text-xl
+    w-full
+    flex
+    justify-between
+    mb-5
+}

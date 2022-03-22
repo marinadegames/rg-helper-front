@@ -1,9 +1,0 @@
-.header {
-    @apply
-        flex
-        justify-between
-    rounded-lg
-    py-2.5
-    px-3
-    bg-gray-800
-}
