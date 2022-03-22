@@ -1,6 +1,9 @@
 .header {
     @apply
+        flex
+        justify-between
     rounded-lg
-    p-2
+    py-2.5
+    px-3
     bg-gray-800
 }
