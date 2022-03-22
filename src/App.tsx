@@ -1,20 +1,12 @@
 import React from 'react';
 import s from './App.module.css';
-import {Reception} from "./Components/Reception";
-
-function App() {
+import {Header} from "./Components/header/Header";
 
 
-
-  return (
-    <div className={s.App}>
-      <h1>Rg-helper</h1>
-
-        <Reception />
-    </div>
-  );
+export const App = () => {
+    return (
+        <div className={s.App}>
+            <Header/>
+        </div>
+    );
 }
-
-
-
-export default App;
