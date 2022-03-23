@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './App.module.css';
 import {Sidebar} from "./Components/sidebar/Sidebar";
-import {AllPatients} from "./Components/table patients/AllPatients";
+import {AllPatients} from "./Components/all pateints/AllPatients";
 
 
 export const App = () => {
