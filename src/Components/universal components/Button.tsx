@@ -5,11 +5,12 @@ type PropsType = {
     title: string
     icon?: any
     callback?: () => void
+    style?: string
 }
 
 export const Button = (props: PropsType) => {
     return (
-        <button className={s.button}>
+        <button className={`${s.button} + ${props.style}`}>
             {props.icon}
             {props.title}
         </button>

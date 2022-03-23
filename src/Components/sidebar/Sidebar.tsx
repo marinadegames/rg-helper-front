@@ -1,29 +1,24 @@
 import React from "react";
 import s from './Sidebar.module.css'
 import {Button} from "../universal components/Button";
+import {MenuItem} from "../menuItem/MenuItem";
 
 export function Sidebar() {
     return (
         <header className={s.Sidebar}>
             <div className={s.sidebar_container}>
                 <h1>☢️Rg-helper</h1>
-                <Button title={'Add patient'}/>
             </div>
+            <Button title={'Новый пациент'} style={'h-10'}/>
 
-            Menu:
+            <hr className={s.horizontalLine}/>
+
+            Меню:
             <div>
-                <div className={s.Sidebar_menu_item}>
-                    Patients
-                </div>
-                <div className={s.Sidebar_menu_item}>
-                    Settings
-                </div>
-                <div className={s.Sidebar_menu_item}>
-                    Doctors
-                </div>
-                <div className={s.Sidebar_menu_item}>
-                    Database
-                </div>
+                <MenuItem title={'Все пациенты'} icon={''}/>
+                <MenuItem title={'Настройки'} icon={''}/>
+                <MenuItem title={'Выход'}
+                          icon={''}/>
             </div>
         </header>
     );

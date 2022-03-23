@@ -1,6 +1,6 @@
 .Sidebar {
     @apply
-    w-1/4
+    w-1/6
     min-h-full
     flex
     justify-between
@@ -19,4 +19,10 @@
     flex
     justify-between
     mb-5
+
+}
+.horizontalLine {
+    @apply
+    my-5
+    border-gray-500
 }
