@@ -4,7 +4,7 @@ type PropsType = {
     patients: PatientsStateType
 }
 
-export const TablePatients = (props: PropsType)=> {
+export const TablePatients = (props: PropsType) => {
 
     const formatDate = (date: Date) => {
         let day = date.getDay().toString()
@@ -16,44 +16,43 @@ export const TablePatients = (props: PropsType)=> {
     }
 
     return (
-        <div className="table w-full bg-gray-800">
-            <div className="table-header-group ...">
+        <div className="table w-full table bg-gray-800 rounded-md p-3 ">
+            <div className="table-header-group">
                 <div className="table-row">
-                    <div className="table-cell text-left ...">Номер</div>
-                    <div className="table-cell text-left ...">Дата</div>
-                    <div className="table-cell text-left ...">ФИО</div>
-                    <div className="table-cell text-left ...">Год</div>
-                    <div className="table-cell text-left ...">Пол</div>
-                    <div className="table-cell text-left ...">Адрес</div>
-                    <div className="table-cell text-left ...">Тип</div>
-                    <div className="table-cell text-left ...">Пленка</div>
-                    <div className="table-cell text-left ...">Доза</div>
-                    <div className="table-cell text-left ...">Описание</div>
-                    <div className="table-cell text-left ...">Заключение</div>
+                    <div className="table-cell text-lg font-bold text-left pb-7">Номер</div>
+                    <div className="table-cell text-lg font-bold text-left pb-7">Дата</div>
+                    <div className="table-cell text-lg font-bold text-left pb-7">ФИО</div>
+                    <div className="table-cell text-lg font-bold text-left pb-7">Год</div>
+                    <div className="table-cell text-lg font-bold text-left pb-7">Пол</div>
+                    <div className="table-cell text-lg font-bold text-left pb-7">Адрес</div>
+                    <div className="table-cell text-lg font-bold text-left pb-7">Тип</div>
+                    <div className="table-cell text-lg font-bold text-left pb-7">Пленка</div>
+                    <div className="table-cell text-lg font-bold text-left pb-7">Доза</div>
+                    <div className="table-cell text-lg font-bold text-left pb-7">Описание</div>
+                    <div className="table-cell text-lg font-bold text-left pb-7">Заключение</div>
                 </div>
             </div>
             <div className="table-row-group">
                 {props.patients.map(pat => {
                     return (
-                        <div key={pat.id} className="table-row">
-                            <div className="table-cell">{pat.id}</div>
-                            <div className="table-cell">{formatDate(pat.dateOfReceipt)}</div>
-                            <div className="table-cell">{pat.name}</div>
-                            <div className="table-cell">{pat.year}</div>
-                            <div className="table-cell">{pat.sex}</div>
-                            <div className="table-cell">{pat.adress}</div>
-                            <div className="table-cell">{pat.typeResearch}</div>
-                            <div className="table-cell">
+                        <div key={pat.id} className="table-row transition hover:bg-gray-600 cursor-pointer">
+                            <div className="table-cell py-3 ">{pat.id}</div>
+                            <div className="table-cell py-3 ">{formatDate(pat.dateOfReceipt)}</div>
+                            <div className="table-cell py-3 ">{pat.name}</div>
+                            <div className="table-cell py-3 ">{pat.year}</div>
+                            <div className="table-cell py-3 ">{pat.sex}</div>
+                            <div className="table-cell py-3 ">{pat.adress}</div>
+                            <div className="table-cell py-3 ">{pat.typeResearch}</div>
+                            <div className="table-cell py-3 ">
                                 {pat.xrayFilms.map(f => {
-                                    console.log(f)
                                     return (
                                         <div key={f.amount}>{f.size}/{f.amount}/{f.projections}</div>
                                     )
                                 })}
                             </div>
-                            <div className="table-cell">{pat.dose} мЗв</div>
-                            <div className="table-cell">{pat.description}</div>
-                            <div className="table-cell">{pat.conclusion}</div>
+                            <div className="table-cell py-3">{pat.dose} мЗв</div>
+                            <div className="table-cell py-3">{pat.description}</div>
+                            <div className="table-cell py-3">{pat.conclusion}</div>
                         </div>
                     )
                 })}

@@ -14,7 +14,7 @@ export const AllPatients = () => {
     // return
     return (
         <div className={s.all_patients}>
-            <div className={s.filters}>FILTERS</div>
+            <div className={s.filters}>Прием пациентов</div>
             <TablePatients patients={patients}/>
         </div>
     )
