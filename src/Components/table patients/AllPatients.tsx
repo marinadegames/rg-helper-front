@@ -17,12 +17,6 @@ export const AllPatients = () => {
         return `${day}.${month}.${year}`
     }
 
-    // const formatXrayFilms = (xrayFilms: any) => {
-    //     console.log(xrayFilms)
-    //     return
-    // }
-
-
     return (
         <div className={s.all_patients}>
             <div className={s.filters}>FILTERS</div>
@@ -38,6 +32,7 @@ export const AllPatients = () => {
                         <div className="table-cell text-left ...">Год</div>
                         <div className="table-cell text-left ...">Пол</div>
                         <div className="table-cell text-left ...">Адрес</div>
+                        <div className="table-cell text-left ...">Тип</div>
                         <div className="table-cell text-left ...">Пленка</div>
                         <div className="table-cell text-left ...">Доза</div>
                         <div className="table-cell text-left ...">Описание</div>
@@ -54,10 +49,12 @@ export const AllPatients = () => {
                                 <div className="table-cell">{pat.year}</div>
                                 <div className="table-cell">{pat.sex}</div>
                                 <div className="table-cell">{pat.adress}</div>
+                                <div className="table-cell">{pat.typeResearch}</div>
                                 <div className="table-cell">
                                     {pat.xrayFilms.map(f => {
+                                        console.log(f)
                                         return (
-                                            <div>{f.size}/{f.amount}/{f.projections}</div>
+                                            <div key={f.amount}>{f.size}/{f.amount}/{f.projections}</div>
                                         )
                                     })}
                                 </div>

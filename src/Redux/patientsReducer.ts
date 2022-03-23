@@ -9,7 +9,7 @@ export type PatientType = {
     year: number
     sex: 'М' | 'Ж'
     adress: string
-    typeResearch: string | any
+    typeResearch: string
     xrayFilms: Array<XrayFilmsType>
     dose: number
     description: string | null
