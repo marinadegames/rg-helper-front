@@ -23,7 +23,7 @@ export type SizeType = '35x35' | '18x43'
 export type ActionType = AddPatientAT
 export type AddPatientAT = {
     type: 'ADD_ACTION_TYPE'
-    OBJECT: PatientType
+    payload: PatientType
 }
 // init state
 const PatientsState: PatientsStateType = [
@@ -58,7 +58,7 @@ const PatientsState: PatientsStateType = [
 export const patientsReducer = (state = PatientsState, action: ActionType): PatientsStateType => {
     switch (action.type) {
         case "ADD_ACTION_TYPE":
-            return state
+            return [...state, action.payload]
         default:
             return state
     }
@@ -66,7 +66,7 @@ export const patientsReducer = (state = PatientsState, action: ActionType): Pati
 
 // AC
 export const AddPatientsAC = (OBJECT: PatientType): AddPatientAT => {
-    return {type: "ADD_ACTION_TYPE", OBJECT}
+    return {type: "ADD_ACTION_TYPE", payload: OBJECT}
 }
 
 // TC
