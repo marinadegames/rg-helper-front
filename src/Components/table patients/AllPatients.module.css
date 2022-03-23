@@ -1,0 +1,13 @@
+.all_patients {
+    @apply
+    w-full
+}
+
+.filters {
+    @apply
+    bg-gray-800
+    rounded-md
+    py-2
+    px-2
+    mb-5
+}

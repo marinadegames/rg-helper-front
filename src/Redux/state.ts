@@ -1,9 +1,10 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunk, {ThunkAction} from "redux-thunk";
+import {patientsReducer} from "./patientsReducer";
 
 
 const rootReducer = combineReducers({
-    // reducers
+    patients: patientsReducer
 })
 
 export type rootReducerType = ReturnType<typeof rootReducer>

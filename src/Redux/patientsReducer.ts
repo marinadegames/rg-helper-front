@@ -9,6 +9,7 @@ export type PatientType = {
     year: number
     sex: 'М' | 'Ж'
     adress: string
+    typeResearch: string | any
     xrayFilms: Array<XrayFilmsType>
     dose: number
     description: string | null
@@ -18,6 +19,7 @@ export type PatientType = {
 export type XrayFilmsType = {
     size: SizeType
     amount: number
+    projections: number
 }
 export type SizeType = '35x35' | '18x43'
 export type ActionType = AddPatientAT
@@ -33,7 +35,8 @@ const PatientsState: PatientsStateType = [
         year: 1997,
         sex: 'М',
         adress: 'Пупкина 11-11',
-        xrayFilms: [{size: '35x35', amount: 1}],
+        typeResearch: 'ОГК',
+        xrayFilms: [{size: '35x35', amount: 1, projections: 1}],
         dose: 0.18,
         description: null,
         conclusion: null,
@@ -45,7 +48,8 @@ const PatientsState: PatientsStateType = [
         year: 2001,
         sex: 'М',
         adress: 'ул. Фронтендерская 99-99',
-        xrayFilms: [{size: '35x35', amount: 2}],
+        typeResearch: 'ОГК',
+        xrayFilms: [{size: '35x35', amount: 1, projections: 1}],
         dose: 0.32,
         description: null,
         conclusion: null,
