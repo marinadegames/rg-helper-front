@@ -12,6 +12,22 @@ export const AddPatient = () => {
 
     const [research, setResearch] = useState<Array<any>>([])
 
+    const researchTypes = [
+        'ОГК',
+        'Т/Б СУСТАВЫ',
+        'Стопы',
+        'ШОП',
+        'ПОП',
+        'ШОП',
+        'ГПОП',
+        'ПКОК',
+        'ППН',
+        'Другое',
+        'Rg-скопия желудка',
+        'Rg-скопия легких',
+
+    ]
+
     return (
         <div className={s.add_patients}>
             <div className={s.header_add_patients}>Добавление нового пациента:</div>
@@ -86,9 +102,11 @@ export const AddPatient = () => {
                         <div className="table-row-group">
                             <div className="table-row">
                                 <div className="table-cell p-2 text-start border border-gray-400">
-                                    <InputMenuTypes />
+                                    <InputMenuTypes types={researchTypes}/>
                                 </div>
-                                <div className="table-cell p-2 text-center border border-gray-400">35х35</div>
+                                <div className="table-cell p-2 text-center border border-gray-400">
+                                    <InputMenuTypes types={researchTypes}/>
+                                </div>
                                 <div className="table-cell p-2 text-center border border-gray-400">1</div>
                                 <div className="table-cell p-2 text-center border border-gray-400">1</div>
                                 <div className="table-cell p-2 text-center border border-gray-400">0.18</div>
