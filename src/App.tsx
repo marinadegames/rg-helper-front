@@ -2,13 +2,20 @@ import React from 'react';
 import s from './App.module.css';
 import {Sidebar} from "./Components/sidebar/Sidebar";
 import {AllPatients} from "./Components/all pateints/AllPatients";
+import {Route, Routes} from 'react-router-dom';
+import {AddPatient} from "./Components/add-patient/AddPatient";
 
 
 export const App = () => {
     return (
         <div className={s.App}>
             <Sidebar/>
-            <AllPatients/>
+
+            <Routes>
+                <Route path='/patients' element={<AllPatients/>}/>
+                <Route path='/add-patient' element={<AddPatient/>}/>
+                <Route path='/*' element={<h1 style={{textAlign:'center'}}>404 not found</h1>}/>
+            </Routes>
         </div>
     );
 }
