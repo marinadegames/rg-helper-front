@@ -4,12 +4,17 @@ import {ChevronDownIcon} from '@heroicons/react/solid'
 
 type PropsType = {
     types: Array<string>
+    selectType?: (type: string) => void
 }
 
 export const InputMenuTypes = (props: PropsType) => {
 
     const [type, setType] = useState<string | 'Выбрать'>('Выбрать')
 
+    const selectType = (t: string) => {
+        setType(t)
+        selectType(t)
+    }
 
     return (
         <Menu as="div" className="relative inline-block text-left w-full ">
@@ -38,7 +43,7 @@ export const InputMenuTypes = (props: PropsType) => {
                                 <Menu.Item>
                                     <div
                                         className={'bg-gray-100 text-gray-900 block px-4 py-2 hover:bg-gray-200 cursor-pointer text-sm'}
-                                        onClick={() => setType(t)}>
+                                        onClick={() => selectType(t)}>
                                         {t}
                                     </div>
                                 </Menu.Item>

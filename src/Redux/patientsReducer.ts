@@ -9,19 +9,20 @@ export type PatientType = {
     year: number
     sex: 'М' | 'Ж'
     adress: string
-    typeResearch: string
-    xrayFilms: Array<XrayFilmsType>
+    researches: Array<ResearchesType>
     dose: number
     description: string | null
     conclusion: string | null
     dateOfReceipt: Date
 }
-export type XrayFilmsType = {
-    size: SizeType
+export type ResearchesType = {
+    typeRes: string
+    sizeFilm: SizeType
     amount: number
     projections: number
 }
-export type SizeType = '35x35' | '18x43'
+
+export type SizeType = '35x35' | '18x43' | '18x35'
 export type ActionType = AddPatientAT
 export type AddPatientAT = {
     type: 'ADD_ACTION_TYPE'
@@ -35,8 +36,14 @@ const PatientsState: PatientsStateType = [
         year: 1997,
         sex: 'М',
         adress: 'Пупкина 11-11',
-        typeResearch: 'ОГК',
-        xrayFilms: [{size: '35x35', amount: 1, projections: 1}],
+        researches: [
+            {
+                typeRes: 'ОГК',
+                sizeFilm: '35x35',
+                amount: 1,
+                projections: 1
+            }
+        ],
         dose: 0.18,
         description: null,
         conclusion: null,
@@ -48,8 +55,14 @@ const PatientsState: PatientsStateType = [
         year: 2001,
         sex: 'М',
         adress: 'ул. Фронтендерская 99-99',
-        typeResearch: 'ОГК',
-        xrayFilms: [{size: '35x35', amount: 1, projections: 1}],
+        researches: [
+            {
+                typeRes: 'ОГК',
+                sizeFilm: '35x35',
+                amount: 1,
+                projections: 1
+            }
+        ],
         dose: 0.32,
         description: null,
         conclusion: null,

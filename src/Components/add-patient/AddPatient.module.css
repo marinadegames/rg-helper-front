@@ -19,9 +19,8 @@
     flex
     flex-row
     items-center
-    /*bg-gray-800*/
     rounded-md
-    mb-4
+    mb-0
     p-2
 }
 
