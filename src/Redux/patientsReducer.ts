@@ -1,7 +1,8 @@
 // import
 
-
 // types
+
+
 export type PatientsStateType = Array<PatientType>
 export type PatientType = {
     id: number // id === xray page number
@@ -16,13 +17,14 @@ export type PatientType = {
     dateOfReceipt: Date
 }
 export type ResearchesType = {
+    idRes: string
     typeRes: string
     sizeFilm: SizeType
     amount: number
     projections: number
 }
 
-export type SizeType = '35x35' | '18x43' | '18x35'
+export type SizeType = string
 export type ActionType = AddPatientAT
 export type AddPatientAT = {
     type: 'ADD_ACTION_TYPE'
@@ -38,6 +40,7 @@ const PatientsState: PatientsStateType = [
         adress: 'Пупкина 11-11',
         researches: [
             {
+                idRes: 'werewrwer1234123413',
                 typeRes: 'ОГК',
                 sizeFilm: '35x35',
                 amount: 1,
@@ -57,6 +60,7 @@ const PatientsState: PatientsStateType = [
         adress: 'ул. Фронтендерская 99-99',
         researches: [
             {
+                idRes: 'ewfwegwegwe',
                 typeRes: 'ОГК',
                 sizeFilm: '35x35',
                 amount: 1,

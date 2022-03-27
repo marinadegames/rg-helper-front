@@ -40,7 +40,7 @@ export const InputMenuTypes = (props: PropsType) => {
                     <div className="py-1 ">
                         {props.types.map(t => {
                             return (
-                                <Menu.Item>
+                                <Menu.Item key={t}>
                                     <div
                                         className={'bg-gray-100 text-gray-900 block px-4 py-2 hover:bg-gray-200 cursor-pointer text-sm'}
                                         onClick={() => selectType(t)}>

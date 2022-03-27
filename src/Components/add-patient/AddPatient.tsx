@@ -1,45 +1,26 @@
 import s from './AddPatient.module.css'
 import {useSelector} from "react-redux";
 import {rootReducerType} from "../../Redux/state";
-import {Button} from "../universal components/Button";
-import {InputMenuTypes} from "../InputMenuResearchType/InputMenuTypes";
-import {Counter} from "../counter/Counter";
 import {useFormik} from "formik";
 import {useState} from "react";
 import {ResearchesType} from "../../Redux/patientsReducer";
+import {TypeResearchComponent} from "./TypeResearchComponent";
+import {v1} from "uuid";
 
 
 export const AddPatient = () => {
 
     const nextId = useSelector<rootReducerType, number>(state => state.patients.length)
-
     const [researches, setResearches] = useState<Array<ResearchesType>>([
-
+        {
+            idRes: v1(),
+            typeRes: '',
+            sizeFilm: '35x35',
+            amount: 1,
+            projections: 1
+        },
     ])
 
-    const selectResType = () => {
-
-    }
-
-    const researchTypes = [
-        'ОГК',
-        'Т/Б СУСТАВЫ',
-        'Стопы',
-        'ШОП',
-        'ПОП',
-        'ШОП',
-        'ГПОП',
-        'ПКОК',
-        'ППН',
-        'Другое',
-        'Rg-скопия желудка',
-        'Rg-скопия легких',
-    ]
-    const sizeFilms = [
-        '35x35',
-        '28x43',
-        '18x35',
-    ]
 
     const formik = useFormik({
         initialValues: {
@@ -48,19 +29,30 @@ export const AddPatient = () => {
             year: 0,
             sex: '',
             adress: '',
-            typeResearch: '',
-            xrayFilms: [
-                // dose: number
-                // description: string | null
-                // conclusion: string | null
-            ], //Array<XrayFilmsType>
-
+            // res
             dateOfReceipt: new Date()
         },
         onSubmit: values => {
             console.log(values);
         },
     });
+
+    const addRes = () => {
+        const newRes = {
+            idRes: v1(),
+            typeRes: '',
+            sizeFilm: '35x35',
+            amount: 1,
+            projections: 1
+        }
+        setResearches(
+            [...researches, newRes]
+        )
+    }
+    const deleteRes = (id: string) => {
+        console.log('delete res ' + id )
+        setResearches(researches.filter(res => res.idRes !== id))
+    }
 
 
     return (
@@ -123,58 +115,47 @@ export const AddPatient = () => {
                 <div className={s.box}>
                     <div className={'flex flex-row'}>
                         <div className={s.name_field}>Тип исследования:</div>
-                        <Button title={'Добавить'}/>
+                        {/*<Button title={'Добавить'}/>*/}
+                        <button onClick={addRes} className={'border border-red-200 w-32'}>+</button>
                     </div>
-
-                    {/*TABLE*/}
-                    <div className={'flex flex-col my-4 '}>
-                        <div className="table w-full ">
-                            <div className="table-header-group ...">
-                                <div className="table-row">
-                                    <div
-                                        className="table-cell w-1/6 font-bold p-2 text-center border border-gray-400 text-left">Тип
-                                    </div>
-                                    <div
-                                        className="table-cell w-1/6 font-bold p-2 text-center border border-gray-400 text-left">Пленка
-                                    </div>
-                                    <div
-                                        className="table-cell w-1/6 font-bold p-2 text-center border border-gray-400 text-left">Кол-во
-                                    </div>
-                                    <div
-                                        className="table-cell w-1/6 font-bold p-2 text-center border border-gray-400 text-left">Проекций
-                                    </div>
-                                    <div
-                                        className="table-cell w-1/6 font-bold p-2 text-center border border-gray-400 text-left">Доза,
-                                        мЗв
-                                    </div>
+                </div>
+                <div className={'flex flex-col my-4 '}>
+                    <div className="table w-full ">
+                        <div className="table-header-group ...">
+                            <div className="table-row">
+                                <div
+                                    className="table-cell w-1/6 font-bold p-2 text-center border border-gray-400 text-left">Тип
                                 </div>
-                            </div>
-                            <div className="table-row-group">
-                                <div className="table-row">
-                                    <div className="table-cell p-2 text-start border border-gray-400">
-                                        <InputMenuTypes types={researchTypes}/>
-                                    </div>
-                                    <div className="table-cell p-2 text-center border border-gray-400">
-                                        <InputMenuTypes types={sizeFilms}/>
-                                    </div>
-                                    <div className="table-cell p-2 text-center border border-gray-400">
-                                        <Counter/>
-                                    </div>
-                                    <div className="table-cell p-2 text-center border border-gray-400">
-                                        <Counter/>
-                                    </div>
-                                    <div className="table-cell p-2 text-center border border-gray-400">
-                                        <input name={'dose'}
-                                               type={'number'}
-                                               className={'text-gray-800'}/>
-                                    </div>
+                                <div
+                                    className="table-cell w-1/6 font-bold p-2 text-center border border-gray-400 text-left">Пленка
+                                </div>
+                                <div
+                                    className="table-cell w-1/6 font-bold p-2 text-center border border-gray-400 text-left">Кол-во
+                                </div>
+                                <div
+                                    className="table-cell w-1/6 font-bold p-2 text-center border border-gray-400 text-left">Проекций
+                                </div>
+                                <div
+                                    className="table-cell w-1/6 font-bold p-2 text-center border border-gray-400 text-left">Доза,
+                                    мЗв
+                                </div>
+                                <div
+                                    className="table-cell w-1/12 font-bold p-2 text-center border border-gray-400 text-left">Удалить
                                 </div>
                             </div>
                         </div>
+                        {researches.map(res => {
+                            return (
+                                <TypeResearchComponent
+                                    key={res.idRes}
+                                    id={res.idRes}
+                                    callback={deleteRes}/>
+                            )
+                        })}
                     </div>
-
-
                 </div>
+
+
                 <button type="submit">Submit</button>
             </form>
         </div>
