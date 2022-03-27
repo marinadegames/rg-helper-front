@@ -1,11 +1,15 @@
 import {InputMenuTypes} from "../InputMenuResearchType/InputMenuTypes";
 import {Counter} from "../counter/Counter";
 import {useState} from "react";
-import {ResearchesType} from "../../Redux/patientsReducer";
 
 type PropsType = {
     id: string
-    callback: (value: any) => void
+    deleteRes: (value: any) => void
+    selectTypeRes: (value: string, id: string) => void
+    selectXrayFilm: (value: string, id: string) => void
+    selectAmount: (num: number, id: string) => void
+    selectProjections: (num: number, id: string) => void
+    selectDose: (num: number, id: string) => void
 }
 
 export const TypeResearchComponent = (props: PropsType) => {
@@ -28,35 +32,54 @@ export const TypeResearchComponent = (props: PropsType) => {
         '28x43',
         '18x35',
     ]
-    const [researches, setResearches] = useState<Array<ResearchesType>>([])
+
+    const [dose, setDose] = useState<number>(0)
 
     const deleteRes = () => {
-        props.callback(props.id)
+        props.deleteRes(props.id)
+    }
+    const selectTypeRes = (type: string) => {
+        props.selectTypeRes(type, props.id)
+    }
+    const selectTypeFilm = (type: string) => {
+        props.selectXrayFilm(type, props.id)
+    }
+    const selectAmount = (num: number) => {
+        props.selectAmount(num, props.id)
+    }
+    const selectProjections = (num: number) => {
+        props.selectProjections(num, props.id)
+    }
+    const changeDose = (e: number) => {
+        setDose(e)
+        props.selectDose(e, props.id)
     }
 
-    return (
 
+    return (
         <div className="table-row-group">
             <div className="table-row">
                 <div className="table-cell p-2 text-start border border-gray-400">
-                    <InputMenuTypes types={researchTypes}/>
+                    <InputMenuTypes callback={selectTypeRes} types={researchTypes}/>
                 </div>
                 <div className="table-cell p-2 text-center border border-gray-400">
-                    <InputMenuTypes types={sizeFilms}/>
+                    <InputMenuTypes callback={selectTypeFilm} types={sizeFilms}/>
                 </div>
                 <div className="table-cell p-2 text-center border border-gray-400">
-                    <Counter/>
+                    <Counter callback={selectAmount}/>
                 </div>
                 <div className="table-cell p-2 text-center border border-gray-400">
-                    <Counter/>
+                    <Counter callback={selectProjections}/>
                 </div>
                 <div className="table-cell p-2 text-center border border-gray-400">
                     <input name={'dose'}
                            type={'number'}
+                           value={dose}
+                           onChange={e => changeDose(e.currentTarget.valueAsNumber)}
                            className={'text-gray-800'}/>
                 </div>
-                <div
-                    className="
+                <div onClick={deleteRes}
+                     className="
                 cursor-pointer
                 transition
                 table-cell
@@ -64,7 +87,7 @@ export const TypeResearchComponent = (props: PropsType) => {
                 hover:bg-red-600
                 border
                 border-gray-400">
-                    <button onClick={deleteRes}>x</button>
+                    x
                 </div>
             </div>
         </div>

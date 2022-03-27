@@ -11,7 +11,7 @@ export type PatientType = {
     sex: 'М' | 'Ж'
     adress: string
     researches: Array<ResearchesType>
-    dose: number
+
     description: string | null
     conclusion: string | null
     dateOfReceipt: Date
@@ -22,6 +22,7 @@ export type ResearchesType = {
     sizeFilm: SizeType
     amount: number
     projections: number
+    dose: number
 }
 
 export type SizeType = string
@@ -44,10 +45,10 @@ const PatientsState: PatientsStateType = [
                 typeRes: 'ОГК',
                 sizeFilm: '35x35',
                 amount: 1,
-                projections: 1
+                projections: 1,
+                dose: 0.18,
             }
         ],
-        dose: 0.18,
         description: null,
         conclusion: null,
         dateOfReceipt: new Date(2022, 3, 23),
@@ -64,10 +65,10 @@ const PatientsState: PatientsStateType = [
                 typeRes: 'ОГК',
                 sizeFilm: '35x35',
                 amount: 1,
-                projections: 1
+                projections: 1,
+                dose: 0.18,
             }
         ],
-        dose: 0.32,
         description: null,
         conclusion: null,
         dateOfReceipt: new Date(2022, 3, 23),

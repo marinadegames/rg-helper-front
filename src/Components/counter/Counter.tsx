@@ -6,7 +6,7 @@ import s from './Counter.module.css'
 import {useState} from "react";
 
 type PropsType = {
-
+    callback: (value: any) => void
 }
 
 // component
@@ -16,13 +16,14 @@ export const Counter = (props: PropsType) => {
 
     const increment = () => {
         setNum(num + 1)
+        props.callback(num + 1)
     }
 
     const decrement = () => {
         if (num >= 1) {
             setNum(num - 1)
+            props.callback(num - 1)
         }
-
     }
 
     return (

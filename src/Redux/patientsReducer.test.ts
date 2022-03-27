@@ -14,7 +14,6 @@ beforeEach(() => {
             researches: [
 
             ],
-            dose: 0.18,
             description: null,
             conclusion: null,
             dateOfReceipt: new Date(2022, 3, 23),

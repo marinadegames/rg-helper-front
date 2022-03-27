@@ -4,7 +4,7 @@ import {ChevronDownIcon} from '@heroicons/react/solid'
 
 type PropsType = {
     types: Array<string>
-    selectType?: (type: string) => void
+    callback: (value: any) => void
 }
 
 export const InputMenuTypes = (props: PropsType) => {
@@ -13,7 +13,7 @@ export const InputMenuTypes = (props: PropsType) => {
 
     const selectType = (t: string) => {
         setType(t)
-        selectType(t)
+        props.callback(t)
     }
 
     return (

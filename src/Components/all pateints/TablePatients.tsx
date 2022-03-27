@@ -53,10 +53,11 @@ export const TablePatients = (props: PropsType) => {
                                         <div className="table-cell border border-gray-500 text-center py-3">
                                             <div>{res.sizeFilm}/{res.amount}/{res.projections}</div>
                                         </div>
+                                        <div className="table-cell border border-gray-500 text-center py-3">{res.dose} мЗв</div>
                                     </>
                                 )
                             })}
-                            <div className="table-cell border border-gray-500 text-center py-3">{pat.dose} мЗв</div>
+
                             <div className="table-cell border border-gray-500 text-center py-3">{pat.description}</div>
                             <div className="table-cell border border-gray-500 text-center py-3">{pat.conclusion}</div>
                         </div>
