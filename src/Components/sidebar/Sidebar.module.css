@@ -1,14 +1,14 @@
 .Sidebar {
     @apply
     w-1/6
-    min-h-full
+    h-1/2
     flex
     justify-between
     flex-col
     rounded-lg
     py-2.5
     px-3
-        mr-5
+    mr-5
     bg-gray-800
 
 }
@@ -22,6 +22,7 @@
     mb-5
 
 }
+
 .horizontalLine {
     @apply
     my-5

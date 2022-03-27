@@ -36,7 +36,7 @@ export const InputMenuTypes = (props: PropsType) => {
                 leaveTo="transform opacity-0 scale-95"
             >
                 <Menu.Items
-                    className="absolute w-56 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    className="absolute w-56 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
                     <div className="py-1 ">
                         {props.types.map(t => {
                             return (

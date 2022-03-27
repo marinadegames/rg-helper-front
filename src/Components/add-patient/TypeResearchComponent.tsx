@@ -76,7 +76,7 @@ export const TypeResearchComponent = (props: PropsType) => {
                            type={'number'}
                            value={dose}
                            onChange={e => changeDose(e.currentTarget.valueAsNumber)}
-                           className={'text-gray-800'}/>
+                           className={'text-gray-800 p-1'}/>
                 </div>
                 <div onClick={deleteRes}
                      className="
