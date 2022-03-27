@@ -4,6 +4,7 @@ import {rootReducerType} from "../../Redux/state";
 import {Button} from "../universal components/Button";
 import {useState} from "react";
 import {InputMenuTypes} from "../InputMenuResearchType/InputMenuTypes";
+import {Counter} from "../counter/Counter";
 
 
 export const AddPatient = () => {
@@ -107,9 +108,17 @@ export const AddPatient = () => {
                                 <div className="table-cell p-2 text-center border border-gray-400">
                                     <InputMenuTypes types={researchTypes}/>
                                 </div>
-                                <div className="table-cell p-2 text-center border border-gray-400">1</div>
-                                <div className="table-cell p-2 text-center border border-gray-400">1</div>
-                                <div className="table-cell p-2 text-center border border-gray-400">0.18</div>
+                                <div className="table-cell p-2 text-center border border-gray-400">
+                                    <Counter/>
+                                </div>
+                                <div className="table-cell p-2 text-center border border-gray-400">
+                                    <Counter/>
+                                </div>
+                                <div className="table-cell p-2 text-center border border-gray-400">
+                                    <input name={'dose'}
+                                           type={'number'}
+                                           className={'text-gray-800'}/>
+                                </div>
                             </div>
                         </div>
                     </div>

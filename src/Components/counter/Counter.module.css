@@ -1,0 +1,16 @@
+.counter_container {
+    @apply
+    flex
+    justify-around
+}
+
+.btn_counter {
+    @apply
+    bg-white
+    w-10
+    rounded-md
+    text-gray-700
+    font-bold
+    text-xl
+    disabled:bg-gray-400
+}
