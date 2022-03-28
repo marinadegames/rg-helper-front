@@ -5,6 +5,9 @@
 
 .header_add_patients {
     @apply
+        flex
+        flex-row
+        justify-between
     bg-gray-800
     rounded-md
     py-3

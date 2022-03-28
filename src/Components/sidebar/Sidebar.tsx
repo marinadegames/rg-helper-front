@@ -3,6 +3,7 @@ import s from './Sidebar.module.css'
 import {Button} from "../universal components/Button";
 import {MenuItem} from "../menuItem/MenuItem";
 import {NavLink} from "react-router-dom";
+import {Clock} from "../clock/Clock";
 
 export function Sidebar() {
     return (
@@ -14,6 +15,13 @@ export function Sidebar() {
             <NavLink to={'/add-patient'}>
                 <Button title={'Новый пациент'} style={'h-10 w-full'}/>
             </NavLink>
+
+            <hr className={s.horizontalLine}/>
+
+            <div className={s.sidebar_container_clock}>
+                <Clock/>
+            </div>
+
 
             <hr className={s.horizontalLine}/>
 

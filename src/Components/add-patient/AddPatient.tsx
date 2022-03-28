@@ -6,6 +6,7 @@ import {AddPatientTC, PatientType, ResearchesType} from "../../Redux/patientsRed
 import {TypeResearchComponent} from "./TypeResearchComponent";
 import {v1} from "uuid";
 import {Button} from "../universal components/Button";
+import {formatDate} from "../../Utils/formatDate";
 
 
 export const AddPatient = memo(() => {
@@ -77,10 +78,16 @@ export const AddPatient = memo(() => {
             setResearches([])
         }
 
+
+        const date = formatDate(new Date())
+
         // JSX
         return (
             <div className={s.add_patients}>
-                <div className={s.header_add_patients}>Добавление нового пациента:</div>
+                <div className={s.header_add_patients}>
+                    Добавление нового пациента:
+                    <p>Дата: {date}</p>
+                </div>
                 {/* ID */}
                 <div className={s.add_patient_element}>
                     <div className={s.name_field}>Номер снимка:</div>
