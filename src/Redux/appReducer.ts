@@ -5,13 +5,16 @@ import {Dispatch} from "react";
 
 const appState: AppReducerType = {
     error: 'ERROR TEST',
-    notificationMode: true
+    notificationMode: false
 }
 
 // reducer
 export const appReducer = (state = appState, action: ActionType): AppReducerType => {
     switch (action.type) {
-        case "SET_ERROR": return {...state, error: action.message}
+        case "SET_ERROR":
+            return {...state, error: action.message}
+        case "SET_NOTIFICATION_MODE":
+            return {...state, notificationMode: action.mode}
         default:
             return state
     }
@@ -22,12 +25,12 @@ export const setErrorMessage = (message: string) => ({type: "SET_ERROR", message
 export const setNotificationMode = (mode: boolean) => ({type: "SET_NOTIFICATION_MODE", mode} as const)
 
 // TC
-export const setErrorMessageTC = (message: string) => (dispatch: Dispatch<any>) => {
+export const setErrorMessageTC = (message: string) => async (dispatch: Dispatch<any>) => {
     dispatch(setErrorMessage(message))
     dispatch(setNotificationMode(true))
-    setTimeout(() => {
+    await setTimeout(() => {
         dispatch(setNotificationMode(false))
-    }, 2000)
+    }, 5000)
 }
 
 
@@ -36,4 +39,4 @@ type AppReducerType = {
     error: string
     notificationMode: boolean
 }
-type ActionType = ReturnType<typeof setErrorMessage>
+type ActionType = ReturnType<typeof setErrorMessage> | ReturnType<typeof setNotificationMode>

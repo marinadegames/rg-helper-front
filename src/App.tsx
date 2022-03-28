@@ -11,6 +11,8 @@ import {rootReducerType} from "./Redux/state";
 
 export const App = () => {
     const notificationMode = useSelector<rootReducerType, boolean>(state => state.app.notificationMode)
+    const errorMessage = useSelector<rootReducerType, string>(state => state.app.error)
+
 
     return (
         <div className={s.App}>
@@ -22,7 +24,7 @@ export const App = () => {
                 <Route path='/*' element={<h1 style={{textAlign: 'center'}}>404 not found</h1>}/>
             </Routes>
 
-            {notificationMode && <Notification message={'ERROR MESSAGE'}/>}
+            {notificationMode && <Notification message={errorMessage}/>}
         </div>
     );
 }

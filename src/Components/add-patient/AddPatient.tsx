@@ -7,7 +7,7 @@ import {TypeResearchComponent} from "./TypeResearchComponent";
 import {v1} from "uuid";
 import {Button} from "../universal components/Button";
 import {formatDate} from "../../Utils/formatDate";
-import {Notification} from "../universal components/Notification";
+import {setErrorMessageTC} from "../../Redux/appReducer";
 
 
 export const AddPatient = memo(() => {
@@ -79,6 +79,9 @@ export const AddPatient = memo(() => {
             setResearches([])
         }
 
+        const addError = () => {
+            dispatch(setErrorMessageTC('MESSAGE ERROR TEST'))
+        }
 
         const date = formatDate(new Date())
 
@@ -205,6 +208,7 @@ export const AddPatient = memo(() => {
                     </div>
                 </div>
                 <Button title={'Добавить пациента'} onClick={addPatient}/>
+                <Button title={'Сгенерировать ошибку'} onClick={addError}/>
             </div>
         )
     }
