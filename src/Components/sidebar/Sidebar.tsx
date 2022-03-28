@@ -22,7 +22,6 @@ export function Sidebar() {
                 <Clock/>
             </div>
 
-
             <hr className={s.horizontalLine}/>
 
             Меню:

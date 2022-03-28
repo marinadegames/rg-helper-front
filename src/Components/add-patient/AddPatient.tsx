@@ -7,6 +7,7 @@ import {TypeResearchComponent} from "./TypeResearchComponent";
 import {v1} from "uuid";
 import {Button} from "../universal components/Button";
 import {formatDate} from "../../Utils/formatDate";
+import {Notification} from "../universal components/Notification";
 
 
 export const AddPatient = memo(() => {
@@ -105,7 +106,9 @@ export const AddPatient = memo(() => {
                            value={name}
                            onChange={e => changeName(e.currentTarget.value)}
                     />
+
                 </div>
+
 
                 {/* YEAR */}
                 <div className={s.add_patient_element}>
