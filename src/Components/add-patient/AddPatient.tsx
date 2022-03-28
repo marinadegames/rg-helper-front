@@ -7,7 +7,10 @@ import {TypeResearchComponent} from "./TypeResearchComponent";
 import {v1} from "uuid";
 import {Button} from "../universal components/Button";
 import {formatDate} from "../../Utils/formatDate";
-import {setErrorMessageTC} from "../../Redux/appReducer";
+import {
+    setErrorMessageTC,
+    setSuccessfulMessageTC,
+} from "../../Redux/appReducer";
 
 
 export const AddPatient = memo(() => {
@@ -68,19 +71,25 @@ export const AddPatient = memo(() => {
                 description: '',
                 conclusion: '',
             }
-
-            dispatch(AddPatientTC(payload))
-
-            // clear inputs
-            setName('')
-            setYear(1900)
-            setSex('')
-            setAdress('')
-            setResearches([])
+            if (name.length > 0 && sex.length > 0 && adress.length > 0) {
+                dispatch(AddPatientTC(payload))
+                dispatch(setSuccessfulMessageTC('Пациент успешно добавлен!'))
+                // clear inputs
+                setName('')
+                setYear(1900)
+                setSex('')
+                setAdress('')
+                setResearches([])
+            } else {
+                dispatch(setErrorMessageTC('Проверьте правильность введенных данных!'))
+            }
         }
 
         const addError = () => {
             dispatch(setErrorMessageTC('MESSAGE ERROR TEST'))
+        }
+        const addSuccessful = () => {
+            dispatch(setSuccessfulMessageTC('ТЕСТ УСПЕШНОГО УСПЕХА!'))
         }
 
         const date = formatDate(new Date())
@@ -209,6 +218,7 @@ export const AddPatient = memo(() => {
                 </div>
                 <Button title={'Добавить пациента'} onClick={addPatient}/>
                 <Button title={'Сгенерировать ошибку'} onClick={addError}/>
+                <Button title={'Сгенерировать успешность'} onClick={addSuccessful}/>
             </div>
         )
     }

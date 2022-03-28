@@ -1,10 +1,21 @@
-.notification_successful {
+.notification_error {
     @apply
     absolute
-    bottom-10
+    bottom-16
     left-10
     text-2xl
     bg-red-700
+    py-1.5
+    px-5
+    rounded-md
+}
+.notification_successful {
+    @apply
+    absolute
+    bottom-5
+    left-10
+    text-2xl
+    bg-green-700
     py-1.5
     px-5
     rounded-md
