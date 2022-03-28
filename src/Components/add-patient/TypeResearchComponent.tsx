@@ -1,6 +1,6 @@
 import {InputMenuTypes} from "../InputMenuResearchType/InputMenuTypes";
 import {Counter} from "../counter/Counter";
-import {useState} from "react";
+import {memo, useState} from "react";
 
 type PropsType = {
     id: string
@@ -12,7 +12,7 @@ type PropsType = {
     selectDose: (num: number, id: string) => void
 }
 
-export const TypeResearchComponent = (props: PropsType) => {
+export const TypeResearchComponent = memo((props: PropsType) => {
     const researchTypes = [
         'ОГК',
         'Т/Б СУСТАВЫ',
@@ -94,4 +94,4 @@ export const TypeResearchComponent = (props: PropsType) => {
 
 
     )
-}
+})

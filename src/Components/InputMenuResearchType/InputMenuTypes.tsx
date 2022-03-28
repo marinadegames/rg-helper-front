@@ -1,4 +1,4 @@
-import {Fragment, useState} from 'react'
+import {Fragment, memo, useState} from 'react'
 import {Menu, Transition} from '@headlessui/react'
 import {ChevronDownIcon} from '@heroicons/react/solid'
 
@@ -7,7 +7,7 @@ type PropsType = {
     callback: (value: any) => void
 }
 
-export const InputMenuTypes = (props: PropsType) => {
+export const InputMenuTypes = memo((props: PropsType) => {
 
     const [type, setType] = useState<string | 'Выбрать'>('Выбрать')
 
@@ -55,3 +55,4 @@ export const InputMenuTypes = (props: PropsType) => {
         </Menu>
     )
 }
+)

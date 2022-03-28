@@ -1,7 +1,7 @@
 import s from './AddPatient.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../../Redux/state";
-import {memo, useCallback, useState} from "react";
+import {memo, useState} from "react";
 import {AddPatientTC, PatientType, ResearchesType} from "../../Redux/patientsReducer";
 import {TypeResearchComponent} from "./TypeResearchComponent";
 import {v1} from "uuid";
@@ -10,59 +10,50 @@ import {Button} from "../universal components/Button";
 
 export const AddPatient = memo(() => {
 
+        // state
         const nextId = useSelector<rootReducerType, number>(state => state.patients.length)
         const [name, setName] = useState<string>('')
-        const [year, setYear] = useState<number>(0)
-        const [sex, setSex] = useState<any>()
+        const [year, setYear] = useState<number>(1900)
+        const [sex, setSex] = useState<string>('')
         const [adress, setAdress] = useState<string>('')
         const [researches, setResearches] = useState<Array<ResearchesType>>([])
-        console.log(researches)
         const dispatch = useDispatch()
 
-        const addRes = useCallback(() => {
+        // functional
+        const addRes = () => {
             const newId = v1()
             const newRes = {
                 idRes: newId,
                 typeRes: '',
                 sizeFilm: '',
-                amount: 1,
-                projections: 1,
+                amount: 0,
+                projections: 0,
                 dose: 0,
             }
             setResearches(
                 [...researches, newRes]
             )
-        }, [])
-        const deleteRes = useCallback((id: string) => {
-            setResearches(researches.filter(res => res.idRes !== id))
-        }, [])
-        const changeName = useCallback((e: string) => {
-            setName(e)
-        }, [])
-        const changeYear = useCallback((e: number) => {
-            setYear(e)
-        }, [])
-        const changeSex = useCallback((sex: string) => {
-            setSex(sex)
-        }, [])
-        const changeAdress = useCallback((e: string) => {
-            setAdress(e)
-        }, [])
-        const selectTypeRes = useCallback((value: string, id: string) => {
+        }
+        const deleteRes = (id: string) => setResearches(researches.filter(res => res.idRes !== id))
+        const changeName = (e: string) => setName(e)
+        const changeYear = (e: number) => setYear(e)
+        const changeSex = (sex: string) => setSex(sex)
+        const changeAdress = (e: string) => setAdress(e)
+        const selectTypeRes = (value: string, id: string) => {
             setResearches(researches.map(res => res.idRes === id ? {...res, typeRes: value} : res))
-        }, [])
-        const selectXrayFilm = useCallback((value: string, id: string) => {
+        }
+        const selectXrayFilm = (value: string, id: string) => {
             setResearches(researches.map(res => res.idRes === id ? {...res, sizeFilm: value} : res))
-        }, [])
-        const selectAmount = useCallback((num: number, id: string) => {
+        }
+        const selectAmount = (num: number, id: string) => {
             setResearches(researches.map(res => res.idRes === id ? {...res, amount: num} : res))
-        }, [])
-        const selectProjections = useCallback((num: number, id: string) => {
+        }
+        const selectProjections = (num: number, id: string) => {
             setResearches(researches.map(res => res.idRes === id ? {...res, projections: num} : res))
-        }, [])
-        const selectDose = useCallback((num: number, id: string) => {
+        }
+        const selectDose = (num: number, id: string) => {
             setResearches(researches.map(res => res.idRes === id ? {...res, dose: num} : res))
-        }, [])
+        }
         const addPatient = () => {
             const payload: PatientType = {
                 id: nextId + 1,
@@ -75,10 +66,18 @@ export const AddPatient = memo(() => {
                 description: '',
                 conclusion: '',
             }
+
             dispatch(AddPatientTC(payload))
+
+            // clear inputs
+            setName('')
+            setYear(1900)
+            setSex('')
+            setAdress('')
+            setResearches([])
         }
 
-
+        // JSX
         return (
             <div className={s.add_patients}>
                 <div className={s.header_add_patients}>Добавление нового пациента:</div>
@@ -107,6 +106,8 @@ export const AddPatient = memo(() => {
                     <input className={s.input_add_pat}
                            placeholder={'ГОД'}
                            id={'year'}
+                           min={1900}
+                           max={2100}
                            type={"number"}
                            name={'year'}
                            value={year}

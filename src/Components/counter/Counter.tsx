@@ -3,14 +3,14 @@ import s from './Counter.module.css'
 
 // types
 
-import {useState} from "react";
+import {memo, useState} from "react";
 
 type PropsType = {
     callback: (value: any) => void
 }
 
 // component
-export const Counter = (props: PropsType) => {
+export const Counter = memo((props: PropsType) => {
 
     const [num, setNum] = useState<number>(0)
 
@@ -41,4 +41,4 @@ export const Counter = (props: PropsType) => {
             </button>
         </div>
     )
-}
+})

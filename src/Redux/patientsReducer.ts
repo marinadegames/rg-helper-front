@@ -81,7 +81,7 @@ export type PatientType = {
     id: number // id === xray page number
     name: string
     year: number
-    sex: 'М' | 'Ж'
+    sex: string
     adress: string
     researches: Array<ResearchesType>
     description: string | null
