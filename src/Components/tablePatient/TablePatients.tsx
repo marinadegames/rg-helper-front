@@ -7,8 +7,6 @@ type PropsType = {
 
 export const TablePatients = ({patients}: PropsType) => {
 
-
-
     return (
         <div className="table w-full table bg-gray-800 rounded-md p-3 ">
 

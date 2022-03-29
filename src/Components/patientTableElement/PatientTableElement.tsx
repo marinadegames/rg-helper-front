@@ -8,33 +8,26 @@ type PropsType = {
     patient: PatientType
 }
 
-export const PatientTableElement = (props: PropsType) => {
+export const PatientTableElement = ({patient}: PropsType) => {
 
-    const [popupMode, setPopupMode] = useState<boolean>(false)
-
-    const openPopup = () => {
-        setPopupMode(true)
-    }
-    const closePopup = () => {
-        setPopupMode(false)
-    }
+    const [open, setOpen] = useState(false)
 
     return (
         <div
             className="table-row transition hover:bg-gray-600 cursor-pointer"
-            onClick={openPopup}
+            onClick={() => setOpen(!open)}
 
         >
-            {popupMode && <Popup patient={props.patient} closePopup={closePopup}/>}
-            <div className="table-cell border border-gray-500 text-center py-3">{props.patient.id}</div>
+            {open && <Popup patient={patient} open={open} setOpen={setOpen}/>}
+            <div className="table-cell border border-gray-500 text-center py-3">{patient.id}</div>
             <div
-                className="table-cell border border-gray-500 text-center py-3">{formatDate(props.patient.dateOfReceipt)}</div>
-            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{props.patient.name}</div>
-            <div className="table-cell border border-gray-500 text-center py-3">{props.patient.year}</div>
-            <div className="table-cell border border-gray-500 text-center py-3">{props.patient.sex}</div>
-            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{props.patient.adress}</div>
+                className="table-cell border border-gray-500 text-center py-3">{formatDate(patient.dateOfReceipt)}</div>
+            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.name}</div>
+            <div className="table-cell border border-gray-500 text-center py-3">{patient.year}</div>
+            <div className="table-cell border border-gray-500 text-center py-3">{patient.sex}</div>
+            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.adress}</div>
 
-            {props.patient.researches.map(res => {
+            {patient.researches.map(res => {
                 return (
                     <React.Fragment key={res.idRes}>
                         <div
@@ -47,8 +40,8 @@ export const PatientTableElement = (props: PropsType) => {
                 )
             })}
 
-            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{props.patient.description}</div>
-            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{props.patient.conclusion}</div>
+            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.description}</div>
+            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.conclusion}</div>
         </div>
     )
 }
