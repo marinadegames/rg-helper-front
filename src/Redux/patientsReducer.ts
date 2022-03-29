@@ -3,56 +3,22 @@
 
 // init state
 import {Dispatch} from "react";
+import {TEMP_PATIENTS} from "./TEMPSTATE";
 
-const PatientsState: PatientsStateType = [
-    {
-        id: 1,
-        name: "Пашкевич Е.В",
-        year: 1997,
-        sex: 'М',
-        adress: 'Пупкина 11-11',
-        researches: [
-            {
-                idRes: 'werewrwer1234123413',
-                typeRes: 'ОГК',
-                sizeFilm: '35x35',
-                amount: 1,
-                projections: 1,
-                dose: 0.18,
-            }
-        ],
-        description: null,
-        conclusion: null,
-        dateOfReceipt: new Date(2022, 3, 23),
-    },
-    {
-        id: 2,
-        name: "Иванов И.И",
-        year: 2001,
-        sex: 'М',
-        adress: 'ул. Фронтендерская 99-99',
-        researches: [
-            {
-                idRes: 'ewfwegwegwe',
-                typeRes: 'ОГК',
-                sizeFilm: '35x35',
-                amount: 1,
-                projections: 1,
-                dose: 0.18,
-            }
-        ],
-        description: null,
-        conclusion: null,
-        dateOfReceipt: new Date(2022, 3, 23),
-    }
-]
+const PatientsState: PatientsStateType = {
+    patients: TEMP_PATIENTS,
+    searchResult: []
+}
 
 
 // reducer
 export const patientsReducer = (state = PatientsState, action: ActionType): PatientsStateType => {
     switch (action.type) {
         case "ADD_PATIENT":
-            return [...state, action.payload]
+            return {...state, patients: [...state.patients, action.payload]}
+        case "SEARCH_PATIENT":
+        return {...state, searchResult : [...state.patients].filter((item) =>
+            item.name.toLowerCase().includes(action.value.toLowerCase()))};
         default:
             return state
     }
@@ -61,6 +27,9 @@ export const patientsReducer = (state = PatientsState, action: ActionType): Pati
 // AC
 export const AddPatientsAC = (payload: PatientType): AddPatientAT => {
     return {type: "ADD_PATIENT", payload}
+}
+export const SearchPatientsAC = (value: string): SearchPatientAT => {
+    return {type: "SEARCH_PATIENT", value}
 }
 
 // TC
@@ -76,7 +45,11 @@ export const AddPatientTC = (payload: PatientType) => async (dispatch: Dispatch<
 
 
 // types
-export type PatientsStateType = Array<PatientType>
+export type PatientsStateType = {
+    patients: Array<PatientType>,
+    searchResult: Array<PatientType>
+}
+
 export type PatientType = {
     id: number // id === xray page number
     name: string
@@ -98,8 +71,12 @@ export type ResearchesType = {
 }
 
 export type SizeType = string
-export type ActionType = AddPatientAT
+export type ActionType = AddPatientAT | SearchPatientAT
 export type AddPatientAT = {
     type: 'ADD_PATIENT'
     payload: PatientType
+}
+export type SearchPatientAT = {
+    type: 'SEARCH_PATIENT'
+    value: string
 }

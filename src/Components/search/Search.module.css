@@ -1,11 +1,12 @@
-.all_patients {
+.search_container {
     @apply
     w-full
 }
 
-.header_patient_list {
+.search_header {
     @apply
-        flex
+    flex
+    flex-row
     justify-between
     bg-gray-800
     rounded-md

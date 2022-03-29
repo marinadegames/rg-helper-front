@@ -7,6 +7,7 @@ import {AddPatient} from "./Components/add-patient/AddPatient";
 import {Notification} from "./Components/universal components/Notification";
 import {useSelector} from "react-redux";
 import {rootReducerType} from "./Redux/state";
+import {Search} from "./Components/search/Search";
 
 
 export const App = () => {
@@ -23,6 +24,7 @@ export const App = () => {
             <Routes>
                 <Route path='/patients' element={<AllPatients/>}/>
                 <Route path='/add-patient' element={<AddPatient/>}/>
+                <Route path='/search' element={<Search/>}/>
                 <Route path='/*' element={<h1 style={{textAlign: 'center'}}>404 not found</h1>}/>
             </Routes>
 

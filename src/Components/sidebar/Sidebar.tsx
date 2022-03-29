@@ -29,7 +29,9 @@ export function Sidebar() {
                 <NavLink to={'/patients'}>
                     <MenuItem title={'Все пациенты'} icon={''}/>
                 </NavLink>
-
+                <NavLink to={'/search'}>
+                    <MenuItem title={'Поиск'} icon={''}/>
+                </NavLink>
                 <MenuItem title={'Настройки'} icon={''}/>
                 <MenuItem title={'Выход'} icon={''}/>
             </div>

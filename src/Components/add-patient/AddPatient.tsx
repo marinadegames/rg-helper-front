@@ -16,7 +16,7 @@ import {
 export const AddPatient = memo(() => {
 
         // state
-        const nextId = useSelector<rootReducerType, number>(state => state.patients.length)
+        const nextId = useSelector<rootReducerType, number>(state => state.patients.patients.length)
         const [name, setName] = useState<string>('')
         const [year, setYear] = useState<number>(1900)
         const [sex, setSex] = useState<string>('')
@@ -94,12 +94,16 @@ export const AddPatient = memo(() => {
 
         const date = formatDate(new Date())
 
+
         // JSX
         return (
             <div className={s.add_patients}>
                 <div className={s.header_add_patients}>
+
                     Добавление нового пациента:
-                    <p>Дата: {date}</p>
+                    <div className={'flex flex-row justify-center items-center cursor-pointer'}>
+                        {date}
+                    </div>
                 </div>
                 {/* ID */}
                 <div className={s.add_patient_element}>
@@ -118,9 +122,7 @@ export const AddPatient = memo(() => {
                            value={name}
                            onChange={e => changeName(e.currentTarget.value)}
                     />
-
                 </div>
-
 
                 {/* YEAR */}
                 <div className={s.add_patient_element}>

@@ -1,8 +1,8 @@
-import {PatientsStateType} from "../../Redux/patientsReducer";
+import {PatientType} from "../../Redux/patientsReducer";
 import {formatDate} from "../../Utils/formatDate";
 
 type PropsType = {
-    patients: PatientsStateType
+    patients: PatientType[]
 }
 
 export const TablePatients = (props: PropsType) => {
@@ -32,16 +32,16 @@ export const TablePatients = (props: PropsType) => {
                             <div className="table-cell border border-gray-500 text-center py-3">{pat.id}</div>
                             <div
                                 className="table-cell border border-gray-500 text-center py-3">{formatDate(pat.dateOfReceipt)}</div>
-                            <div className="table-cell border border-gray-500 text-center py-3">{pat.name}</div>
+                            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{pat.name}</div>
                             <div className="table-cell border border-gray-500 text-center py-3">{pat.year}</div>
                             <div className="table-cell border border-gray-500 text-center py-3">{pat.sex}</div>
-                            <div className="table-cell border border-gray-500 text-center py-3">{pat.adress}</div>
+                            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{pat.adress}</div>
 
                             {pat.researches.map(res => {
                                 return (
                                     <>
                                         <div
-                                            className="table-cell border border-gray-500 text-center py-3">{res.typeRes}</div>
+                                            className="table-cell border border-gray-500 text-left pl-3 py-3">{res.typeRes}</div>
                                         <div className="table-cell border border-gray-500 text-center py-3">
                                             <div>{res.sizeFilm}/{res.amount}/{res.projections}</div>
                                         </div>
@@ -50,8 +50,8 @@ export const TablePatients = (props: PropsType) => {
                                 )
                             })}
 
-                            <div className="table-cell border border-gray-500 text-center py-3">{pat.description}</div>
-                            <div className="table-cell border border-gray-500 text-center py-3">{pat.conclusion}</div>
+                            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{pat.description}</div>
+                            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{pat.conclusion}</div>
                         </div>
                     )
                 })}
