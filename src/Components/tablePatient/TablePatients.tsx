@@ -1,14 +1,17 @@
 import {PatientType} from "../../Redux/patientsReducer";
-import {formatDate} from "../../Utils/formatDate";
+import {PatientTableElement} from "../patientTableElement/PatientTableElement";
 
 type PropsType = {
     patients: PatientType[]
 }
 
-export const TablePatients = (props: PropsType) => {
+export const TablePatients = ({patients}: PropsType) => {
+
+
 
     return (
         <div className="table w-full table bg-gray-800 rounded-md p-3 ">
+
             <div className="table-header-group">
                 <div className="table-row">
                     <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">Номер</div>
@@ -26,33 +29,10 @@ export const TablePatients = (props: PropsType) => {
                 </div>
             </div>
             <div className="table-row-group">
-                {props.patients.map(pat => {
+
+                {patients.map(pat => {
                     return (
-                        <div key={pat.id} className="table-row transition hover:bg-gray-600 cursor-pointer">
-                            <div className="table-cell border border-gray-500 text-center py-3">{pat.id}</div>
-                            <div
-                                className="table-cell border border-gray-500 text-center py-3">{formatDate(pat.dateOfReceipt)}</div>
-                            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{pat.name}</div>
-                            <div className="table-cell border border-gray-500 text-center py-3">{pat.year}</div>
-                            <div className="table-cell border border-gray-500 text-center py-3">{pat.sex}</div>
-                            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{pat.adress}</div>
-
-                            {pat.researches.map(res => {
-                                return (
-                                    <>
-                                        <div
-                                            className="table-cell border border-gray-500 text-left pl-3 py-3">{res.typeRes}</div>
-                                        <div className="table-cell border border-gray-500 text-center py-3">
-                                            <div>{res.sizeFilm}/{res.amount}/{res.projections}</div>
-                                        </div>
-                                        <div className="table-cell border border-gray-500 text-center py-3">{res.dose} мЗв</div>
-                                    </>
-                                )
-                            })}
-
-                            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{pat.description}</div>
-                            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{pat.conclusion}</div>
-                        </div>
+                        <PatientTableElement patient={pat} key={pat.id}/>
                     )
                 })}
             </div>

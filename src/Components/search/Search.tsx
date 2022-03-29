@@ -21,7 +21,12 @@ export const Search = () => {
         <div className={s.search_container}>
             <div className={s.search_header}>
                 Поиск пациентов
-                <input className={'text-gray-700'} onChange={e => onChangeHandler(e.currentTarget.value)}/>
+                <input className={'text-gray-700 px-3'}
+                       placeholder={'Введите имя'}
+                       onChange={e => onChangeHandler(e.currentTarget.value)}/>
+                <input type={"date"}
+                       className='text-gray-700 flex justify-center items-center px-2 rounded'
+                />
             </div>
 
             <div className={'w-full'}>

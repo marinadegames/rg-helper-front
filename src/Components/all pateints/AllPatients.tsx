@@ -10,7 +10,6 @@ export const AllPatients = () => {
     // filters
     const patients = useSelector<rootReducerType, PatientType[]>(state => state.patients.patients)
 
-
     // return
     return (
         <div className={s.all_patients}>
