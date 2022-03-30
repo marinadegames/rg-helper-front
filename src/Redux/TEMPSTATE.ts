@@ -73,6 +73,14 @@ export const TEMP_PATIENTS = [
                 amount: 2,
                 projections: 2,
                 dose: 1.1,
+            },
+            {
+                idRes: '2334234fff',
+                typeRes: 'ОГК',
+                sizeFilm: '35x35',
+                amount: 1,
+                projections: 1,
+                dose: 0.18,
             }
         ],
         description: null,

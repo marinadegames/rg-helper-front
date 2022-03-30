@@ -31,11 +31,17 @@ export const PatientTableElement = ({patient}: PropsType) => {
                 return (
                     <React.Fragment key={res.idRes}>
                         <div
-                            className="table-cell border border-gray-500 text-left pl-3 py-3">{res.typeRes}</div>
-                        <div className="table-cell border border-gray-500 text-center py-3">
-                            <div>{res.sizeFilm}/{res.amount}/{res.projections}</div>
+                            className="table-cell border border-gray-500 text-left pl-3 py-3">
+                            {/*{res.typeRes}*/}
                         </div>
-                        <div className="table-cell border border-gray-500 text-center py-3">{res.dose} мЗв</div>
+                        <div className="table-cell border border-gray-500 text-center py-3">
+                            <div>
+                                {/*{res.sizeFilm}/{res.amount}/{res.projections}*/}
+                            </div>
+                        </div>
+                        <div className="table-cell border border-gray-500 text-center py-3">
+                            {/*{res.dose} мЗв*/}
+                        </div>
                     </React.Fragment>
                 )
             })}

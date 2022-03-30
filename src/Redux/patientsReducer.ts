@@ -28,6 +28,7 @@ export const patientsReducer = (state = PatientsState, action: ActionType): Pati
 export const AddPatientsAC = (payload: PatientType): AddPatientAT => {
     return {type: "ADD_PATIENT", payload}
 }
+
 export const SearchPatientsAC = (value: string): SearchPatientAT => {
     return {type: "SEARCH_PATIENT", value}
 }
