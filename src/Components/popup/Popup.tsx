@@ -9,6 +9,7 @@ type PropsType = {
     setOpen: (value: boolean) => void
 }
 
+
 export default function Popup({patient, open, setOpen}: PropsType) {
 
     const cancelButtonRef = useRef(null)
@@ -117,6 +118,7 @@ export default function Popup({patient, open, setOpen}: PropsType) {
                                             </div>
                                             <div className="my-2 text-2xl text-left flex flex-row">
                                                 <b className='w-1/4 mr-5'>Описание: </b>
+
                                             </div>
                                         </div>
 
