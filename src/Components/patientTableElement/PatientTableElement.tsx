@@ -27,24 +27,26 @@ export const PatientTableElement = ({patient}: PropsType) => {
             <div className="table-cell border border-gray-500 text-center py-3">{patient.sex}</div>
             <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.adress}</div>
 
-            {patient.researches.map(res => {
-                return (
-                    <React.Fragment key={res.idRes}>
-                        <div
-                            className="table-cell border border-gray-500 text-left pl-3 py-3">
-                            {/*{res.typeRes}*/}
-                        </div>
-                        <div className="table-cell border border-gray-500 text-center py-3">
-                            <div>
-                                {/*{res.sizeFilm}/{res.amount}/{res.projections}*/}
-                            </div>
-                        </div>
-                        <div className="table-cell border border-gray-500 text-center py-3">
-                            {/*{res.dose} мЗв*/}
-                        </div>
-                    </React.Fragment>
-                )
-            })}
+            <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
+                {patient.researches.map(typeRes => {
+                    return (<p key={typeRes.idRes}>{typeRes.typeRes}</p>)
+                })}
+            </div>
+            <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
+                {patient.researches.map(films => {
+                    return (<p key={films.idRes}>{films.sizeFilm}/{films.amount}/{films.projections}</p>)
+                })}
+            </div>
+            <div className="flex flex-row table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
+                <div>
+                    {patient.researches.map(dose => {
+                        return <p key={dose.idRes}>{dose.dose} мЗв</p>
+                    })}
+                </div>
+                {patient.researches.length > 1 && <div>
+                    Суммарно: {patient.researches.reduce((a: any, b: any) => a.dose + b.dose)} мЗв
+                </div>}
+            </div>
 
             <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.description}</div>
             <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.conclusion}</div>

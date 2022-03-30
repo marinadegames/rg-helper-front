@@ -91,7 +91,7 @@ export default function Popup({patient, open, setOpen}: PropsType) {
 
                                                         <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
                                                             {patient.researches.map(typeRes => {
-                                                                return (<p key={typeRes.idRes}>* {typeRes.typeRes}</p>)
+                                                                return (<p key={typeRes.idRes}>{typeRes.typeRes}</p>)
                                                             })}
                                                         </div>
                                                         <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
@@ -105,14 +105,19 @@ export default function Popup({patient, open, setOpen}: PropsType) {
                                                                     return <p key={dose.idRes}>{dose.dose} мЗв</p>
                                                                 })}
                                                             </div>
-                                                            <div>
-                                                                Суммарно: {patient.researches.reduce((a:any, b:any) => a.dose + b.dose)} мЗв
-                                                            </div>
+                                                            {patient.researches.length > 1 && <div>
+                                                                Суммарно: {patient.researches.reduce((a: any, b: any) => a.dose + b.dose)} мЗв
+                                                            </div>}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            <div className="my-2 text-2xl text-left flex flex-row">
+                                                <b className='w-1/4 mr-5'>Описание: </b>
+                                            </div>
+                                            <div className="my-2 text-2xl text-left flex flex-row">
+                                                <b className='w-1/4 mr-5'>Описание: </b>
+                                            </div>
                                         </div>
 
                                     </div>

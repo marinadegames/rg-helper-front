@@ -12,7 +12,7 @@ export const TablePatients = ({patients}: PropsType) => {
 
             <div className="table-header-group">
                 <div className="table-row">
-                    <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">Номер</div>
+                    <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">№</div>
                     <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">Дата</div>
                     <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">ФИО</div>
                     <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">Год</div>
