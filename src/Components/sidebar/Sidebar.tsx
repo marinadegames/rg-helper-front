@@ -11,22 +11,17 @@ export function Sidebar() {
             <div className={s.sidebar_container}>
                 <h1>☢️Rg-helper</h1>
             </div>
-
             <NavLink to={'/add-patient'}>
                 <Button title={'Новый пациент'} style={'h-10 w-full'}/>
             </NavLink>
-
             <hr className={s.horizontalLine}/>
-
             <div className={s.sidebar_container_clock}>
                 <Clock/>
             </div>
-
             <hr className={s.horizontalLine}/>
-
             Меню:
             <div>
-                <NavLink to={'/patients'}>
+                <NavLink to={'/'}>
                     <MenuItem title={'Все пациенты'} icon={''}/>
                 </NavLink>
                 <NavLink to={'/search'}>
