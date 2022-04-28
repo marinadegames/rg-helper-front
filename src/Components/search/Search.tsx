@@ -12,6 +12,7 @@ export const Search = () => {
     const [value, setValue] = useState<string>('')
     const dispatch = useDispatch()
     console.log(result)
+
     const onChangeHandler = (e: string) => {
         setValue(e)
         dispatch(SearchPatientsAC(value))

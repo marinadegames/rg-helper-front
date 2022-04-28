@@ -1,6 +1,3 @@
-// import
-
-
 // init state
 import {Dispatch} from "react";
 import {TEMP_PATIENTS} from "./TEMPSTATE";
@@ -9,7 +6,6 @@ const PatientsState: PatientsStateType = {
     patients: TEMP_PATIENTS,
     searchResult: []
 }
-
 
 // reducer
 export const patientsReducer = (state = PatientsState, action: ActionType): PatientsStateType => {
