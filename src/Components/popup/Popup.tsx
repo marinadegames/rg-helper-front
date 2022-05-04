@@ -1,7 +1,10 @@
-import React, {Fragment, useRef} from 'react'
+import React, {Fragment, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
-import {PatientType} from "../../Redux/patientsReducer";
+import {EditResearchTypePatient, PatientType} from "../../Redux/patientsReducer";
 import {EditableSpan} from "../universal components/EditableSpan";
+import {useDispatch} from "react-redux";
+import {InputMenuTypes} from "../InputMenuResearchType/InputMenuTypes";
+import {researchTypes, sizeFilms} from "../../Utils/selectors";
 
 type PropsType = {
     patient: PatientType
@@ -12,7 +15,28 @@ type PropsType = {
 
 export default function Popup({patient, open, setOpen}: PropsType) {
 
+
+    // state
+    const dispatch = useDispatch()
+
     const cancelButtonRef = useRef(null)
+
+    const [modeTypeResearch, setModeTypeResearch] = useState<boolean>(false)
+    const [modeFilms, setModeFilms] = useState<boolean>(false)
+    const [modeDose, setModeDose] = useState<boolean>(false)
+
+
+    const selectTypeRes = (value: string, id: string) => {
+        dispatch(EditResearchTypePatient(value, id))
+    }
+
+    const changeModeTypeResearch = (e: any) => {
+        e.stopPropagation()
+        setModeTypeResearch(!modeTypeResearch)
+
+    }
+    const changeModeFilms = () => setModeFilms(!modeFilms)
+
 
     return (
         <Transition.Root show={open} as={Fragment}>
@@ -90,14 +114,24 @@ export default function Popup({patient, open, setOpen}: PropsType) {
                                                 <div className="table-row-group">
                                                     <div className="table-row transition">
 
-                                                        <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
+                                                        <div className="table-cell border border-gray-500 text-left text-lg p-2 m-0 hover:bg-gray-600 cursor-pointer">
                                                             {patient.researches.map(typeRes => {
-                                                                return (<p key={typeRes.idRes}>{typeRes.typeRes}</p>)
+                                                                return (
+                                                                    modeTypeResearch
+                                                                        ? <InputMenuTypes callback={() => selectTypeRes(typeRes.typeRes, typeRes.idRes)}
+                                                                                          types={researchTypes}
+                                                                                          key={typeRes.idRes}/>
+                                                                        : <p onClick={changeModeTypeResearch} key={typeRes.idRes}>{typeRes.typeRes}</p>)
                                                             })}
                                                         </div>
                                                         <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
                                                             {patient.researches.map(films => {
-                                                                return (<p key={films.idRes}>{films.sizeFilm}/{films.amount}/{films.projections}</p>)
+                                                                return (
+                                                                    modeFilms
+                                                                        ? <InputMenuTypes callback={() => {
+                                                                        }} types={sizeFilms} key={films.idRes}/>
+                                                                        : <p onClick={changeModeFilms} key={films.idRes}>{films.sizeFilm}/{films.amount}/{films.projections}</p>
+                                                                )
                                                             })}
                                                         </div>
                                                         <div className="flex flex-row table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">

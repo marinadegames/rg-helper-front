@@ -1,6 +1,7 @@
 import {InputMenuTypes} from "../InputMenuResearchType/InputMenuTypes";
 import {Counter} from "../counter/Counter";
 import {memo, useState} from "react";
+import {researchTypes, sizeFilms} from "../../Utils/selectors";
 
 type PropsType = {
     id: string
@@ -13,25 +14,7 @@ type PropsType = {
 }
 
 export const TypeResearchComponent = memo((props: PropsType) => {
-    const researchTypes = [
-        'ОГК',
-        'Т/Б СУСТАВЫ',
-        'Стопы',
-        'ШОП',
-        'ПОП',
-        'ШОП',
-        'ГПОП',
-        'ПКОК',
-        'ППН',
-        'Другое',
-        'Rg-скопия желудка',
-        'Rg-скопия легких',
-    ]
-    const sizeFilms = [
-        '35x35',
-        '28x43',
-        '18x35',
-    ]
+
 
     const [dose, setDose] = useState<number>(0)
 

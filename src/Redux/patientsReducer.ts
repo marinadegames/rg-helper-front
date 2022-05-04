@@ -13,8 +13,15 @@ export const patientsReducer = (state = PatientsState, action: ActionType): Pati
         case "ADD_PATIENT":
             return {...state, patients: [...state.patients, action.payload]}
         case "SEARCH_PATIENT":
-        return {...state, searchResult : [...state.patients].filter((item) =>
-            item.name.toLowerCase().includes(action.value.toLowerCase()))};
+            return {
+                ...state, searchResult: [...state.patients].filter((item) =>
+                    item.name.toLowerCase().includes(action.value.toLowerCase()))
+            };
+        case "EDIT_RES_TYPE_PATIENT":
+            const targetId = action.id
+
+
+            return state
         default:
             return state
     }
@@ -27,6 +34,10 @@ export const AddPatientsAC = (payload: PatientType): AddPatientAT => {
 
 export const SearchPatientsAC = (value: string): SearchPatientAT => {
     return {type: "SEARCH_PATIENT", value}
+}
+
+export const EditResearchTypePatient = (value: string, id: string): EditResearchTypePatientAT => {
+    return {type: "EDIT_RES_TYPE_PATIENT", value, id}
 }
 
 // TC
@@ -68,12 +79,18 @@ export type ResearchesType = {
 }
 
 export type SizeType = string
-export type ActionType = AddPatientAT | SearchPatientAT
+export type ActionType = AddPatientAT | SearchPatientAT | EditResearchTypePatientAT
 export type AddPatientAT = {
     type: 'ADD_PATIENT'
     payload: PatientType
 }
 export type SearchPatientAT = {
     type: 'SEARCH_PATIENT'
+    value: string
+}
+
+export type EditResearchTypePatientAT = {
+    type: 'EDIT_RES_TYPE_PATIENT'
+    id: string
     value: string
 }
