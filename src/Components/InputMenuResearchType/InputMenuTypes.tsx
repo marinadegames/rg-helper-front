@@ -1,6 +1,7 @@
 import {Fragment, memo, useState} from 'react'
 import {Menu, Transition} from '@headlessui/react'
 import {ChevronDownIcon} from '@heroicons/react/solid'
+import {v1} from "uuid";
 
 type PropsType = {
     types: Array<string>
@@ -40,7 +41,7 @@ export const InputMenuTypes = memo((props: PropsType) => {
                     <div className="py-1 ">
                         {props.types.map(t => {
                             return (
-                                <Menu.Item key={t}>
+                                <Menu.Item key={Math.random()}>
                                     <div
                                         className={'bg-gray-100 text-gray-900 block px-4 py-2 hover:bg-gray-200 cursor-pointer text-sm'}
                                         onClick={() => selectType(t)}>

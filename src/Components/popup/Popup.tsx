@@ -15,7 +15,6 @@ type PropsType = {
 
 export default function Popup({patient, open, setOpen}: PropsType) {
 
-
     // state
     const dispatch = useDispatch()
 
@@ -25,15 +24,13 @@ export default function Popup({patient, open, setOpen}: PropsType) {
     const [modeFilms, setModeFilms] = useState<boolean>(false)
     const [modeDose, setModeDose] = useState<boolean>(false)
 
-
-    const selectTypeRes = (value: string, id: string) => {
-        dispatch(EditResearchTypePatient(value, id))
+    const selectTypeRes = (value: string, idRes: string, idPat: number) => {
+        dispatch(EditResearchTypePatient(value, idRes, idPat))
     }
 
     const changeModeTypeResearch = (e: any) => {
         e.stopPropagation()
         setModeTypeResearch(!modeTypeResearch)
-
     }
     const changeModeFilms = () => setModeFilms(!modeFilms)
 
@@ -118,7 +115,7 @@ export default function Popup({patient, open, setOpen}: PropsType) {
                                                             {patient.researches.map(typeRes => {
                                                                 return (
                                                                     modeTypeResearch
-                                                                        ? <InputMenuTypes callback={() => selectTypeRes(typeRes.typeRes, typeRes.idRes)}
+                                                                        ? <InputMenuTypes callback={() => selectTypeRes(typeRes.typeRes, typeRes.idRes, patient.id)}
                                                                                           types={researchTypes}
                                                                                           key={typeRes.idRes}/>
                                                                         : <p onClick={changeModeTypeResearch} key={typeRes.idRes}>{typeRes.typeRes}</p>)
