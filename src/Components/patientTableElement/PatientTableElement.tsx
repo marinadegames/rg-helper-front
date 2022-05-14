@@ -1,8 +1,8 @@
-import Popup from "../popup/Popup";
 import {formatDate} from "../../Utils/formatDate";
 import {PatientType} from "../../Redux/patientsReducer";
 import {useState} from "react";
 import React from "react";
+import {Popup} from "../popup/Popup";
 
 type PropsType = {
     patient: PatientType
@@ -16,7 +16,6 @@ export const PatientTableElement = ({patient}: PropsType) => {
         <div
             className="table-row transition hover:bg-gray-600 cursor-pointer"
             onClick={() => setOpen(!open)}
-
         >
             {open && <Popup patient={patient} open={open} setOpen={setOpen}/>}
             <div className="table-cell border border-gray-500 text-center py-3">{patient.id}</div>

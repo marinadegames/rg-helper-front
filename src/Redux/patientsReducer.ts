@@ -1,7 +1,6 @@
 // init state
 import {Dispatch} from "react";
 import {TEMP_PATIENTS} from "./TEMPSTATE";
-import {researchTypes} from "../Utils/selectors";
 
 const PatientsState: PatientsStateType = {
     patients: TEMP_PATIENTS,
@@ -19,36 +18,16 @@ export const patientsReducer = (state = PatientsState, action: ActionType): Pati
                     item.name.toLowerCase().includes(action.value.toLowerCase()))
             };
         case "EDIT_RES_TYPE_PATIENT":
-            const copyState = {...state}
-            const copyPat = copyState.patients.find(pat => pat.id === action.idPat)
-            let patientId = null
-            let copyResearches = null;
-            let copyRes = null;
-            let researchId = null
-
-            if (copyPat){
-                patientId = copyPat.id
-            }
-
+            let copyRes = null
+            let copyState = {...state}
+            let copyPat = copyState.patients.find(pat => pat.id == action.idPat)
             if (copyPat) {
-                copyResearches = [...copyPat.researches]
-                copyRes = copyResearches.find(res => res.idRes === action.idRes)
+                copyRes = copyPat.researches.find(res => res.idRes === action.idRes)
                 if (copyRes) {
                     copyRes.typeRes = action.value
-                    researchId = copyRes.idRes
                 }
             }
-            if (copyRes) {
-                copyRes.typeRes = action.value
-                researchId = copyRes.idRes
-            }
-
-            let result = null
-            if (researchId && patientId ){
-                 result = copyState.patients[patientId].researches.map(res => res.idRes)
-            }
-
-            return state
+            return copyState
         default:
             return state
     }

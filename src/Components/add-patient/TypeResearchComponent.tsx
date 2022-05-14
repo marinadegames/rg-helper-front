@@ -22,6 +22,8 @@ export const TypeResearchComponent = memo((props: PropsType) => {
         props.deleteRes(props.id)
     }
     const selectTypeRes = (type: string) => {
+        console.log(type)
+        debugger
         props.selectTypeRes(type, props.id)
     }
     const selectTypeFilm = (type: string) => {
