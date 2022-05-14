@@ -1,6 +1,7 @@
 // init state
 import {Dispatch} from "react";
 import {TEMP_PATIENTS} from "./TEMPSTATE";
+import {researchTypes} from "../Utils/selectors";
 
 const PatientsState: PatientsStateType = {
     patients: TEMP_PATIENTS,
@@ -18,18 +19,36 @@ export const patientsReducer = (state = PatientsState, action: ActionType): Pati
                     item.name.toLowerCase().includes(action.value.toLowerCase()))
             };
         case "EDIT_RES_TYPE_PATIENT":
+            const copyState = {...state}
+            const copyPat = copyState.patients.find(pat => pat.id === action.idPat)
+            let patientId = null
+            let copyResearches = null;
+            let copyRes = null;
+            let researchId = null
 
-            // const copyPatients = [...state.patients]
-            // const targetPat = copyPatients.find(pat => pat.id === action.idPat)
-            // const copyPat = {...targetPat}
-            // const copyRes = copyPat.researches
-            // let targetRes;
-            // if (copyRes){
-            //     targetRes = copyRes.find(res => res.idRes)
-            // }
-            // targetRes = action.type
-return state
-            // return {...state, patients: [...state.patients.map(pat => pat.id === action.idPat ? {...pat, researches: [...pat.researches, pat.researches.map(res => res.idRes === action.idRes ? {...res, typeRes: action.value} : res)]} : pat)]}
+            if (copyPat){
+                patientId = copyPat.id
+            }
+
+            if (copyPat) {
+                copyResearches = [...copyPat.researches]
+                copyRes = copyResearches.find(res => res.idRes === action.idRes)
+                if (copyRes) {
+                    copyRes.typeRes = action.value
+                    researchId = copyRes.idRes
+                }
+            }
+            if (copyRes) {
+                copyRes.typeRes = action.value
+                researchId = copyRes.idRes
+            }
+
+            let result = null
+            if (researchId && patientId ){
+                 result = copyState.patients[patientId].researches.map(res => res.idRes)
+            }
+
+            return state
         default:
             return state
     }
