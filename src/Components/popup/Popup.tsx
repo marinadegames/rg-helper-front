@@ -25,15 +25,12 @@ export const Popup = memo(({patient, open, setOpen}: PropsType) => {
         const [modeDose, setModeDose] = useState<boolean>(false)
 
         const selectTypeRes = (value: string, idRes: string, idPat: number) => {
-            debugger
-            console.log(value)
             dispatch(EditResearchTypePatient(value, idRes, idPat))
         }
 
         const changeModeTypeResearch = (e: any) => {
             e.stopPropagation()
-            setModeTypeResearch(!modeTypeResearch)
-        }
+            setModeTypeResearch(!modeTypeResearch)        }
         const changeModeFilms = () => setModeFilms(!modeFilms)
 
 
@@ -96,7 +93,7 @@ export const Popup = memo(({patient, open, setOpen}: PropsType) => {
                                                 </div>
                                                 <div className="my-2 text-2xl text-left flex flex-row">
                                                     <b className='w-1/4 mr-5'>Адрес: </b>
-                                                    <EditableSpan title={patient.adress} callback={() => {
+                                                    <EditableSpan title={patient.address} callback={() => {
                                                     }}/>
                                                 </div>
                                                 <div className="my-2 text-2xl text-left flex flex-row">

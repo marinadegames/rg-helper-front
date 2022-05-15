@@ -12,7 +12,6 @@ export const InputMenuTypes = memo((props: PropsType) => {
     const [type, setType] = useState<string | 'Выбрать'>('Выбрать')
 
     const selectType = useCallback((t: string) => {
-        debugger
         setType(t)
         props.callback(t)
     },[type])

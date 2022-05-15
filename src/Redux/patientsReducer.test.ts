@@ -12,7 +12,7 @@ beforeEach(() => {
                 name: "Пашкевич Е.В",
                 year: 1997,
                 sex: 'М',
-                adress: 'Пупкина 11-11',
+                address: 'Пупкина 11-11',
                 researches: [],
                 description: null,
                 conclusion: null,
@@ -28,12 +28,13 @@ beforeEach(() => {
 // tests
 
 test('ADD PATIENT', () => {
+    const newName = "Иванов И.И"
     const newPatient: PatientType = {
         id: 2,
-        name: "Иванов И.И",
+        name: newName,
         year: 2001,
         sex: 'М',
-        adress: 'ул. Фронтендерская 99-99',
+        address: 'ул. Фронтендерская 99-99',
         researches: [
             {
                 idRes: 'ewfwegwegwe',
@@ -52,5 +53,5 @@ test('ADD PATIENT', () => {
     const endState = patientsReducer(startState, action)
     expect(endState.patients.length).toBe(2)
     expect(endState.patients[1].id).toBe(2)
-    expect(endState.patients[1].name).toBe("Иванов И.И")
+    expect(endState.patients[1].name).toBe(newName)
 })

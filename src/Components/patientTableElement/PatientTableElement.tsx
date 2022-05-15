@@ -24,7 +24,7 @@ export const PatientTableElement = ({patient}: PropsType) => {
             <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.name}</div>
             <div className="table-cell border border-gray-500 text-center py-3">{patient.year}</div>
             <div className="table-cell border border-gray-500 text-center py-3">{patient.sex}</div>
-            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.adress}</div>
+            <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.address}</div>
 
             <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
                 {patient.researches.map(typeRes => {

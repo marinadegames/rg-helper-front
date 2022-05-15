@@ -1,6 +1,7 @@
 // init state
 import {Dispatch} from "react";
 import {TEMP_PATIENTS} from "./TEMPSTATE";
+import {debug} from "util";
 
 const PatientsState: PatientsStateType = {
     patients: TEMP_PATIENTS,
@@ -49,11 +50,11 @@ export const EditResearchTypePatient = (value: string, idRes: string, idPat: num
 // TC
 export const AddPatientTC = (payload: PatientType) => async (dispatch: Dispatch<any>) => {
     try {
+        console.log(payload)
         await dispatch(AddPatientsAC(payload))
     } catch {
         console.warn('ERROR')
     } finally {
-
     }
 }
 
@@ -69,7 +70,7 @@ export type PatientType = {
     name: string
     year: number
     sex: string
-    adress: string
+    address: string
     researches: Array<ResearchesType>
     description: string | null
     conclusion: string | null

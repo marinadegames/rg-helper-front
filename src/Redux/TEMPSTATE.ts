@@ -4,7 +4,7 @@ export const TEMP_PATIENTS = [
         name: "Пашкевич Е.В",
         year: 1997,
         sex: 'М',
-        adress: 'Пупкина 11-11',
+        address: 'Пупкина 11-11',
         researches: [
             {
                 idRes: 'werewrwer1234123413',
@@ -24,7 +24,7 @@ export const TEMP_PATIENTS = [
         name: "Иванов И.И",
         year: 2001,
         sex: 'М',
-        adress: 'ул. Фронтендерская 99-99',
+        address: 'ул. Фронтендерская 99-99',
         researches: [
             {
                 idRes: 'ewfwegwegwe',
@@ -44,7 +44,7 @@ export const TEMP_PATIENTS = [
         name: "Добровольская А.П.",
         year: 1987,
         sex: 'Ж',
-        adress: 'ул. Бэкенда-Фрондендоровича 100-100',
+        address: 'ул. Бэкенда-Фрондендоровича 100-100',
         researches: [
             {
                 idRes: '123123123',
@@ -64,7 +64,7 @@ export const TEMP_PATIENTS = [
         name: "Крикунов В.С.",
         year: 1956,
         sex: 'М',
-        adress: 'ул. Самурая-Камасутровича',
+        address: 'ул. Самурая-Камасутровича',
         researches: [
             {
                 idRes: '123123123',
@@ -92,7 +92,7 @@ export const TEMP_PATIENTS = [
         name: "Орулькович В.П.",
         year: 1999,
         sex: 'Ж',
-        adress: 'ул. Булочкина 90-90',
+        address: 'ул. Булочкина 90-90',
         researches: [
             {
                 idRes: '123123123',
@@ -112,7 +112,7 @@ export const TEMP_PATIENTS = [
         name: "Чувак В.С.",
         year: 1985,
         sex: 'М',
-        adress: 'ул. Мучная 90-90',
+        address: 'ул. Мучная 90-90',
         researches: [
             {
                 idRes: '123123123',
@@ -132,7 +132,7 @@ export const TEMP_PATIENTS = [
         name: "лебедка В.В.",
         year: 1999,
         sex: 'М',
-        adress: 'ул. Штруделя 90-90',
+        address: 'ул. Штруделя 90-90',
         researches: [
             {
                 idRes: '2231566',
@@ -152,7 +152,7 @@ export const TEMP_PATIENTS = [
         name: "Прилипский В.К.",
         year: 1978,
         sex: 'М',
-        adress: 'ул. Кривошеего 90-90',
+        address: 'ул. Кривошеего 90-90',
         researches: [
             {
                 idRes: '456789',
@@ -172,7 +172,7 @@ export const TEMP_PATIENTS = [
         name: "Плевова В.П.",
         year: 1999,
         sex: 'Ж',
-        adress: 'ул. Метрова 90-90',
+        address: 'ул. Метрова 90-90',
         researches: [
             {
                 idRes: '90',
@@ -192,7 +192,7 @@ export const TEMP_PATIENTS = [
         name: "Приемович Ж.А.",
         year: 1999,
         sex: 'М',
-        adress: 'ул. Отличникова 90-90',
+        address: 'ул. Отличникова 90-90',
         researches: [
             {
                 idRes: '123123123',

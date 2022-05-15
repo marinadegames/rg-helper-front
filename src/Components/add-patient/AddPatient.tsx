@@ -1,16 +1,14 @@
 import s from './AddPatient.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../../Redux/state";
-import {memo, useState} from "react";
+import {memo, useCallback, useState} from "react";
 import {AddPatientTC, PatientType, ResearchesType} from "../../Redux/patientsReducer";
 import {TypeResearchComponent} from "./TypeResearchComponent";
 import {v1} from "uuid";
 import {Button} from "../universal components/Button";
 import {formatDate} from "../../Utils/formatDate";
-import {
-    setErrorMessageTC,
-    setSuccessfulMessageTC,
-} from "../../Redux/appReducer";
+import {setErrorMessageTC, setSuccessfulMessageTC,} from "../../Redux/appReducer";
+import {debug} from "util";
 
 
 export const AddPatient = memo(() => {
@@ -20,9 +18,11 @@ export const AddPatient = memo(() => {
         const [name, setName] = useState<string>('')
         const [year, setYear] = useState<number>(1900)
         const [sex, setSex] = useState<string>('')
-        const [adress, setAdress] = useState<string>('')
+        const [address, setAddress] = useState<string>('')
         const [researches, setResearches] = useState<Array<ResearchesType>>([])
         const dispatch = useDispatch()
+
+        console.table(researches)
 
         // functional
         const addRes = () => {
@@ -34,7 +34,8 @@ export const AddPatient = memo(() => {
                 amount: 0,
                 projections: 0,
                 dose: 0,
-            }
+            } as ResearchesType
+
             setResearches(
                 [...researches, newRes]
             )
@@ -43,12 +44,14 @@ export const AddPatient = memo(() => {
         const changeName = (e: string) => setName(e)
         const changeYear = (e: number) => setYear(e)
         const changeSex = (sex: string) => setSex(sex)
-        const changeAdress = (e: string) => setAdress(e)
-        const selectTypeRes = (value: string, id: string) => {
-            setResearches(researches.map(res => res.idRes === id ? {...res, typeRes: value} : res))
-        }
+        const changeAddress = (e: string) => setAddress(e)
+
+        const selectTypeRes = useCallback((value: string, idTarget: string) => {
+            setResearches(researches.map(res => res.idRes === idTarget ? {...res, typeRes: value} : res))
+        }, [researches])
+
         const selectXrayFilm = (value: string, id: string) => {
-            setResearches(researches.map(res => res.idRes === id ? {...res, sizeFilm: value} : res))
+            setResearches(researches.map(res => res.idRes === id ? ({...res, sizeFilm: value}) : res))
         }
         const selectAmount = (num: number, id: string) => {
             setResearches(researches.map(res => res.idRes === id ? {...res, amount: num} : res))
@@ -65,20 +68,20 @@ export const AddPatient = memo(() => {
                 name,
                 year,
                 sex,
-                adress,
-                researches,
+                address: address,
+                researches: researches,
                 dateOfReceipt: new Date(),
                 description: '',
                 conclusion: '',
             }
-            if (name.length > 0 && sex.length > 0 && adress.length > 0) {
+            if (name.length > 0 && sex.length > 0 && address.length > 0) {
                 dispatch(AddPatientTC(payload))
                 dispatch(setSuccessfulMessageTC('Пациент успешно добавлен!'))
                 // clear inputs
                 setName('')
                 setYear(1900)
                 setSex('')
-                setAdress('')
+                setAddress('')
                 setResearches([])
             } else {
                 dispatch(setErrorMessageTC('Проверьте правильность введенных данных!'))
@@ -165,8 +168,8 @@ export const AddPatient = memo(() => {
                            placeholder={'Адрес'}
                            id={'adress'}
                            name={'adress'}
-                           value={adress}
-                           onChange={e => changeAdress(e.currentTarget.value)}
+                           value={address}
+                           onChange={e => changeAddress(e.currentTarget.value)}
                     />
                 </div>
 

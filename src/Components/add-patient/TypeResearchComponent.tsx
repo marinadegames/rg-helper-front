@@ -1,6 +1,6 @@
 import {InputMenuTypes} from "../InputMenuResearchType/InputMenuTypes";
 import {Counter} from "../counter/Counter";
-import {memo, useState} from "react";
+import {memo, useCallback, useState} from "react";
 import {researchTypes, sizeFilms} from "../../Utils/selectors";
 
 type PropsType = {
@@ -21,11 +21,11 @@ export const TypeResearchComponent = memo((props: PropsType) => {
     const deleteRes = () => {
         props.deleteRes(props.id)
     }
-    const selectTypeRes = (type: string) => {
-        console.log(type)
-        debugger
+    const selectTypeRes = useCallback((type: string) => {
+        console.log(`TYPE: ${type}`)
         props.selectTypeRes(type, props.id)
-    }
+    }, [props.selectTypeRes, props.id])
+
     const selectTypeFilm = (type: string) => {
         props.selectXrayFilm(type, props.id)
     }
