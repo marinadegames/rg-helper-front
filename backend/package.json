@@ -1,5 +1,20 @@
 {
   "dependencies": {
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "chalk": "^4.1.2"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "type": "module",
+  "name": "rg-helper-server",
+  "version": "1.0.0",
+  "description": "Rg-helper Server",
+  "main": "index.js",
+  "author": "Eugene Pashkevich <marinadegames@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   }
 }
