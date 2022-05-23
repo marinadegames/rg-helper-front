@@ -11,8 +11,8 @@
 🎎`v0.0.4` - added button `delete` patient => working!  |  + `layout`  
 🧢`v0.0.5` - added panel for `add patients`  
 💁`v0.0.6` - added the ability `add patients` | fix `checkbox-covid`  
-📥`v0.0.7` - added `Tailwind UI` | `mega refactoring`
-✅`v0.1.0` - `reducers` | input change | new component | add patient
+📥`v0.0.7` - added `Tailwind UI` | `mega refactoring`  
+✅`v0.1.0` - `reducers` | input change | new component | add patient  
 🔍`v0.1.1` - add `search`
 
 ## 🌠 Per aspera ad astra ⭐ 
