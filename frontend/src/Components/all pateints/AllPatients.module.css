@@ -1,0 +1,16 @@
+.all_patients {
+    @apply
+    w-full
+}
+
+.header_patient_list {
+    @apply
+        flex
+    justify-between
+    bg-gray-800
+    rounded-md
+    py-3
+    px-3
+    mb-5
+    text-2xl
+}

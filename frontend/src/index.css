@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply
+    text-blue-50
+    p-5
+    bg-gray-900
+}
