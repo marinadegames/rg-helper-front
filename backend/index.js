@@ -1,10 +1,8 @@
 import http from "http";
 import chalk from "chalk";
+import {usersController} from "./usersController.js";
 
-
-let server = http.createServer((req, res) => {
-
-    // Set CORS headers
+const CORS = (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Request-Method', '*');
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
@@ -12,15 +10,26 @@ let server = http.createServer((req, res) => {
     if (req.method === 'OPTIONS') {
         res.writeHead(200);
         res.end();
-        return;
+        return true
     }
+    return false
+}
+
+export let users = [
+    {"id": 1, "name": "Eugene"},
+    {"id": 2, "name": "Elina"},
+    {"id": 3, "name": "Bob"}
+]
+
+let server = http.createServer((req, res) => {
+    if (CORS(req, res)) return
 
     switch (req.url) {
         case "/":
             res.write('HOME PAGE')
             break
         case '/users':
-            res.write(`[{"id": 1, "name": "Eugene"}, {"id": 2, "name": "Elina"}]`)
+            usersController(req, res)
             break
         case '/tasks':
             res.write('TASKS PAGE')
