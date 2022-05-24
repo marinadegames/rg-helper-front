@@ -1,11 +1,14 @@
-import {users} from "./index.js";
+import {addUser, getUsers} from "./repository.js";
 
-export const usersController = (req, res) => {
+export const usersController = async (req, res) => {
     if (req.method === 'POST') {
-        users.push({"id": users.length + 1, "name": 'Alex'})
+        await addUser("Alex")
         res.write(JSON.stringify({"success": true}))
+        res.end()
     } else {
-        res.write(JSON.stringify(users))
-    }
+        let users = await getUsers()
+        res.write(users)
+        res.end()
 
+    }
 }

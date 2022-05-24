@@ -15,11 +15,6 @@ const CORS = (req, res) => {
     return false
 }
 
-export let users = [
-    {"id": 1, "name": "Eugene"},
-    {"id": 2, "name": "Elina"},
-    {"id": 3, "name": "Bob"}
-]
 
 let server = http.createServer((req, res) => {
     if (CORS(req, res)) return
@@ -40,8 +35,6 @@ let server = http.createServer((req, res) => {
         default:
             res.write('404 - PAGE NOT FOUND')
     }
-
-    res.end()
 })
 
 server.listen(7500, () => {
