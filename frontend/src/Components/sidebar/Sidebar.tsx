@@ -27,7 +27,9 @@ export function Sidebar() {
                 <NavLink to={'/search'}>
                     <MenuItem title={'Поиск'} icon={''}/>
                 </NavLink>
-                <MenuItem title={'Настройки'} icon={''}/>
+                <NavLink to={'/settings'}>
+                    <MenuItem title={'Настройки'} icon={''}/>
+                </NavLink>
                 <MenuItem title={'Выход'} icon={''}/>
             </div>
         </header>
