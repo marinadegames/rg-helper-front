@@ -7,8 +7,7 @@ export const usersController = async (req, res) => {
         res.end()
     } else {
         let users = await getUsers()
-        res.write(users)
+        res.write(JSON.stringify(users))
         res.end()
-
     }
 }

@@ -9,8 +9,8 @@ export let users = [
 
 export const getUsers = () => {
     return new Promise((resolve, reject) => {
-        fs.readFile('users.json', function (err, buf) {
-            resolve(buf.toString())
+        fs.readFile('db', function (err, buf) {
+            resolve(JSON.parse(buf.toString()))
         })
     })
 }
