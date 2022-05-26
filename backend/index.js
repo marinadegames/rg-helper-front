@@ -1,46 +1,26 @@
 import chalk from "chalk";
-import {usersController} from "./usersController.js";
 import os from "os";
 import dotenv from "dotenv";
-import http from "http";
+import express from 'express'
+import cors from 'cors'
+import users from "./usersRouter.js";
 
-const PORT = process.env.PORT || 7500
+// params
+const port = 7500
+const app = express()
 dotenv.config()
+app.use(cors())
 
-const CORS = (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Request-Method', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-    res.setHeader('Access-Control-Allow-Headers', '*');
-    if (req.method === 'OPTIONS') {
-        res.writeHead(200);
-        res.end();
-        return true
-    }
-    return false
-}
+// routers
+app.use('/users', users)
 
+app.get('/tasks', async (req, res) => {
+    res.send('TASKS')
+})
 
-let server = http.createServer((req, res) => {
-    if (CORS(req, res)) return
-    switch (req.url) {
-        case "/":
-            res.write('HOME PAGE')
-            break
-        case '/users':
-            usersController(req, res).then(res => {
-                console.log(res)
-            })
-            break
-        case '/tasks':
-            res.write('TASKS PAGE')
-            break
-        case '/lessons':
-            res.write('LESSONS')
-            break
-        default:
-            res.write('404 - PAGE NOT FOUND')
-    }
+// default
+app.use(async (req, res) => {
+    res.send('404 NOT FOUND')
 })
 
 console.clear()
@@ -51,9 +31,10 @@ console.log(chalk.blueBright('MODE:'), chalk.cyanBright(process.env.NODE_ENV))
 console.log(chalk.blueBright('OS:'), chalk.cyanBright(os.platform()))
 console.log(chalk.blueBright("CPU's"), chalk.cyanBright(os.cpus().length))
 
-server.listen(PORT, () => {
-    console.log(chalk.greenBright('===== SERVER IS RUNNING... ====='))
+app.listen(port, () => {
+    console.log(chalk.greenBright(`===== SERVER IS RUNNING... =====`))
 })
+
 
 
 
