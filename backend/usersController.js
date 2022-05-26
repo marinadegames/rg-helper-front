@@ -2,7 +2,7 @@ import {addUser, getUsers} from "./repository.js";
 
 export const usersController = async (req, res) => {
     if (req.method === 'POST') {
-        let result = await addUser("Alex")
+        let result = await addUser("TEST")
         res.write(JSON.stringify({"success": true}))
         res.end()
     } else {
