@@ -1,4 +1,6 @@
 import fs from "fs";
+import chalk from "chalk";
+import {readJSONFromFile} from "./fs-utils.js";
 
 export let users = [
     {"id": 1, "name": "Eugene"},
@@ -8,13 +10,20 @@ export let users = [
 
 
 export const getUsers = () => {
-    return new Promise((resolve, reject) => {
-        fs.readFile('db', function (err, buf) {
-            resolve(JSON.parse(buf.toString()))
-        })
-    })
+    return readJSONFromFile('db')
 }
 
-export const addUser = (name) => {
+export const addUser = async (name) => {
+    let users = await getUsers()
     users.push({id: users.length + 1, name: name})
+    return new Promise((res, rej) => {
+        fs.writeFile('db', JSON.stringify(users), (err) => {
+            if (err) {
+                rej(err)
+                console.log(chalk.red(err))
+            }
+            console.log(chalk.greenBright('ADD USER SUCCESSFUL! '))
+            res()
+        })
+    })
 }
