@@ -6,6 +6,10 @@ const router = express.Router()
 router.get('/', async (req, res) => {
     let users = await getUsers()
     console.log(users)
+
+    if (!!req.query.search){
+        users = users.filter(u => u.name.indexOf(req.query.search) > -1)
+    }
     res.send(users)
 })
 router.get('/:id', async (req, res) => {
