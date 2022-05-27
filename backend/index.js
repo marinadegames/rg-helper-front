@@ -4,10 +4,13 @@ import dotenv from "dotenv";
 import express from 'express'
 import cors from 'cors'
 import users from "./usersRouter.js";
+import bodyParser from 'body-parser'
 
 // params
 const port = 7500
 const app = express()
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
 dotenv.config()
 app.use(cors())
 

@@ -1,5 +1,5 @@
 import s from "../all pateints/AllPatients.module.css";
-import {useEffect, useState} from "react";
+import {useEffect, useState, KeyboardEvent} from "react";
 import axios from "axios";
 import {Button} from "../universal components/Button";
 import {Input} from "postcss";
@@ -43,6 +43,13 @@ export const Settings = () => {
             })
     }
 
+    const enterInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter'){
+            addPatient()
+            setInputName('')
+        }
+    }
+
     return (
         <div className={s.all_patients}>
             <div className={s.header_patient_list}>
@@ -51,10 +58,17 @@ export const Settings = () => {
             <input value={inputName}
                    style={{color: 'black', height: '40px', padding: '8px', width: '270px', margin: '0 0 20px 0'}}
                    placeholder={'add name'}
+                   onKeyPress={(e) => enterInputHandler(e)}
                    onChange={(e) => changeInputHandler(e.currentTarget.value)}/>
             <Button onClick={addPatient} title={'add patient'}/>
             {users.map((u) => {
-                return <div key={u.id}>{u.name}</div>
+                return <div style={
+                    {
+                        display: 'flex',
+                        margin: '5px 0',
+                        fontSize: '20px',
+
+                    }} key={u.id}>{u.name}</div>
             })}
 
         </div>

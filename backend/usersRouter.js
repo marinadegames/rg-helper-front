@@ -3,7 +3,6 @@ import express from "express";
 
 const router = express.Router()
 
-
 router.get('/', async (req, res) => {
     let users = await getUsers()
     console.log(users)
@@ -21,31 +20,9 @@ router.get('/:id', async (req, res) => {
     }
 })
 router.post('/', async (req, res) => {
-    await addUser("Robot")
+    let name = req.body.name
+    await addUser(name)
     res.send({"success": true})
 })
-
-
-// router.get('/', function(req, res){
-//     res.send('Birds home page')
-// })
-// router.get('/', function(req, res){
-//     res.send('About birds')
-// })
-
-
-// export const usersRouter = async (req, res) => {
-//     if (req.method === POST) {
-//         let result = await addUser("TEST")
-//         res.write(JSON.stringify({"success": true}))
-//         res.end()
-//     }
-//     if (req.method === GET) {
-//         let users = await getUsers()
-//         console.log(users)
-//         res.write(JSON.stringify(users))
-//         res.end()
-//     }
-// }
 
 export default router
