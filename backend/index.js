@@ -13,7 +13,9 @@ app.use(cors())
 
 // routers
 app.use('/users', users)
-
+app.get('/', async (req, res) => {
+    res.send(`<h1>HOME PAGE</h1>`)
+})
 app.get('/tasks', async (req, res) => {
     res.send('TASKS')
 })
