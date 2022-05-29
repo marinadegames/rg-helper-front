@@ -18,6 +18,14 @@ export const getUsers = (search) => {
     }
 }
 
+export const getUser = (id) => {
+    return Patient.find({_id: id})
+}
+
+export const updateUser = (id, name) => {
+    return Patient.update({_id: id}, {name: name})
+}
+
 export const addUser = async (name) => {
     console.log('POST NAME: ', name)
     let Patient_ONE = new Patient({

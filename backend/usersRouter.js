@@ -1,4 +1,4 @@
-import {addUser, deleteUser, getUsers} from "./repository.js";
+import {addUser, deleteUser, getUsers, updateUser} from "./repository.js";
 import express from "express";
 
 const router = express.Router()
@@ -33,5 +33,10 @@ router.post('/', async (req, res) => {
     await addUser(name)
     res.send({"success": true})
 })
-
+router.put('/', async (req, res) => {
+    let name = req.body.name
+    let id = req.body.id
+    await updateUser(id, name)
+    res.send({"success": true})
+})
 export default router

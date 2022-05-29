@@ -52,6 +52,15 @@ export const Settings = () => {
             })
     }
 
+    const updateUser = (id: string, name: string) => {
+        axios.put('http://localhost:7500/users', {name, id})
+            .then( () => {
+                getUsers()
+            }).catch(() => {
+            console.error('ERROR get users!')
+        })
+    }
+
     const enterInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             addPatient()
@@ -78,7 +87,9 @@ export const Settings = () => {
                         fontSize: '20px',
 
                     }} key={u._id}>
-                    <div>{u.name}</div>
+                    <input defaultValue={u.name}
+                           style={{color: "black"}}
+                           onBlur={(e) => updateUser(u._id, e.currentTarget.value)}/>
                     <button style={{border: '1px solid white', width: '40px', margin: '0 0 0 10px'}}
                             onClick={() => deletePatient(u._id)}>X
                     </button>
