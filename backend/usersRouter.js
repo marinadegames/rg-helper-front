@@ -1,4 +1,4 @@
-import {addUser, getUsers} from "./repository.js";
+import {addUser, deleteUser, getUsers} from "./repository.js";
 import express from "express";
 
 const router = express.Router()
@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
     let users = await getUsers()
     console.log(users)
 
-    if (!!req.query.search){
+    if (!!req.query.search) {
         users = users.filter(u => u.name.indexOf(req.query.search) > -1)
     }
     res.send(users)
@@ -22,6 +22,11 @@ router.get('/:id', async (req, res) => {
     } else {
         res.sendStatus(404)
     }
+})
+router.delete('/:id', async (req, res) => {
+    const userId = req.params.id
+    await deleteUser(userId)
+    res.send(204)
 })
 router.post('/', async (req, res) => {
     let name = req.body.name

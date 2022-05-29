@@ -1,12 +1,10 @@
 import s from "../all pateints/AllPatients.module.css";
-import {useEffect, useState, KeyboardEvent} from "react";
+import {KeyboardEvent, useEffect, useState} from "react";
 import axios from "axios";
 import {Button} from "../universal components/Button";
-import {Input} from "postcss";
-import {EditableSpan} from "../universal components/EditableSpan";
 
 type UserType = {
-    id: string,
+    _id: string,
     name: string
 }
 
@@ -43,8 +41,19 @@ export const Settings = () => {
             })
     }
 
+    const deletePatient = (_id: string) => {
+        axios.delete(`http://localhost:7500/users/${_id}`)
+            .then(res => {
+                console.log(res)
+                getUsers()
+            })
+            .catch(() => {
+                console.error('ERROR patient delete!')
+            })
+    }
+
     const enterInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter'){
+        if (e.key === 'Enter') {
             addPatient()
             setInputName('')
         }
@@ -68,7 +77,12 @@ export const Settings = () => {
                         margin: '5px 0',
                         fontSize: '20px',
 
-                    }} key={u.id}>{u.name}</div>
+                    }} key={u._id}>
+                    <div>{u.name}</div>
+                    <button style={{border: '1px solid white', width: '40px', margin: '0 0 0 10px'}}
+                            onClick={() => deletePatient(u._id)}>X
+                    </button>
+                </div>
             })}
 
         </div>

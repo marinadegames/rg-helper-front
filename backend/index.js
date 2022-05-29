@@ -5,6 +5,13 @@ import express from 'express'
 import cors from 'cors'
 import users from "./usersRouter.js";
 import bodyParser from 'body-parser'
+import mongoose from "mongoose";
+
+// connect ro db (MongoDB)
+main().catch(err => console.log(err))
+async function main() {
+    await mongoose.connect('mongodb://localhost:27017/patients');
+}
 
 // params
 const port = 7500
@@ -13,6 +20,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 dotenv.config()
 app.use(cors())
+
 
 // routers
 app.use('/users', users)
