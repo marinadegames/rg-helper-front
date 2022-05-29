@@ -14,7 +14,7 @@ export const getUsers = (search) => {
     if (!search) {
         return Patient.find()
     } else {
-        return Patient.find({name: search})
+        return Patient.find({name: new RegExp(search)})
     }
 }
 
