@@ -18,7 +18,7 @@ export const Settings = () => {
     }
 
     const getUsers = () => {
-        axios.get('http://localhost:7500/users')
+        axios.get('http://localhost:7500/users' + window.location.search)
             .then(res => {
                 setUsers(res.data)
             }).catch(() => {

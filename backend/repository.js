@@ -10,10 +10,12 @@ let patientsSchema = new mongoose.Schema({
 })
 export let Patient = mongoose.model('Patients', patientsSchema)
 
-
-export const getUsers = () => {
-    // return readJSONFromFile('db')
-    return Patient.find()
+export const getUsers = (search) => {
+    if (!search) {
+        return Patient.find()
+    } else {
+        return Patient.find({name: search})
+    }
 }
 
 export const addUser = async (name) => {
