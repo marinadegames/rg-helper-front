@@ -8,8 +8,8 @@
 
 ☢️`v0.0.1` - create app  
 🦷`v0.0.2` - added `useState` and `table patients`  
-🆔`v0.0.3` - added `uuid`
-✔️`v0.0.3` - added `filters` (in progress... not working!!!)  
+🆔`v0.0.3` - added `uuid`  
+✔️`v0.0.3.1` - added `filters` (in progress... not working!!!)  
 🎎`v0.0.4` - added button `delete` patient => working!  | + `layout`  
 🧢`v0.0.5` - added panel for `add patients`  
 💁`v0.0.6` - added the ability `add patients` | fix `checkbox-covid`  
