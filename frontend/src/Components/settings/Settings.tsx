@@ -35,6 +35,7 @@ export const Settings = () => {
             .then(res => {
                 console.log(res)
                 getUsers()
+                setInputName('')
             })
             .catch(() => {
                 console.error('ERROR post!')
@@ -54,7 +55,7 @@ export const Settings = () => {
 
     const updateUser = (id: string, name: string) => {
         axios.put('http://localhost:7500/users', {name, id})
-            .then( () => {
+            .then(() => {
                 getUsers()
             }).catch(() => {
             console.error('ERROR get users!')
