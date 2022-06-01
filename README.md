@@ -16,7 +16,7 @@
 📥`v0.0.7` - added `Tailwind UI` | `mega refactoring`  
 ✅`v0.1.0` - `reducers` | input change | new component | add patient  
 🔍`v0.1.1` - add `search`  
-😎`v0.1.2` - add `nodejs server`
+😎`v0.1.2` - add connect to `nodejs server`
 
 ## 🌠 Per aspera ad astra ⭐ 
 

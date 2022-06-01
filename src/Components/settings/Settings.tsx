@@ -2,25 +2,25 @@ import s from "../all pateints/AllPatients.module.css";
 import {KeyboardEvent, useEffect, useState} from "react";
 import axios from "axios";
 import {Button} from "../universal components/Button";
+import {usersAPI} from "../../api/api";
 
 type UserType = {
-    _id: string,
+    id: string,
     name: string
 }
 
 export const Settings = () => {
-
-    const [users, setUsers] = useState<UserType[]>([])
+    const [users, setUsers] = useState<any>([])
     const [inputName, setInputName] = useState<string>('')
 
     const changeInputHandler = (value: string) => {
         setInputName(value)
     }
-
     const getUsers = () => {
-        axios.get('http://localhost:7500/users' + window.location.search)
+
+        usersAPI.getUsers()
             .then(res => {
-                setUsers(res.data)
+                setUsers(res.data.results)
             }).catch(() => {
             console.error('ERROR get users!')
         })
@@ -80,19 +80,19 @@ export const Settings = () => {
                    onKeyPress={(e) => enterInputHandler(e)}
                    onChange={(e) => changeInputHandler(e.currentTarget.value)}/>
             <Button onClick={addPatient} title={'add patient'}/>
-            {users.map((u) => {
+            {users.map((u: UserType) => {
                 return <div style={
                     {
                         display: 'flex',
                         margin: '5px 0',
                         fontSize: '20px',
 
-                    }} key={u._id}>
+                    }} key={u.id}>
                     <input defaultValue={u.name}
                            style={{color: "black"}}
-                           onBlur={(e) => updateUser(u._id, e.currentTarget.value)}/>
+                           onBlur={(e) => updateUser(u.id, e.currentTarget.value)}/>
                     <button style={{border: '1px solid white', width: '40px', margin: '0 0 0 10px'}}
-                            onClick={() => deletePatient(u._id)}>X
+                            onClick={() => deletePatient(u.id)}>X
                     </button>
                 </div>
             })}
