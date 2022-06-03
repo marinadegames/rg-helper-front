@@ -1,14 +1,11 @@
-// init state
 import {Dispatch} from "react";
 import {TEMP_PATIENTS} from "./TEMPSTATE";
-import {debug} from "util";
 
 const PatientsState: PatientsStateType = {
     patients: TEMP_PATIENTS,
     searchResult: []
 }
 
-// reducer
 export const patientsReducer = (state = PatientsState, action: ActionType): PatientsStateType => {
     switch (action.type) {
         case "ADD_PATIENT":
@@ -34,7 +31,6 @@ export const patientsReducer = (state = PatientsState, action: ActionType): Pati
     }
 }
 
-// AC
 export const AddPatientsAC = (payload: PatientType): AddPatientAT => {
     return {type: "ADD_PATIENT", payload}
 }
@@ -47,7 +43,6 @@ export const EditResearchTypePatient = (value: string, idRes: string, idPat: num
     return {type: "EDIT_RES_TYPE_PATIENT", value, idRes, idPat}
 }
 
-// TC
 export const AddPatientTC = (payload: PatientType) => async (dispatch: Dispatch<any>) => {
     try {
         console.log(payload)
@@ -59,7 +54,6 @@ export const AddPatientTC = (payload: PatientType) => async (dispatch: Dispatch<
 }
 
 
-// types
 export type PatientsStateType = {
     patients: Array<PatientType>,
     searchResult: Array<PatientType>

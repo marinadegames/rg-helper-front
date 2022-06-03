@@ -17,7 +17,6 @@ export const Settings = () => {
         setInputName(value)
     }
     const getUsers = () => {
-
         usersAPI.getUsers()
             .then(res => {
                 setUsers(res.data.results)
