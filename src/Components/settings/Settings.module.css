@@ -7,4 +7,8 @@
 .test_user {
     @apply
     mr-5
+    mt-2
+    mb-2
+    flex
+    align-middle
 }

@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: 'https://rg-helper-back.herokuapp.com/',
-    // baseURL: 'http://localhost:5000/',
+    // baseURL: 'https://rg-helper-back.herokuapp.com/',
+    baseURL: 'http://localhost:5000/',
 })
 
 export const usersAPI = {
@@ -10,7 +10,7 @@ export const usersAPI = {
         return instance.get<GetUsersResponseType>('db')
     },
     deleteUser(userId: string) {
-        return instance.delete<any>('')
+        return instance.delete<GetUsersResponseType>(userId)
     }
 }
 

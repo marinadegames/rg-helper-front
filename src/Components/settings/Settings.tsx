@@ -46,13 +46,14 @@ export const Settings = () => {
             })
     }
 
-    const deletePatient = (_id: string) => {
-        axios.delete(`http://localhost:7500/users/${_id}`)
+    const deletePatient = (patientId: string) => {
+        usersAPI.deleteUser(patientId)
             .then(res => {
                 console.log(res)
                 getUsers()
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err)
                 console.error('ERROR patient delete!')
             })
     }
@@ -95,6 +96,10 @@ export const Settings = () => {
                         <div className={style.test_user}>{utc.toDateString()} </div>
                         <input type={"checkbox"} checked={u.covid} onChange={() => {
                         }}/>
+                        <button className={style.test_user}
+                                onClick={() => deletePatient(u.id)}>
+                            x
+                        </button>
                     </div>
                 )
             })}
