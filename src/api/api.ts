@@ -9,6 +9,9 @@ export const usersAPI = {
     getUsers() {
         return instance.get<GetUsersResponseType>('db')
     },
+    deleteUser(userId: string) {
+        return instance.delete<any>('')
+    }
 }
 
 

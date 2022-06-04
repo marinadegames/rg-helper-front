@@ -1,12 +1,17 @@
 import s from "../all pateints/AllPatients.module.css";
+import style from './Settings.module.css'
 import {KeyboardEvent, useEffect, useState} from "react";
 import axios from "axios";
 import {Button} from "../universal components/Button";
 import {usersAPI} from "../../api/api";
 
 type UserType = {
-    id: string,
+    id: string
     name: string
+    email: string
+    bio: string
+    birth: string
+    covid: boolean
 }
 
 export const Settings = () => {
@@ -80,20 +85,18 @@ export const Settings = () => {
                    onChange={(e) => changeInputHandler(e.currentTarget.value)}/>
             <Button onClick={addPatient} title={'add patient'}/>
             {users.map((u: UserType) => {
-                return <div style={
-                    {
-                        display: 'flex',
-                        margin: '5px 0',
-                        fontSize: '20px',
-
-                    }} key={u.id}>
-                    <input defaultValue={u.name}
-                           style={{color: "black"}}
-                           onBlur={(e) => updateUser(u.id, e.currentTarget.value)}/>
-                    <button style={{border: '1px solid white', width: '40px', margin: '0 0 0 10px'}}
-                            onClick={() => deletePatient(u.id)}>X
-                    </button>
-                </div>
+                let now = new Date(u.birth);
+                let utc = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+                return (
+                    <div key={u.id} className={style.test_users}>
+                        <div className={style.test_user}>{u.id}</div>
+                        <div className={style.test_user}>{u.name}</div>
+                        <div className={style.test_user}>{u.bio} </div>
+                        <div className={style.test_user}>{utc.toDateString()} </div>
+                        <input type={"checkbox"} checked={u.covid} onChange={() => {
+                        }}/>
+                    </div>
+                )
             })}
 
         </div>

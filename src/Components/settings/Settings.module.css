@@ -1,0 +1,10 @@
+.test_users {
+    @apply
+    flex
+    flex-row
+}
+
+.test_user {
+    @apply
+    mr-5
+}
