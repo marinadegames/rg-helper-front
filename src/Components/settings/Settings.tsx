@@ -3,16 +3,7 @@ import style from './Settings.module.css'
 import {KeyboardEvent, useEffect, useState} from "react";
 import axios from "axios";
 import {Button} from "../universal components/Button";
-import {usersAPI} from "../../api/api";
-
-type UserType = {
-    id: string
-    name: string
-    email: string
-    bio: string
-    birth: string
-    covid: boolean
-}
+import {usersAPI, UserType, UserTypePost} from "../../api/api";
 
 export const Settings = () => {
     const [users, setUsers] = useState<any>([])
@@ -35,14 +26,24 @@ export const Settings = () => {
     }, [])
 
     const addPatient = () => {
-        axios.post('http://localhost:7500/users', {name: inputName})
+        let newUser: UserTypePost = {
+            name: inputName,
+            email: null,
+            bio: null,
+            birth: null,
+            covid: null
+        }
+        usersAPI.addUser(newUser)
             .then(res => {
                 console.log(res)
                 getUsers()
-                setInputName('')
             })
-            .catch(() => {
+            .catch((err) => {
+                console.error(err)
                 console.error('ERROR post!')
+            })
+            .finally(() => {
+                setInputName('')
             })
     }
 
@@ -94,7 +95,7 @@ export const Settings = () => {
                         <div className={style.test_user}>{u.name}</div>
                         <div className={style.test_user}>{u.bio} </div>
                         <div className={style.test_user}>{utc.toDateString()} </div>
-                        <input type={"checkbox"} checked={u.covid} onChange={() => {
+                        <input type={"checkbox"} checked={!!u.covid} onChange={() => {
                         }}/>
                         <button className={style.test_user}
                                 onClick={() => deletePatient(u.id)}>
