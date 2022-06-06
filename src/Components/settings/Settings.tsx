@@ -1,9 +1,8 @@
 import s from "../all pateints/AllPatients.module.css";
-import style from './Settings.module.css'
-import {KeyboardEvent, useEffect, useState} from "react";
-import axios from "axios";
+import {KeyboardEvent, useCallback, useEffect, useState} from "react";
 import {Button} from "../universal components/Button";
 import {usersAPI, UserType, UserTypePost} from "../../api/api";
+import {UserTest} from "./UserTest";
 
 export const Settings = () => {
     const [users, setUsers] = useState<any>([])
@@ -47,7 +46,7 @@ export const Settings = () => {
             })
     }
 
-    const deletePatient = (patientId: string) => {
+    const deletePatient = useCallback((patientId: string) => {
         usersAPI.deleteUser(patientId)
             .then(res => {
                 console.log(res)
@@ -57,16 +56,18 @@ export const Settings = () => {
                 console.log(err)
                 console.error('ERROR patient delete!')
             })
-    }
+    }, [])
 
-    const updateUser = (id: string, name: string) => {
-        axios.put('http://localhost:7500/users', {name, id})
+    const editUser = useCallback((user: UserType) => {
+        usersAPI.editUser(user)
             .then(() => {
                 getUsers()
-            }).catch(() => {
-            console.error('ERROR get users!')
-        })
-    }
+            })
+            .catch((err) => {
+                console.log(err)
+                console.error('ERROR edit USER!')
+            })
+    }, [])
 
     const enterInputHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
@@ -87,21 +88,20 @@ export const Settings = () => {
                    onChange={(e) => changeInputHandler(e.currentTarget.value)}/>
             <Button onClick={addPatient} title={'add patient'}/>
             {users.map((u: UserType) => {
-                let now = new Date(u.birth);
-                let utc = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+                let now;
+                let utc;
+                if (u.birth !== null) {
+                    now = new Date(u.birth);
+                    utc = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+                } else {
+                    utc = null
+                }
                 return (
-                    <div key={u.id} className={style.test_users}>
-                        <div className={style.test_user}>{u.id}</div>
-                        <div className={style.test_user}>{u.name}</div>
-                        <div className={style.test_user}>{u.bio} </div>
-                        <div className={style.test_user}>{utc.toDateString()} </div>
-                        <input type={"checkbox"} checked={!!u.covid} onChange={() => {
-                        }}/>
-                        <button className={style.test_user}
-                                onClick={() => deletePatient(u.id)}>
-                            x
-                        </button>
-                    </div>
+                    <UserTest deletePatient={deletePatient}
+                              editUser={editUser}
+                              utc={utc}
+                              user={u}
+                              key={u.id}/>
                 )
             })}
 

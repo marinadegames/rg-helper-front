@@ -1,5 +1,7 @@
 .test_users {
     @apply
+    border
+    border-amber-50
     flex
     flex-row
 }
@@ -7,8 +9,9 @@
 .test_user {
     @apply
     mr-5
-    mt-2
-    mb-2
+    mt-3
+    mb-3
+    pl-2
     flex
     align-middle
 }
