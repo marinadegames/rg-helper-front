@@ -4,14 +4,16 @@
     border-amber-50
     flex
     flex-row
+    justify-between
+    align-middle
 }
 
 .test_user {
     @apply
+    w-max
     mr-5
     mt-3
     mb-3
     pl-2
     flex
-    align-middle
 }
