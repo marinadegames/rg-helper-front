@@ -23,11 +23,16 @@ export const usersAPI = {
         })
     },
     editUser(user: UserType) {
-        return instance.put<any>(`db/${user.id}`, {user})
+        return instance.put<EditUserResponseType>(`db/${user.id}`, {user})
     }
 }
 
-export type EditUserResponseType = {}
+export type EditUserResponseType = {
+    status: number,
+    data: {
+        results: UserType[]
+    }
+}
 
 export type GetUsersResponseType = {
     status: number
@@ -35,7 +40,6 @@ export type GetUsersResponseType = {
 }
 export type AddUserResponseType = {
     status: number
-    message: Array<string>
     data: {
         item: UserType
     }
