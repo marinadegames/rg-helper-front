@@ -8,20 +8,21 @@ const PatientsState: PatientsStateType = {
 
 export const patientsReducer = (state = PatientsState, action: ActionType): PatientsStateType => {
     switch (action.type) {
-
+        case "GET_PATIENTS":
+            // return state
+            return {...state, patients: action.patients}
         default:
             return state
     }
 }
 
-export const GetPatientsAC = (): GetPatientsAT => {
-    return {type: "GET_PATIENTS"}
+export const GetPatientsAC = (patients: Array<PatientType>): GetPatientsAT => {
+    return {type: "GET_PATIENTS", patients}
 }
 export const GetPatientsTC = () => async (dispatch: Dispatch<any>) => {
     try {
-        const result = await patientsAPI.getUsers()
-        console.log(result)
-        dispatch(GetPatientsAC)
+        const res = await patientsAPI.getUsers()
+        dispatch(GetPatientsAC(res.data.results))
     } catch {
         console.warn('ERROR')
     } finally {
@@ -38,4 +39,5 @@ export type ActionType = GetPatientsAT
 
 export type GetPatientsAT = {
     type: 'GET_PATIENTS'
+    patients: PatientType[]
 }

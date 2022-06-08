@@ -27,7 +27,9 @@ export const patientsAPI = {
     // }
 }
 export type GetUsersResponseType = {
-
+    results: PatientType[]
+    status: number
+    statusText: string
 }
 export type PatientType = {
     id: number
@@ -40,6 +42,6 @@ export type PatientType = {
     resid: number | null
     description: string | null
     conclusion: string | null
-    dateres: Date | null
+    dateres: Date
 }
 export type sexTypes = 'MAN' | 'WOMAN'

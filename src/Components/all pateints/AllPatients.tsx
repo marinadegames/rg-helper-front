@@ -2,15 +2,19 @@ import s from './AllPatients.module.css'
 import {TablePatients} from "../tablePatient/TablePatients";
 import {useEffect} from "react";
 import {GetPatientsTC} from "../../Redux/patientsReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {rootReducerType} from "../../Redux/state";
+import {PatientType} from "../../api/api";
 
 
 export const AllPatients = () => {
 
-    const patients = null
+    const patients = useSelector<rootReducerType, Array<PatientType>>(state => state.patients.patients)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        GetPatientsTC()
-    }, [])
+        dispatch(GetPatientsTC())
+    }, [dispatch])
 
     return (
         <div className={s.all_patients}>
