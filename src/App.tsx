@@ -3,7 +3,6 @@ import s from './App.module.css';
 import {Sidebar} from "./Components/sidebar/Sidebar";
 import {AllPatients} from "./Components/all pateints/AllPatients";
 import {Route, Routes} from 'react-router-dom';
-import {AddPatient} from "./Components/add-patient/AddPatient";
 import {Notification} from "./Components/universal components/Notification";
 import {useSelector} from "react-redux";
 import {rootReducerType} from "./Redux/state";
@@ -21,7 +20,7 @@ export const App = () => {
             <Sidebar/>
             <Routes>
                 <Route path='/' element={<AllPatients/>}/>
-                <Route path='/add-patient' element={<AddPatient/>}/>
+                {/*<Route path='/add-patient' element={<AddPatient/>}/>*/}
                 <Route path='/settings' element={<Settings/>}/>
                 <Route path='/search' element={<Search/>}/>
                 <Route path='/*' element={<h1 style={{textAlign: 'center'}}>404 not found</h1>}/>

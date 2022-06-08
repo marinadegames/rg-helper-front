@@ -6,58 +6,40 @@ const instance = axios.create({
     baseURL: 'http://localhost:5000/'
 })
 
-export const usersAPI = {
+export const patientsAPI = {
     getUsers() {
-        return instance.get<GetUsersResponseType>('db')
+        return instance.get<GetUsersResponseType>('patients')
     },
-    deleteUser(userId: string) {
-        return instance.delete<GetUsersResponseType>(`${userId}`)
-    },
-    addUser(user: UserTypePost) {
-        return instance.post<AddUserResponseType>('db', {
-            name: user.name,
-            bio: user.bio,
-            birth: user.birth,
-            email: user.email,
-            covid: user.covid,
-        })
-    },
-    editUser(user: UserType) {
-        return instance.put<EditUserResponseType>(`db/${user.id}`, {user})
-    }
+    // deleteUser(userId: string) {
+    //     return instance.delete<GetUsersResponseType>(`${userId}`)
+    // },
+    // addUser(user: UserTypePost) {
+    //     return instance.post<AddUserResponseType>('db', {
+    //         name: user.name,
+    //         bio: user.bio,
+    //         birth: user.birth,
+    //         email: user.email,
+    //         covid: user.covid,
+    //     })
+    // },
+    // editUser(user: UserType) {
+    //     return instance.put<EditUserResponseType>(`db/${user.id}`, {user})
+    // }
 }
-
-export type EditUserResponseType = {
-    status: number,
-    data: {
-        results: UserType[]
-    }
-}
-
 export type GetUsersResponseType = {
-    status: number
-    results: UserType[]
+
 }
-export type AddUserResponseType = {
-    status: number
-    data: {
-        item: UserType
+export type PatientType = {
+    id: number
+    name: string
+    birthyear: {
+        years: number | null
     }
+    sex: sexTypes
+    address: string | null
+    resid: number | null
+    description: string | null
+    conclusion: string | null
+    dateres: Date | null
 }
-
-export type UserTypePost = {
-    name: string
-    email: string | null
-    bio: string | null
-    birth: string | null
-    covid: boolean | null
-}
-
-export type UserType = {
-    id: string
-    name: string
-    email: string | null
-    bio: string | null
-    birth: string | null
-    covid: boolean | null
-}
+export type sexTypes = 'MAN' | 'WOMAN'

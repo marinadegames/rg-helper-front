@@ -1,8 +1,8 @@
-import {PatientType} from "../../Redux/patientsReducer";
 import {PatientTableElement} from "../patientTableElement/PatientTableElement";
+import {PatientType} from "../../api/api";
 
 type PropsType = {
-    patients: PatientType[]
+    patients: PatientType[] | null
 }
 
 export const TablePatients = ({patients}: PropsType) => {
@@ -28,11 +28,11 @@ export const TablePatients = ({patients}: PropsType) => {
             </div>
             <div className="table-row-group">
 
-                {patients.map(pat => {
+                {patients !== null ? patients.map(pat => {
                     return (
                         <PatientTableElement patient={pat} key={pat.id}/>
                     )
-                })}
+                }) : null}
             </div>
         </div>
     )

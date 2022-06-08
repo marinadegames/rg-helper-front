@@ -1,10 +1,6 @@
-import React, {Fragment, memo, useRef, useState} from 'react'
+import React, {Fragment, memo, useRef} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
-import {EditResearchTypePatient, PatientType} from "../../Redux/patientsReducer";
-import {EditableSpan} from "../universal components/EditableSpan";
-import {useDispatch} from "react-redux";
-import {InputMenuTypes} from "../InputMenuResearchType/InputMenuTypes";
-import {researchTypes, sizeFilms} from "../../Utils/selectors";
+import {PatientType} from "../../api/api";
 
 type PropsType = {
     patient: PatientType
@@ -16,22 +12,22 @@ type PropsType = {
 export const Popup = memo(({patient, open, setOpen}: PropsType) => {
 
         // state
-        const dispatch = useDispatch()
+        // const dispatch = useDispatch()
 
         const cancelButtonRef = useRef(null)
 
-        const [modeTypeResearch, setModeTypeResearch] = useState<boolean>(false)
-        const [modeFilms, setModeFilms] = useState<boolean>(false)
-        const [modeDose, setModeDose] = useState<boolean>(false)
+        // const [modeTypeResearch, setModeTypeResearch] = useState<boolean>(false)
+        // const [modeFilms, setModeFilms] = useState<boolean>(false)
+        // const [modeDose, setModeDose] = useState<boolean>(false)
 
-        const selectTypeRes = (value: string, idRes: string, idPat: number) => {
-            dispatch(EditResearchTypePatient(value, idRes, idPat))
-        }
+        // const selectTypeRes = (value: string, idRes: string, idPat: number) => {
+        //     dispatch(EditResearchTypePatient(value, idRes, idPat))
+        // }
 
-        const changeModeTypeResearch = (e: any) => {
-            e.stopPropagation()
-            setModeTypeResearch(!modeTypeResearch)        }
-        const changeModeFilms = () => setModeFilms(!modeFilms)
+        // const changeModeTypeResearch = (e: any) => {
+        //     e.stopPropagation()
+        //     setModeTypeResearch(!modeTypeResearch)        }
+        // const changeModeFilms = () => setModeFilms(!modeFilms)
 
 
         return (
@@ -76,29 +72,29 @@ export const Popup = memo(({patient, open, setOpen}: PropsType) => {
                                                     <b className='w-1/4 mr-5'>Номер исследования: </b>
                                                     <label>{patient.id}</label>
                                                 </div>
-                                                <div className="my-2 text-2xl text-left flex flex-row">
-                                                    <b className='w-1/4 mr-5'>ФИО: </b>
-                                                    <EditableSpan title={patient.name} callback={() => {
-                                                    }}/>
-                                                </div>
-                                                <div className="my-2 text-2xl text-left flex flex-row">
-                                                    <b className='w-1/4 mr-5'>Год: </b>
-                                                    <EditableSpan title={patient.year} callback={() => {
-                                                    }}/>
-                                                </div>
-                                                <div className="my-2 text-2xl text-left flex flex-row">
-                                                    <b className='w-1/4 mr-5'>Пол: </b>
-                                                    <EditableSpan title={patient.sex} callback={() => {
-                                                    }}/>
-                                                </div>
-                                                <div className="my-2 text-2xl text-left flex flex-row">
-                                                    <b className='w-1/4 mr-5'>Адрес: </b>
-                                                    <EditableSpan title={patient.address} callback={() => {
-                                                    }}/>
-                                                </div>
-                                                <div className="my-2 text-2xl text-left flex flex-row">
-                                                    <b className='w-1/4 mr-5'>Исследования: </b>
-                                                </div>
+                                                {/*<div className="my-2 text-2xl text-left flex flex-row">*/}
+                                                {/*    <b className='w-1/4 mr-5'>ФИО: </b>*/}
+                                                {/*    <EditableSpan title={patient.name} callback={() => {*/}
+                                                {/*    }}/>*/}
+                                                {/*</div>*/}
+                                                {/*<div className="my-2 text-2xl text-left flex flex-row">*/}
+                                                {/*    <b className='w-1/4 mr-5'>Год: </b>*/}
+                                                {/*    <EditableSpan title={patient.year} callback={() => {*/}
+                                                {/*    }}/>*/}
+                                                {/*</div>*/}
+                                                {/*<div className="my-2 text-2xl text-left flex flex-row">*/}
+                                                {/*    <b className='w-1/4 mr-5'>Пол: </b>*/}
+                                                {/*    <EditableSpan title={patient.sex} callback={() => {*/}
+                                                {/*    }}/>*/}
+                                                {/*</div>*/}
+                                                {/*<div className="my-2 text-2xl text-left flex flex-row">*/}
+                                                {/*    <b className='w-1/4 mr-5'>Адрес: </b>*/}
+                                                {/*    <EditableSpan title={patient.address} callback={() => {*/}
+                                                {/*    }}/>*/}
+                                                {/*</div>*/}
+                                                {/*<div className="my-2 text-2xl text-left flex flex-row">*/}
+                                                {/*    <b className='w-1/4 mr-5'>Исследования: </b>*/}
+                                                {/*</div>*/}
                                                 <div className="table w-full table bg-gray-800 rounded-md p-3 ">
                                                     <div className="table-header-group">
                                                         <div className="table-row">
@@ -110,36 +106,36 @@ export const Popup = memo(({patient, open, setOpen}: PropsType) => {
                                                     <div className="table-row-group">
                                                         <div className="table-row transition">
 
-                                                            <div className="table-cell border border-gray-500 text-left text-lg p-2 m-0 hover:bg-gray-600 cursor-pointer">
-                                                                {patient.researches.map(typeRes => {
-                                                                    return (
-                                                                        modeTypeResearch
-                                                                            ? <InputMenuTypes callback={(value) => selectTypeRes(value, typeRes.idRes, patient.id)}
-                                                                                              types={researchTypes}
-                                                                                              key={typeRes.idRes}/>
-                                                                            : <p onClick={changeModeTypeResearch} key={typeRes.idRes}>{typeRes.typeRes}</p>)
-                                                                })}
-                                                            </div>
-                                                            <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
-                                                                {patient.researches.map(films => {
-                                                                    return (
-                                                                        modeFilms
-                                                                            ? <InputMenuTypes callback={() => {
-                                                                            }} types={sizeFilms} key={films.idRes}/>
-                                                                            : <p onClick={changeModeFilms} key={films.idRes}>{films.sizeFilm}/{films.amount}/{films.projections}</p>
-                                                                    )
-                                                                })}
-                                                            </div>
-                                                            <div className="flex flex-row table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
-                                                                <div>
-                                                                    {patient.researches.map(dose => {
-                                                                        return <p key={dose.idRes}>{dose.dose} мЗв</p>
-                                                                    })}
-                                                                </div>
-                                                                {patient.researches.length > 1 && <div>
-                                                                    Суммарно: {patient.researches.reduce((a: any, b: any) => a.dose + b.dose)} мЗв
-                                                                </div>}
-                                                            </div>
+                                                            {/*<div className="table-cell border border-gray-500 text-left text-lg p-2 m-0 hover:bg-gray-600 cursor-pointer">*/}
+                                                            {/*    {patient.researches.map(typeRes => {*/}
+                                                            {/*        return (*/}
+                                                            {/*            modeTypeResearch*/}
+                                                            {/*                ? <InputMenuTypes callback={(value) => selectTypeRes(value, typeRes.idRes, patient.id)}*/}
+                                                            {/*                                  types={researchTypes}*/}
+                                                            {/*                                  key={typeRes.idRes}/>*/}
+                                                            {/*                : <p onClick={changeModeTypeResearch} key={typeRes.idRes}>{typeRes.typeRes}</p>)*/}
+                                                            {/*    })}*/}
+                                                            {/*</div>*/}
+                                                            {/*<div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">*/}
+                                                            {/*    {patient.researches.map(films => {*/}
+                                                            {/*        return (*/}
+                                                            {/*            modeFilms*/}
+                                                            {/*                ? <InputMenuTypes callback={() => {*/}
+                                                            {/*                }} types={sizeFilms} key={films.idRes}/>*/}
+                                                            {/*                : <p onClick={changeModeFilms} key={films.idRes}>{films.sizeFilm}/{films.amount}/{films.projections}</p>*/}
+                                                            {/*        )*/}
+                                                            {/*    })}*/}
+                                                            {/*</div>*/}
+                                                            {/*<div className="flex flex-row table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">*/}
+                                                            {/*    <div>*/}
+                                                            {/*        {patient.researches.map(dose => {*/}
+                                                            {/*            return <p key={dose.idRes}>{dose.dose} мЗв</p>*/}
+                                                            {/*        })}*/}
+                                                            {/*    </div>*/}
+                                                            {/*    {patient.researches.length > 1 && <div>*/}
+                                                            {/*        Суммарно: {patient.researches.reduce((a: any, b: any) => a.dose + b.dose)} мЗв*/}
+                                                            {/*    </div>}*/}
+                                                            {/*</div>*/}
                                                         </div>
                                                     </div>
                                                 </div>

@@ -1,16 +1,17 @@
 import s from './AllPatients.module.css'
-import {useSelector} from "react-redux";
-import {rootReducerType} from "../../Redux/state";
-import {PatientType} from "../../Redux/patientsReducer";
 import {TablePatients} from "../tablePatient/TablePatients";
+import {useEffect} from "react";
+import {GetPatientsTC} from "../../Redux/patientsReducer";
 
 
 export const AllPatients = () => {
 
-    // filters
-    const patients = useSelector<rootReducerType, PatientType[]>(state => state.patients.patients)
+    const patients = null
 
-    // return
+    useEffect(() => {
+        GetPatientsTC()
+    }, [])
+
     return (
         <div className={s.all_patients}>
             <div className={s.header_patient_list}>
