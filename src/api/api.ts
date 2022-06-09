@@ -39,9 +39,21 @@ export type PatientType = {
     }
     sex: sexTypes
     address: string | null
-    resid: number | null
+    resid: Array<number | null>
     description: string | null
     conclusion: string | null
     dateres: Date
 }
+
+export type ResearchType = {
+    idres: number
+    typeres: ResearchesType
+    sizefilm: SizeFilmsType
+    amount: number
+    projections: number
+    dose: number
+    idpatient: number
+}
+export type SizeFilmsType = '35x35' | '18x43' | '24x30' | '30x40' | '13x18'
+export type ResearchesType = 'Т/Б СУСТАВЫ' | 'ОГК' | 'ШОП' | 'ГОП' | 'ПОП' | 'ПКОП' | 'ЧЕРЕП' | 'ППН'
 export type sexTypes = 'MAN' | 'WOMAN'

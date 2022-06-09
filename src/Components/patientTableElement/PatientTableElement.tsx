@@ -23,7 +23,7 @@ export const PatientTableElement = memo(({patient}: PropsType) => {
                 className="table-cell border border-gray-500 text-center py-3">{formatDate}</div>
             <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.name}</div>
             <div className="table-cell border border-gray-500 text-center py-3">{patient.birthyear.years}</div>
-            <div className="table-cell border border-gray-500 text-center py-3">{patient.sex}</div>
+            <div className="table-cell border border-gray-500 text-center py-3">{patient.sex === 'MAN' ? 'М' : 'Ж'}</div>
             <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.address}</div>
 
             <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">

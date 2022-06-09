@@ -1,5 +1,6 @@
 import {Dispatch} from "react";
 import {patientsAPI, PatientType} from "../api/api";
+import {log} from "util";
 
 const PatientsState: PatientsStateType = {
     patients: [],
@@ -22,6 +23,7 @@ export const GetPatientsAC = (patients: Array<PatientType>): GetPatientsAT => {
 export const GetPatientsTC = () => async (dispatch: Dispatch<any>) => {
     try {
         const res = await patientsAPI.getUsers()
+        console.log(res)
         dispatch(GetPatientsAC(res.data.results))
     } catch {
         console.warn('ERROR')
