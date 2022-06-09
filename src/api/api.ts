@@ -10,6 +10,9 @@ export const patientsAPI = {
     getUsers() {
         return instance.get<GetUsersResponseType>('patients')
     },
+    getResearches(idPatient: number) {
+        return instance.get<GetResearchesResponseType>(`patients/researches/${idPatient}`)
+    }
     // deleteUser(userId: string) {
     //     return instance.delete<GetUsersResponseType>(`${userId}`)
     // },
@@ -40,11 +43,16 @@ export type PatientType = {
     sex: sexTypes
     address: string | null
     resid: Array<number | null>
+    researches: Array<ResearchType>
     description: string | null
     conclusion: string | null
     dateres: Date
 }
-
+export type GetResearchesResponseType = {
+    results: Array<ResearchType>
+    status: number
+    statusText: string
+}
 export type ResearchType = {
     idres: number
     typeres: ResearchesType

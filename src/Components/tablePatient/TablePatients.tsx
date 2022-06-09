@@ -2,14 +2,13 @@ import {PatientTableElement} from "../patientTableElement/PatientTableElement";
 import {PatientType} from "../../api/api";
 
 type PropsType = {
-    patients: PatientType[] | null
+    patients: PatientType[]
 }
 
 export const TablePatients = ({patients}: PropsType) => {
 
     return (
         <div className="table w-full table bg-gray-800 rounded-md p-3 ">
-
             <div className="table-header-group">
                 <div className="table-row">
                     <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">№</div>
@@ -19,7 +18,7 @@ export const TablePatients = ({patients}: PropsType) => {
                     <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">Пол</div>
                     <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">Адрес</div>
                     <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">Тип</div>
-                    <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">Пленка</div>
+                    <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">Пленка <br/>(р | кол | пр)</div>
                     <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">Доза</div>
                     <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">Описание</div>
                     <div className="table-cell border border-gray-500 text-center text-lg font-bold py-3">Заключение
@@ -28,11 +27,11 @@ export const TablePatients = ({patients}: PropsType) => {
             </div>
             <div className="table-row-group">
 
-                {patients !== null ? patients.map(pat => {
+                {patients && patients.map(pat => {
                     return (
                         <PatientTableElement patient={pat} key={pat.id}/>
                     )
-                }) : null}
+                })}
             </div>
         </div>
     )
