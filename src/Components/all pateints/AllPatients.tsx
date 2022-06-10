@@ -6,7 +6,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../../Redux/state";
 import {PatientType} from "../../api/api";
 
-
 export const AllPatients = () => {
 
     const patients = useSelector<rootReducerType, Array<PatientType>>(state => state.patients.patients)

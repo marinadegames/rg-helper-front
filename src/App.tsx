@@ -8,6 +8,7 @@ import {useSelector} from "react-redux";
 import {rootReducerType} from "./Redux/state";
 import {Search} from "./Components/search/Search";
 import {Settings} from "./Components/settings/Settings";
+import {AddPatient} from "./Components/add-patient/AddPatient";
 
 export const App = () => {
     const errorMode = useSelector<rootReducerType, boolean>(state => state.app.errorMode)
@@ -20,7 +21,7 @@ export const App = () => {
             <Sidebar/>
             <Routes>
                 <Route path='/' element={<AllPatients/>}/>
-                {/*<Route path='/add-patient' element={<AddPatient/>}/>*/}
+                <Route path='/add-patient' element={<AddPatient/>}/>
                 <Route path='/settings' element={<Settings/>}/>
                 <Route path='/search' element={<Search/>}/>
                 <Route path='/*' element={<h1 style={{textAlign: 'center'}}>404 not found</h1>}/>
