@@ -13,7 +13,7 @@ export const AllPatients = () => {
 
     useEffect(() => {
         dispatch(GetPatientsTC())
-    }, [dispatch])
+    }, [])
 
     return (
         <div className={s.all_patients}>

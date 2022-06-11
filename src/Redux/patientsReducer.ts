@@ -12,6 +12,7 @@ export const patientsReducer = (state = PatientsState, action: ActionType): Pati
         case "GET_PATIENTS":
             return {...state, patients: action.patients}
         case "GET_RES":
+            if (action.researches.length === 0) return {...state, researches: action.researches}
             return {...state, researches: [...state.researches, ...action.researches]}
         default:
             return state
@@ -36,6 +37,7 @@ export const GetPatientsTC = () => async (dispatch: Dispatch<any>) => {
 
     }
 }
+
 export const GetResearchesTC = (idPatient: number) => async (dispatch: Dispatch<any>) => {
     try {
         const res = await patientsAPI.getResearches(idPatient)

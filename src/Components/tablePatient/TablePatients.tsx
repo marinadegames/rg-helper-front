@@ -1,11 +1,12 @@
 import {PatientTableElement} from "../patientTableElement/PatientTableElement";
 import {PatientType} from "../../api/api";
+import {memo} from "react";
 
 type PropsType = {
     patients: PatientType[]
 }
 
-export const TablePatients = ({patients}: PropsType) => {
+export const TablePatients = memo(({patients}: PropsType) => {
 
     return (
         <div className="table w-full table bg-gray-800 rounded-md p-3 ">
@@ -27,12 +28,12 @@ export const TablePatients = ({patients}: PropsType) => {
             </div>
             <div className="table-row-group">
 
-                {patients && patients.map(pat => {
+                {patients && patients.map((pat, index) => {
                     return (
-                        <PatientTableElement patient={pat} key={pat.id}/>
+                        <PatientTableElement patient={pat} key={index}/>
                     )
                 })}
             </div>
         </div>
     )
-}
+})

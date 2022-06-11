@@ -35,9 +35,10 @@ export const AddPatient = memo(() => {
         const [sex, setSex] = useState<SexTypes>('MAN')
         const [address, setAddress] = useState<string>('')
 
+
         useEffect(() => {
             dispatch(GetPatientsTC())
-        }, [nextId])
+        }, [nextId, dispatch])
 
         const changeName = (e: string) => {
             setName(e)
@@ -50,6 +51,18 @@ export const AddPatient = memo(() => {
         }
         const changeAddress = (e: string) => {
             setAddress(e)
+        }
+        const addRes = () => {
+            const newRes = {
+                localId: v1(),
+                idpatient: nextId,
+                typeres: undefined,
+                sizefilm: undefined,
+                amount: undefined,
+                projections: undefined,
+                dose: undefined
+            }
+            setResearches([...researches, newRes])
         }
 
     console.log(sex)
@@ -133,8 +146,7 @@ export const AddPatient = memo(() => {
                 <div className={s.box}>
                     <div className={'flex flex-row'}>
                         <div className={s.name_field}>Исследования:</div>
-                        <Button onClick={() => {
-                        }} title={'Добавить'}/>
+                        <Button onClick={addRes} title={'Добавить'}/>
                     </div>
                 </div>
                 <div className={'flex flex-col my-4 '}>

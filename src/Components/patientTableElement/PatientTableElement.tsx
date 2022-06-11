@@ -4,7 +4,7 @@ import {PatientType, ResearchType} from "../../api/api";
 import {timestampToDate} from "../../Utils/formatDate";
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../../Redux/state";
-import {GetResearchesTC} from "../../Redux/patientsReducer";
+import {GetResearchesAC, GetResearchesTC} from "../../Redux/patientsReducer";
 
 type PropsType = {
     patient: PatientType
@@ -16,11 +16,15 @@ export const PatientTableElement = memo(({patient}: PropsType) => {
     const formatDate = timestampToDate(Date.parse(patient.dateres.toString()))
     const researches = useSelector<rootReducerType, Array<ResearchType>>(state => state.patients.researches)
     const dispatch = useDispatch()
-    console.log('RENDER')
+
+    console.log('render Patient Table element')
 
     useEffect(() => {
         dispatch(GetResearchesTC(patient.id))
-    }, [patient.id])
+        return () => {
+            dispatch(GetResearchesAC([]))
+        }
+    }, [dispatch, patient.id])
 
     return (
         <div className="table-row transition hover:bg-gray-600 cursor-pointer" onClick={() => setOpen(!open)}>
@@ -33,15 +37,15 @@ export const PatientTableElement = memo(({patient}: PropsType) => {
             <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.address}</div>
 
             <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
-                {researches.map(res => res.idpatient === patient.id && <div key={res.idres}>{res.typeres}</div>)}
+                {researches.map((res, index) => res.idpatient === patient.id && <div key={index}>{res.typeres}</div>)}
             </div>
             <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
-                {researches.map(res => res.idpatient === patient.id
-                    && <div key={res.idres}>{res.sizefilm} | {res.amount} | {res.projections}</div>
+                {researches.map((res, index) => res.idpatient === patient.id
+                    && <div key={index}>{res.sizefilm} | {res.amount} | {res.projections}</div>
                 )}
             </div>
             <div className="flex flex-row table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
-                {researches.map(res => res.idpatient === patient.id && <div key={res.idres}>{res.dose}</div>)}
+                {researches.map((res, index) => res.idpatient === patient.id && <div key={index}>{res.dose}</div>)}
             </div>
 
             <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.description}</div>
