@@ -1,20 +1,21 @@
 import {Fragment, memo, useCallback, useState} from 'react'
 import {Menu, Transition} from '@headlessui/react'
 import {ChevronDownIcon} from '@heroicons/react/solid'
+import {ResearchesType, SizeFilmsType} from "../../api/api";
 
 type PropsType = {
-    types: Array<string>
-    callback: (value: string) => void
+    types: Array<any>
+    callback: (value: ResearchesType | SizeFilmsType) => void
 }
 
 export const InputMenuTypes = memo((props: PropsType) => {
 
-    const [type, setType] = useState<string | 'Выбрать'>('Выбрать')
+    const [type, setType] = useState<ResearchesType | SizeFilmsType | 'Выбрать'>('Выбрать')
 
-    const selectType = useCallback((t: string) => {
+    const selectType = useCallback((t: ResearchesType | SizeFilmsType) => {
         setType(t)
         props.callback(t)
-    },[type])
+    },[props])
 
     return (
         <Menu as="div" className="relative inline-block text-left w-full ">

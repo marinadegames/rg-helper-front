@@ -1,14 +1,13 @@
 import s from './AddPatient.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../../Redux/state";
-import {memo, useEffect, useState} from "react";
+import {memo, useCallback, useEffect, useState} from "react";
 import {Button} from "../universal components/Button";
 import {formatDate} from "../../Utils/formatDate";
 import {GetPatientsTC} from "../../Redux/patientsReducer";
-import {AddPatientDataType, PostResearchType, SexTypes} from "../../api/api";
+import {PostResearchType, ResearchesType, SexTypes, SizeFilmsType} from "../../api/api";
 import {TypeResearchComponent} from "./TypeResearchComponent";
 import {v1} from "uuid";
-import {useFormik} from "formik";
 
 
 export const AddPatient = memo(() => {
@@ -28,7 +27,6 @@ export const AddPatient = memo(() => {
                 dose: undefined
             },
         ])
-
 
         const [name, setName] = useState<string>('')
         const [year, setYear] = useState<number | undefined>()
@@ -52,6 +50,8 @@ export const AddPatient = memo(() => {
         const changeAddress = (e: string) => {
             setAddress(e)
         }
+
+
         const addRes = () => {
             const newRes = {
                 localId: v1(),
@@ -65,7 +65,24 @@ export const AddPatient = memo(() => {
             setResearches([...researches, newRes])
         }
 
-    console.log(sex)
+        const deleteRes = useCallback((localId: string) => {
+            setResearches(researches.filter(res => res.localId !== localId))
+        }, [researches])
+        const selectTypeRes = useCallback((value: ResearchesType, id: string) => {
+            setResearches(researches.map(res => res.localId === id ? {...res, typeres: value} : res))
+        }, [researches])
+        const selectXrayFilm = useCallback((value: SizeFilmsType, id: string) => {
+            setResearches(researches.map(res => res.localId === id ? {...res, sizefilm: value} : res))
+        }, [researches])
+        const selectAmount = useCallback((num: number, id: string) => {
+            setResearches(researches.map(res => res.localId === id ? {...res, amount: num} : res))
+        }, [researches])
+        const selectProjections = useCallback((num: number, id: string) => {
+            setResearches(researches.map(res => res.localId === id ? {...res, projections: num} : res))
+        }, [researches])
+        const selectDose = useCallback((num: number, id: string) => {
+            setResearches(researches.map(res => res.localId === id ? {...res, dose: num} : res))
+        }, [researches])
 
         return (
             <div className={s.add_patients}>
@@ -178,19 +195,13 @@ export const AddPatient = memo(() => {
                             return (
                                 <TypeResearchComponent
                                     key={res.localId}
-                                    id={res.localId}
-                                    deleteRes={() => {
-                                    }}
-                                    selectTypeRes={() => {
-                                    }}
-                                    selectXrayFilm={() => {
-                                    }}
-                                    selectAmount={() => {
-                                    }}
-                                    selectProjections={() => {
-                                    }}
-                                    selectDose={() => {
-                                    }}
+                                    localId={res.localId}
+                                    deleteRes={deleteRes}
+                                    selectTypeRes={selectTypeRes}
+                                    selectXrayFilm={selectXrayFilm}
+                                    selectAmount={selectAmount}
+                                    selectProjections={selectProjections}
+                                    selectDose={selectDose}
                                 />
                             )
                         })}
