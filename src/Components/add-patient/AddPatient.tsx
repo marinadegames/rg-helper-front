@@ -5,7 +5,7 @@ import {memo, useCallback, useEffect, useState} from "react";
 import {Button} from "../universal components/Button";
 import {formatDate} from "../../Utils/formatDate";
 import {AddNewResearchesTC, AddPatientsTC, GetPatientsTC} from "../../Redux/patientsReducer";
-import {patientsAPI, PostNewPatientType, PostNewResearches, PostResearchType, ResearchesType, SexTypes, SizeFilmsType} from "../../api/api";
+import {PostNewPatientType, PostResearchType, ResearchesType, SexTypes, SizeFilmsType} from "../../api/api";
 import {TypeResearchComponent} from "./TypeResearchComponent";
 import {v1} from "uuid";
 
