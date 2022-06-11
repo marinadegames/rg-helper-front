@@ -12,22 +12,34 @@ export const patientsAPI = {
     },
     getResearches(idPatient: number) {
         return instance.get<GetResearchesResponseType>(`patients/researches/${idPatient}`)
-    }
+    },
     // deleteUser(userId: string) {
     //     return instance.delete<GetUsersResponseType>(`${userId}`)
     // },
-    // addUser(user: UserTypePost) {
-    //     return instance.post<AddUserResponseType>('db', {
-    //         name: user.name,
-    //         bio: user.bio,
-    //         birth: user.birth,
-    //         email: user.email,
-    //         covid: user.covid,
-    //     })
-    // },
+    addPatient(patient: PostNewPatientType) {
+        return instance.post<any>('patients', patient)
+    },
+    addResearches(res: Array<PostNewResearches>) {
+        return instance.post<any>('patients/researches', res)
+    },
     // editUser(user: UserType) {
     //     return instance.put<EditUserResponseType>(`db/${user.id}`, {user})
     // }
+}
+export type PostNewResearches = {
+    typeres: ResearchesType | null
+    sizefilm: SizeFilmsType | null
+    amount: number
+    projections: number
+    dose: number
+    idpatient: number
+}
+export type PostNewPatientType = {
+    name: string
+    year: number | undefined
+    sex: SexTypes
+    address: string | null
+    dateres: Date
 }
 export type GetUsersResponseType = {
     results: PatientType[]
@@ -64,11 +76,11 @@ export type ResearchType = {
 }
 export type PostResearchType = {
     localId: string
-    typeres: ResearchesType | undefined
-    sizefilm: SizeFilmsType | undefined
-    amount: number | undefined
-    projections: number | undefined
-    dose: number | undefined
+    typeres: ResearchesType | null
+    sizefilm: SizeFilmsType | null
+    amount: number
+    projections: number
+    dose: number
     idpatient: number
 }
 export type AddPatientDataType = {

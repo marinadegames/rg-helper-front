@@ -4,8 +4,8 @@ import {rootReducerType} from "../../Redux/state";
 import {memo, useCallback, useEffect, useState} from "react";
 import {Button} from "../universal components/Button";
 import {formatDate} from "../../Utils/formatDate";
-import {GetPatientsTC} from "../../Redux/patientsReducer";
-import {PostResearchType, ResearchesType, SexTypes, SizeFilmsType} from "../../api/api";
+import {AddNewResearchesTC, AddPatientsTC, GetPatientsTC} from "../../Redux/patientsReducer";
+import {patientsAPI, PostNewPatientType, PostNewResearches, PostResearchType, ResearchesType, SexTypes, SizeFilmsType} from "../../api/api";
 import {TypeResearchComponent} from "./TypeResearchComponent";
 import {v1} from "uuid";
 
@@ -20,11 +20,11 @@ export const AddPatient = memo(() => {
             {
                 localId: v1(),
                 idpatient: nextId,
-                typeres: undefined,
-                sizefilm: undefined,
-                amount: undefined,
-                projections: undefined,
-                dose: undefined
+                typeres: null,
+                sizefilm: null,
+                amount: 0,
+                projections: 0,
+                dose: 0
             },
         ])
 
@@ -32,7 +32,6 @@ export const AddPatient = memo(() => {
         const [year, setYear] = useState<number | undefined>()
         const [sex, setSex] = useState<SexTypes>('MAN')
         const [address, setAddress] = useState<string>('')
-
 
         useEffect(() => {
             dispatch(GetPatientsTC())
@@ -51,16 +50,15 @@ export const AddPatient = memo(() => {
             setAddress(e)
         }
 
-
         const addRes = () => {
             const newRes = {
                 localId: v1(),
                 idpatient: nextId,
-                typeres: undefined,
-                sizefilm: undefined,
-                amount: undefined,
-                projections: undefined,
-                dose: undefined
+                typeres: null,
+                sizefilm: null,
+                amount: 0,
+                projections: 0,
+                dose: 0
             }
             setResearches([...researches, newRes])
         }
@@ -84,10 +82,32 @@ export const AddPatient = memo(() => {
             setResearches(researches.map(res => res.localId === id ? {...res, dose: num} : res))
         }, [researches])
 
+        const sendNewPatient = () => {
+            const newPatient: PostNewPatientType = {
+                name: name,
+                address: address,
+                sex: sex,
+                year: year,
+                dateres: new Date(),
+            }
+            const newResearches = researches.map(res => {
+                return {
+                    typeres: res.typeres,
+                    amount: res.amount,
+                    dose: res.dose,
+                    idpatient: nextId,
+                    projections: res.projections,
+                    sizefilm: res.sizefilm
+                }
+            })
+            console.log(newResearches)
+            dispatch(AddPatientsTC(newPatient))
+            dispatch(AddNewResearchesTC(newResearches))
+        }
+
         return (
             <div className={s.add_patients}>
                 <div className={s.header_add_patients}>
-
                     Добавление нового пациента:
                     <div className={'flex flex-row justify-center items-center cursor-pointer'}>
                         {date}
@@ -207,8 +227,7 @@ export const AddPatient = memo(() => {
                         })}
                     </div>
                 </div>
-                <Button title={'Добавить пациента'} onClick={() => {
-                }}/>
+                <Button title={'Добавить пациента'} onClick={sendNewPatient}/>
                 <Button title={'Сгенерировать ошибку'} onClick={() => {
                 }}/>
                 <Button title={'Сгенерировать успешность'} onClick={() => {
