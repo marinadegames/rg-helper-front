@@ -17,7 +17,7 @@ export const patientsAPI = {
         return instance.post<any>('patients', {patient})
     },
     addResearches(res: Array<PostNewResearches>) {
-        return instance.post<any>('patients/researches', res)
+        return instance.post<any>('patients/researches', {res})
     },
 }
 export type PostNewResearches = {
@@ -47,8 +47,6 @@ export type PatientType = {
     }
     sex: SexTypes
     address: string | null
-    resid: Array<number | null>
-    researches: Array<ResearchType>
     description: string | null
     conclusion: string | null
     dateres: Date
@@ -83,5 +81,5 @@ export type AddPatientDataType = {
     address: string
 }
 export type SizeFilmsType = '35x35' | '18x43' | '24x30' | '30x40' | '13x18'
-export type ResearchesType = 'Т/Б СУСТАВЫ' | 'ОГК' | 'ШОП' | 'ГОП' | 'ПОП' | 'ПКОП' | 'ЧЕРЕП' | 'ППН'
+export type ResearchesType = "Т\\Б СУСТАВЫ" | 'ОГК' | 'ШОП' | 'ГОП' | 'ПОП' | 'ПКОП' | 'ЧЕРЕП' | 'ППН'
 export type SexTypes = 'MAN' | 'WOMAN'

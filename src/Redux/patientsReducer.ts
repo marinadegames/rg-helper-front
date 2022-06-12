@@ -47,10 +47,9 @@ export const AddPatientsTC = (patient: PostNewPatientType) => async (dispatch: D
 
     }
 }
-export const AddNewResearchesTC = (researches: Array<PostNewResearches>) => async (dispatch: Dispatch<any>) => {
+export const AddNewResearchesTC = (researches: Array<PostNewResearches>) => async () => {
     try {
         await patientsAPI.addResearches(researches)
-
     } catch {
         console.warn('ERROR POST new patient')
     } finally {

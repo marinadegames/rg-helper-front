@@ -17,8 +17,6 @@ export const PatientTableElement = memo(({patient}: PropsType) => {
     const researches = useSelector<rootReducerType, Array<ResearchType>>(state => state.patients.researches)
     const dispatch = useDispatch()
 
-    console.log('render Patient Table element')
-
     useEffect(() => {
         dispatch(GetResearchesTC(patient.id))
         return () => {
