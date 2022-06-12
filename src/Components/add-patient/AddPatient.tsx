@@ -1,35 +1,26 @@
 import s from './AddPatient.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../../Redux/state";
-import {memo, useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {Button} from "../universal components/Button";
 import {formatDate} from "../../Utils/formatDate";
 import {AddNewResearchesTC, AddPatientsTC, GetPatientsTC} from "../../Redux/patientsReducer";
 import {PostNewPatientType, PostResearchType, ResearchesType, SexTypes, SizeFilmsType} from "../../api/api";
 import {TypeResearchComponent} from "./TypeResearchComponent";
 import {v1} from "uuid";
+import {setErrorMessageTC} from "../../Redux/appReducer";
 
 
-export const AddPatient = memo(() => {
+export const AddPatient = () => {
 
         const nextId = useSelector<rootReducerType, number>(state => state.patients.patients.length + 1)
         const dispatch = useDispatch()
         const date = formatDate(new Date())
 
-        const [researches, setResearches] = useState<Array<PostResearchType>>([
-            {
-                localId: v1(),
-                idpatient: nextId,
-                typeres: null,
-                sizefilm: null,
-                amount: 0,
-                projections: 0,
-                dose: 0
-            },
-        ])
+        const [researches, setResearches] = useState<Array<PostResearchType>>([])
 
         const [name, setName] = useState<string>('')
-        const [year, setYear] = useState<number>(2000)
+        const [year, setYear] = useState<number>(0)
         const [sex, setSex] = useState<SexTypes>('MAN')
         const [address, setAddress] = useState<string>('')
 
@@ -99,10 +90,17 @@ export const AddPatient = memo(() => {
                     sizefilm: res.sizefilm
                 }
             })
-            console.log(newResearches)
 
-            dispatch(AddPatientsTC(newPatient))
-            dispatch(AddNewResearchesTC(newResearches))
+            if (name !== '' && address !== ''){
+                dispatch(AddPatientsTC(newPatient))
+                dispatch(AddNewResearchesTC(newResearches))
+                setName('')
+                setYear(0)
+                setResearches([])
+            }
+            else {
+                dispatch(setErrorMessageTC('Проверьте правильность введенных данных!'))
+            }
         }
 
         return (
@@ -235,4 +233,3 @@ export const AddPatient = memo(() => {
             </div>
         )
     }
-)

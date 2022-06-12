@@ -1,5 +1,6 @@
 import {Dispatch} from "react";
 import {patientsAPI, PatientType, PostNewPatientType, PostNewResearches, ResearchType} from "../api/api";
+import {setErrorMessageTC, setSuccessfulMessageTC} from "./appReducer";
 
 const PatientsState: PatientsStateType = {
     patients: [],
@@ -37,20 +38,23 @@ export const GetPatientsTC = () => async (dispatch: Dispatch<any>) => {
 
     }
 }
-export const AddPatientsTC = (patient: PostNewPatientType) => async () => {
+export const AddPatientsTC = (patient: PostNewPatientType) => async (dispatch: Dispatch<any>) => {
     try {
         await patientsAPI.addPatient(patient)
+        dispatch(setSuccessfulMessageTC('Пациент успешно добавлен!'))
     } catch {
         console.error('ERROR POST new patient')
+        dispatch(setErrorMessageTC('Ошибка при добавлении пациента!'))
     } finally {
 
     }
 }
-export const AddNewResearchesTC = (researches: Array<PostNewResearches>) => async () => {
+export const AddNewResearchesTC = (researches: Array<PostNewResearches>) => async (dispatch: Dispatch<any>) => {
     try {
         await patientsAPI.addResearches(researches)
     } catch {
-        console.warn('ERROR POST new patient')
+        console.error('ERROR POST new patient')
+        dispatch(setErrorMessageTC('Ошибка при добавлении исследований пациента!'))
     } finally {
 
     }
