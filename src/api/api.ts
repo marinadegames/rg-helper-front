@@ -13,18 +13,12 @@ export const patientsAPI = {
     getResearches(idPatient: number) {
         return instance.get<GetResearchesResponseType>(`patients/researches/${idPatient}`)
     },
-    // deleteUser(userId: string) {
-    //     return instance.delete<GetUsersResponseType>(`${userId}`)
-    // },
     addPatient(patient: PostNewPatientType) {
-        return instance.post<any>('patients', patient)
+        return instance.post<any>('patients', {patient})
     },
     addResearches(res: Array<PostNewResearches>) {
         return instance.post<any>('patients/researches', res)
     },
-    // editUser(user: UserType) {
-    //     return instance.put<EditUserResponseType>(`db/${user.id}`, {user})
-    // }
 }
 export type PostNewResearches = {
     typeres: ResearchesType | null
@@ -39,7 +33,6 @@ export type PostNewPatientType = {
     year: number | undefined
     sex: SexTypes
     address: string | null
-    dateres: Date
 }
 export type GetUsersResponseType = {
     results: PatientType[]

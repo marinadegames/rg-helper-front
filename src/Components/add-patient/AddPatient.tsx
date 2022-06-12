@@ -4,7 +4,7 @@ import {rootReducerType} from "../../Redux/state";
 import {memo, useCallback, useEffect, useState} from "react";
 import {Button} from "../universal components/Button";
 import {formatDate} from "../../Utils/formatDate";
-import {AddNewResearchesTC, AddPatientsTC, GetPatientsTC} from "../../Redux/patientsReducer";
+import {AddPatientsTC, GetPatientsTC} from "../../Redux/patientsReducer";
 import {PostNewPatientType, PostResearchType, ResearchesType, SexTypes, SizeFilmsType} from "../../api/api";
 import {TypeResearchComponent} from "./TypeResearchComponent";
 import {v1} from "uuid";
@@ -88,7 +88,6 @@ export const AddPatient = memo(() => {
                 address: address,
                 sex: sex,
                 year: year,
-                dateres: new Date(),
             }
             const newResearches = researches.map(res => {
                 return {
@@ -100,9 +99,10 @@ export const AddPatient = memo(() => {
                     sizefilm: res.sizefilm
                 }
             })
-            console.log(newResearches)
+            console.log(newPatient)
+
             dispatch(AddPatientsTC(newPatient))
-            dispatch(AddNewResearchesTC(newResearches))
+            // dispatch(AddNewResearchesTC(newResearches))
         }
 
         return (

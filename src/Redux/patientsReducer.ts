@@ -1,6 +1,5 @@
 import {Dispatch} from "react";
 import {patientsAPI, PatientType, PostNewPatientType, PostNewResearches, ResearchType} from "../api/api";
-import {emitKeypressEvents} from "readline";
 
 const PatientsState: PatientsStateType = {
     patients: [],
@@ -41,8 +40,9 @@ export const GetPatientsTC = () => async (dispatch: Dispatch<any>) => {
 export const AddPatientsTC = (patient: PostNewPatientType) => async (dispatch: Dispatch<any>) => {
     try {
         await patientsAPI.addPatient(patient)
+        dispatch(GetPatientsTC())
     } catch {
-        console.warn('ERROR POST new patient')
+        console.error('ERROR POST new patient')
     } finally {
 
     }
@@ -50,6 +50,7 @@ export const AddPatientsTC = (patient: PostNewPatientType) => async (dispatch: D
 export const AddNewResearchesTC = (researches: Array<PostNewResearches>) => async (dispatch: Dispatch<any>) => {
     try {
         await patientsAPI.addResearches(researches)
+
     } catch {
         console.warn('ERROR POST new patient')
     } finally {
