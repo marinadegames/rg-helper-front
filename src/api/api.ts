@@ -14,12 +14,17 @@ export const patientsAPI = {
         return instance.get<GetResearchesResponseType>(`patients/researches/${idPatient}`)
     },
     addPatient(patient: PostNewPatientType) {
-        return instance.post<any>('patients', {patient})
+        return instance.post<ResponsePostType>('patients', patient)
     },
     addResearches(res: Array<PostNewResearches>) {
-        return instance.post<any>('patients/researches', {res})
+        return instance.post<ResponsePostType>('patients/researches', {res})
     },
 }
+export type ResponsePostType = {
+    status: number
+    statusText: string
+}
+
 export type PostNewResearches = {
     typeres: ResearchesType | null
     sizefilm: SizeFilmsType | null
@@ -30,7 +35,7 @@ export type PostNewResearches = {
 }
 export type PostNewPatientType = {
     name: string
-    year: number | undefined
+    year: number
     sex: SexTypes
     address: string | null
 }
@@ -81,5 +86,5 @@ export type AddPatientDataType = {
     address: string
 }
 export type SizeFilmsType = '35x35' | '18x43' | '24x30' | '30x40' | '13x18'
-export type ResearchesType = "Т\\Б СУСТАВЫ" | 'ОГК' | 'ШОП' | 'ГОП' | 'ПОП' | 'ПКОП' | 'ЧЕРЕП' | 'ППН'
+export type ResearchesType = "Т-Б СУСТАВЫ" | 'ОГК' | 'ШОП' | 'ГОП' | 'ПОП' | 'ПКОП' | 'ЧЕРЕП' | 'ППН'
 export type SexTypes = 'MAN' | 'WOMAN'

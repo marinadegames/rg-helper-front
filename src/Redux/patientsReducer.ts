@@ -37,10 +37,9 @@ export const GetPatientsTC = () => async (dispatch: Dispatch<any>) => {
 
     }
 }
-export const AddPatientsTC = (patient: PostNewPatientType) => async (dispatch: Dispatch<any>) => {
+export const AddPatientsTC = (patient: PostNewPatientType) => async () => {
     try {
         await patientsAPI.addPatient(patient)
-        dispatch(GetPatientsTC())
     } catch {
         console.error('ERROR POST new patient')
     } finally {

@@ -12,7 +12,7 @@ import {v1} from "uuid";
 
 export const AddPatient = memo(() => {
 
-        const nextId = useSelector<rootReducerType, number>(state => state.patients.patients.length)
+        const nextId = useSelector<rootReducerType, number>(state => state.patients.patients.length + 1)
         const dispatch = useDispatch()
         const date = formatDate(new Date())
 
@@ -29,7 +29,7 @@ export const AddPatient = memo(() => {
         ])
 
         const [name, setName] = useState<string>('')
-        const [year, setYear] = useState<number | undefined>()
+        const [year, setYear] = useState<number>(2000)
         const [sex, setSex] = useState<SexTypes>('MAN')
         const [address, setAddress] = useState<string>('')
 
@@ -116,7 +116,7 @@ export const AddPatient = memo(() => {
                 {/* ID */}
                 <div className={s.add_patient_element}>
                     <div className={s.name_field}>Номер снимка:</div>
-                    <div className={s.name_field}>{nextId + 1}</div>
+                    <div className={s.name_field}>{nextId}</div>
                 </div>
 
                 {/* NAME */}
