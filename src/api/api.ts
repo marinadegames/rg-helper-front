@@ -5,7 +5,7 @@ const instance = axios.create({
     withCredentials: false,
     baseURL: process.env.REACT_APP_URL
 })
-
+console.log(process.env)
 
 export const patientsAPI = {
     getUsers() {
