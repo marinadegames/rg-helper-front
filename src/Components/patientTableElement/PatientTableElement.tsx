@@ -4,7 +4,7 @@ import {PatientType, ResearchType} from "../../api/api";
 import {timestampToDate} from "../../Utils/formatDate";
 import {useDispatch, useSelector} from "react-redux";
 import {rootReducerType} from "../../Redux/state";
-import {GetResearchesAC, GetResearchesTC} from "../../Redux/patientsReducer";
+import {ClearPatientsTC, GetResearchesTC} from "../../Redux/patientsReducer";
 
 type PropsType = {
     patient: PatientType
@@ -20,7 +20,7 @@ export const PatientTableElement = memo(({patient}: PropsType) => {
     useEffect(() => {
         dispatch(GetResearchesTC(patient.id))
         return () => {
-            dispatch(GetResearchesAC([]))
+            dispatch(ClearPatientsTC())
         }
     }, [dispatch, patient.id])
 

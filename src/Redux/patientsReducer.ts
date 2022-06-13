@@ -13,8 +13,9 @@ export const patientsReducer = (state = PatientsState, action: ActionType): Pati
         case "GET_PATIENTS":
             return {...state, patients: action.patients}
         case "GET_RES":
-            if (action.researches.length === 0) return {...state, researches: action.researches}
             return {...state, researches: [...state.researches, ...action.researches]}
+        case "CLEAR_RES":
+            return {...state, researches: []}
         default:
             return state
     }
@@ -26,12 +27,24 @@ export const GetPatientsAC = (patients: Array<PatientType>): GetPatientsAT => {
 export const GetResearchesAC = (researches: Array<ResearchType>): GetResearchesAT => {
     return {type: "GET_RES", researches}
 }
+export const ClearResearchesAC = (): ClearResearchesAT => {
+    return {type: "CLEAR_RES",}
+}
 
 
 export const GetPatientsTC = () => async (dispatch: Dispatch<any>) => {
     try {
         const res = await patientsAPI.getUsers()
         dispatch(GetPatientsAC(res.data.results))
+    } catch {
+        console.warn('ERROR get patients')
+    } finally {
+
+    }
+}
+export const ClearPatientsTC = () => async (dispatch: Dispatch<any>) => {
+    try {
+        dispatch(ClearResearchesAC())
     } catch {
         console.warn('ERROR get patients')
     } finally {
@@ -77,7 +90,7 @@ export type PatientsStateType = {
     searchResult: Array<PatientType>
 }
 
-export type ActionType = GetPatientsAT | GetResearchesAT
+export type ActionType = GetPatientsAT | GetResearchesAT | ClearResearchesAT
 
 export type GetPatientsAT = {
     type: 'GET_PATIENTS'
@@ -86,4 +99,7 @@ export type GetPatientsAT = {
 export type GetResearchesAT = {
     type: 'GET_RES'
     researches: Array<ResearchType>
+}
+export type ClearResearchesAT = {
+    type: 'CLEAR_RES'
 }
