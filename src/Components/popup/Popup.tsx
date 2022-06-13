@@ -3,8 +3,8 @@ import {Dialog, Transition} from '@headlessui/react'
 import {PatientType, SexTypes} from "../../api/api";
 import {useDispatch} from "react-redux";
 import {EditableSpan} from "../universal components/EditableSpan";
-import {EditNamePatientTC, EditSexPatientTC, EditYearPatientTC} from "../../Redux/patientsReducer";
-import { EditableSpanSex } from '../universal components/EditableSpanSex';
+import {EditAddressPatientTC, EditNamePatientTC, EditSexPatientTC, EditYearPatientTC} from "../../Redux/patientsReducer";
+import {EditableSpanSex} from '../universal components/EditableSpanSex';
 
 type PropsType = {
     patient: PatientType
@@ -43,6 +43,10 @@ export const Popup = memo(({patient, open, setOpen}: PropsType) => {
 
         const editSex = useCallback((sex: SexTypes) => {
             dispatch(EditSexPatientTC(patient.id, sex))
+        }, [dispatch, patient.id])
+
+        const editAddress = useCallback((address: string) => {
+            dispatch(EditAddressPatientTC(patient.id, address))
         }, [dispatch, patient.id])
 
         return (
@@ -99,11 +103,10 @@ export const Popup = memo(({patient, open, setOpen}: PropsType) => {
                                                     <b className='w-1/4 mr-5'>Пол: </b>
                                                     <EditableSpanSex sex={patient.sex} callback={editSex}/>
                                                 </div>
-                                                {/*<div className="my-2 text-2xl text-left flex flex-row">*/}
-                                                {/*    <b className='w-1/4 mr-5'>Адрес: </b>*/}
-                                                {/*    <EditableSpan title={patient.address} callback={() => {*/}
-                                                {/*    }}/>*/}
-                                                {/*</div>*/}
+                                                <div className="my-2 text-2xl text-left flex flex-row">
+                                                    <b className='w-1/4 mr-5'>Адрес: </b>
+                                                    <EditableSpan title={patient.address} callback={editAddress}/>
+                                                </div>
                                                 {/*<div className="my-2 text-2xl text-left flex flex-row">*/}
                                                 {/*    <b className='w-1/4 mr-5'>Исследования: </b>*/}
                                                 {/*</div>*/}

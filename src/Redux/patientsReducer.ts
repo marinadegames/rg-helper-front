@@ -113,6 +113,16 @@ export const EditSexPatientTC = (idPatient: number, sex: SexTypes) => async (dis
         dispatch(setErrorMessageTC('Ошибка при изменении года пациента!'))
     }
 }
+export const EditAddressPatientTC = (idPatient: number, address: string) => async (dispatch: Dispatch<any>) => {
+    try {
+        await patientsAPI.editAddressPatient(idPatient, address)
+        dispatch(setSuccessfulMessageTC('Год пациента успешно изменен!'))
+        dispatch(GetPatientsTC())
+    } catch {
+        console.warn('ERROR: fail change patient year!')
+        dispatch(setErrorMessageTC('Ошибка при изменении года пациента!'))
+    }
+}
 
 
 export type PatientsStateType = {

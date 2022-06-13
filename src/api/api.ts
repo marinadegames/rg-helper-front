@@ -29,6 +29,9 @@ export const patientsAPI = {
     editSexPatient(id: number, sex: SexTypes) {
         return instance.put<ResponseType>(`patients/${id}/changeSex`, {sex})
     },
+    editAddressPatient(id: number, address: string) {
+        return instance.put<ResponseType>(`patients/${id}/changeAddress`, {address})
+    },
 }
 export type ResponseType = {
     status: number
@@ -61,7 +64,7 @@ export type PatientType = {
         years: number
     }
     sex: SexTypes
-    address: string | null
+    address: string
     description: string | null
     conclusion: string | null
     dateres: Date
