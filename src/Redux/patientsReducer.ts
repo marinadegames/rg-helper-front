@@ -72,7 +72,7 @@ export const GetResearchesTC = (idPatient: number) => async (dispatch: Dispatch<
 }
 
 export type PatientsStateType = {
-    patients: Array<PatientType>,
+    patients: Array<PatientType>
     researches: Array<ResearchType>
     searchResult: Array<PatientType>
 }
