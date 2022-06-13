@@ -1,5 +1,5 @@
 import {Dispatch} from "react";
-import {patientsAPI, PatientType, PostNewPatientType, PostNewResearches, ResearchType} from "../api/api";
+import {patientsAPI, PatientType, PostNewPatientType, PostNewResearches, ResearchType, SexTypes} from "../api/api";
 import {setErrorMessageTC, setSuccessfulMessageTC} from "./appReducer";
 
 const PatientsState: PatientsStateType = {
@@ -96,6 +96,16 @@ export const EditNamePatientTC = (idPatient: number, newName: string) => async (
 export const EditYearPatientTC = (idPatient: number, year: number) => async (dispatch: Dispatch<any>) => {
     try {
         await patientsAPI.editYearPatient(idPatient, year)
+        dispatch(setSuccessfulMessageTC('Год пациента успешно изменен!'))
+        dispatch(GetPatientsTC())
+    } catch {
+        console.warn('ERROR: fail change patient year!')
+        dispatch(setErrorMessageTC('Ошибка при изменении года пациента!'))
+    }
+}
+export const EditSexPatientTC = (idPatient: number, sex: SexTypes) => async (dispatch: Dispatch<any>) => {
+    try {
+        await patientsAPI.editSexPatient(idPatient, sex)
         dispatch(setSuccessfulMessageTC('Год пациента успешно изменен!'))
         dispatch(GetPatientsTC())
     } catch {
