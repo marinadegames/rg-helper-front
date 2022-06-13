@@ -17,7 +17,7 @@ export const EditableSpan = (props: PropsType) => {
     }
     const editOff = () => {
         setEdit(false)
-        // props.editTaskHandlerForEditableLabel(title)
+        props.callback(title)
     }
     const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)

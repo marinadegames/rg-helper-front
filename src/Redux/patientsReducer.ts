@@ -34,7 +34,7 @@ export const ClearResearchesAC = (): ClearResearchesAT => {
 
 export const GetPatientsTC = () => async (dispatch: Dispatch<any>) => {
     try {
-        const res = await patientsAPI.getUsers()
+        const res = await patientsAPI.getPatients()
         dispatch(GetPatientsAC(res.data.results))
     } catch {
         console.warn('ERROR get patients')
@@ -83,6 +83,17 @@ export const GetResearchesTC = (idPatient: number) => async (dispatch: Dispatch<
 
     }
 }
+export const EditNamePatientTC = (idPatient: number, newName: string) => async (dispatch: Dispatch<any>) => {
+    try {
+        await patientsAPI.editNamePatient(idPatient, newName)
+        dispatch(setSuccessfulMessageTC('Имя пациента успешно изменено!'))
+        dispatch(GetPatientsTC())
+    } catch {
+        console.warn('ERROR: fail change patient name!')
+        dispatch(setErrorMessageTC('Ошибка при изменении имени пациента :('))
+    }
+}
+
 
 export type PatientsStateType = {
     patients: Array<PatientType>

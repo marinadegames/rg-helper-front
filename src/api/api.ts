@@ -1,28 +1,30 @@
 import axios from "axios";
 
-
 const instance = axios.create({
     withCredentials: false,
-    // baseURL: process.env.REACT_APP_URL || "http://localhost:5000"
-    baseURL: 'https://rg-helper-back.herokuapp.com/'
+    baseURL: process.env.REACT_APP_URL || "http://localhost:5000"
+    // baseURL: 'https://rg-helper-back.herokuapp.com/'
 })
-console.log(process.env)
 
 export const patientsAPI = {
-    getUsers() {
-        return instance.get<GetUsersResponseType>('patients')
+    getPatients() {
+        return instance.get<GetPatientsResponseType>('patients')
     },
     getResearches(idPatient: number) {
         return instance.get<GetResearchesResponseType>(`patients/researches/${idPatient}`)
     },
     addPatient(patient: PostNewPatientType) {
-        return instance.post<ResponsePostType>('patients', patient)
+        return instance.post<ResponseType>('patients', patient)
     },
     addResearches(res: Array<PostNewResearches>) {
-        return instance.post<ResponsePostType>('patients/researches', {res})
+        return instance.post<ResponseType>('patients/researches', {res})
     },
+
+    editNamePatient(id: number, name: string) {
+        return instance.put<ResponseType>(`patients/${id}`, {name})
+    }
 }
-export type ResponsePostType = {
+export type ResponseType = {
     status: number
     statusText: string
 }
@@ -41,7 +43,7 @@ export type PostNewPatientType = {
     sex: SexTypes
     address: string | null
 }
-export type GetUsersResponseType = {
+export type GetPatientsResponseType = {
     results: PatientType[]
     status: number
     statusText: string

@@ -1,6 +1,9 @@
-import React, {Fragment, memo, useRef} from 'react'
+import React, {Fragment, memo, useCallback, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {PatientType} from "../../api/api";
+import {useDispatch} from "react-redux";
+import {EditableSpan} from "../universal components/EditableSpan";
+import {EditNamePatientTC} from "../../Redux/patientsReducer";
 
 type PropsType = {
     patient: PatientType
@@ -8,27 +11,30 @@ type PropsType = {
     setOpen: (value: boolean) => void
 }
 
-
 export const Popup = memo(({patient, open, setOpen}: PropsType) => {
 
         // state
-        // const dispatch = useDispatch()
+        const dispatch = useDispatch()
 
         const cancelButtonRef = useRef(null)
 
-        // const [modeTypeResearch, setModeTypeResearch] = useState<boolean>(false)
-        // const [modeFilms, setModeFilms] = useState<boolean>(false)
-        // const [modeDose, setModeDose] = useState<boolean>(false)
+        const [modeTypeResearch, setModeTypeResearch] = useState<boolean>(false)
+        const [modeFilms, setModeFilms] = useState<boolean>(false)
+        const [modeDose, setModeDose] = useState<boolean>(false)
 
-        // const selectTypeRes = (value: string, idRes: string, idPat: number) => {
-        //     dispatch(EditResearchTypePatient(value, idRes, idPat))
-        // }
+        const selectTypeRes = (value: string, idRes: string, idPat: number) => {
+            // dispatch(EditResearchTypePatient(value, idRes, idPat))
+        }
 
-        // const changeModeTypeResearch = (e: any) => {
-        //     e.stopPropagation()
-        //     setModeTypeResearch(!modeTypeResearch)        }
-        // const changeModeFilms = () => setModeFilms(!modeFilms)
+        const changeModeTypeResearch = (e: any) => {
+            e.stopPropagation()
+            setModeTypeResearch(!modeTypeResearch)
+        }
+        const changeModeFilms = () => setModeFilms(!modeFilms)
 
+        const editName = useCallback((name: string) => {
+            dispatch(EditNamePatientTC(patient.id, name))
+        }, [dispatch, patient.id])
 
         return (
             <Transition.Root show={open} as={Fragment}>
@@ -72,11 +78,10 @@ export const Popup = memo(({patient, open, setOpen}: PropsType) => {
                                                     <b className='w-1/4 mr-5'>Номер исследования: </b>
                                                     <label>{patient.id}</label>
                                                 </div>
-                                                {/*<div className="my-2 text-2xl text-left flex flex-row">*/}
-                                                {/*    <b className='w-1/4 mr-5'>ФИО: </b>*/}
-                                                {/*    <EditableSpan title={patient.name} callback={() => {*/}
-                                                {/*    }}/>*/}
-                                                {/*</div>*/}
+                                                <div className="my-2 text-2xl text-left flex flex-row">
+                                                    <b className='w-1/4 mr-5'>ФИО: </b>
+                                                    <EditableSpan title={patient.name} callback={editName}/>
+                                                </div>
                                                 {/*<div className="my-2 text-2xl text-left flex flex-row">*/}
                                                 {/*    <b className='w-1/4 mr-5'>Год: </b>*/}
                                                 {/*    <EditableSpan title={patient.year} callback={() => {*/}
