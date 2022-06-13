@@ -3,7 +3,7 @@ import {Dialog, Transition} from '@headlessui/react'
 import {PatientType} from "../../api/api";
 import {useDispatch} from "react-redux";
 import {EditableSpan} from "../universal components/EditableSpan";
-import {EditNamePatientTC} from "../../Redux/patientsReducer";
+import {EditNamePatientTC, EditYearPatientTC} from "../../Redux/patientsReducer";
 
 type PropsType = {
     patient: PatientType
@@ -34,6 +34,10 @@ export const Popup = memo(({patient, open, setOpen}: PropsType) => {
 
         const editName = useCallback((name: string) => {
             dispatch(EditNamePatientTC(patient.id, name))
+        }, [dispatch, patient.id])
+
+        const editYear = useCallback((year: number) => {
+            dispatch(EditYearPatientTC(patient.id, year))
         }, [dispatch, patient.id])
 
         return (
@@ -82,11 +86,10 @@ export const Popup = memo(({patient, open, setOpen}: PropsType) => {
                                                     <b className='w-1/4 mr-5'>ФИО: </b>
                                                     <EditableSpan title={patient.name} callback={editName}/>
                                                 </div>
-                                                {/*<div className="my-2 text-2xl text-left flex flex-row">*/}
-                                                {/*    <b className='w-1/4 mr-5'>Год: </b>*/}
-                                                {/*    <EditableSpan title={patient.year} callback={() => {*/}
-                                                {/*    }}/>*/}
-                                                {/*</div>*/}
+                                                <div className="my-2 text-2xl text-left flex flex-row">
+                                                    <b className='w-1/4 mr-5'>Год: </b>
+                                                    <EditableSpan title={patient.birthyear.years} callback={editYear}/>
+                                                </div>
                                                 {/*<div className="my-2 text-2xl text-left flex flex-row">*/}
                                                 {/*    <b className='w-1/4 mr-5'>Пол: </b>*/}
                                                 {/*    <EditableSpan title={patient.sex} callback={() => {*/}

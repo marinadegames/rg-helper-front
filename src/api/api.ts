@@ -21,7 +21,10 @@ export const patientsAPI = {
     },
 
     editNamePatient(id: number, name: string) {
-        return instance.put<ResponseType>(`patients/${id}`, {name})
+        return instance.put<ResponseType>(`patients/${id}/changeName`, {name})
+    },
+    editYearPatient(id: number, year: number) {
+        return instance.put<ResponseType>(`patients/${id}/changeYear`, {year})
     }
 }
 export type ResponseType = {
@@ -52,7 +55,7 @@ export type PatientType = {
     id: number
     name: string
     birthyear: {
-        years: number | null
+        years: number
     }
     sex: SexTypes
     address: string | null

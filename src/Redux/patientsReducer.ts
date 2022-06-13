@@ -90,7 +90,17 @@ export const EditNamePatientTC = (idPatient: number, newName: string) => async (
         dispatch(GetPatientsTC())
     } catch {
         console.warn('ERROR: fail change patient name!')
-        dispatch(setErrorMessageTC('Ошибка при изменении имени пациента :('))
+        dispatch(setErrorMessageTC('Ошибка при изменении имени пациента!'))
+    }
+}
+export const EditYearPatientTC = (idPatient: number, year: number) => async (dispatch: Dispatch<any>) => {
+    try {
+        await patientsAPI.editYearPatient(idPatient, year)
+        dispatch(setSuccessfulMessageTC('Год пациента успешно изменен!'))
+        dispatch(GetPatientsTC())
+    } catch {
+        console.warn('ERROR: fail change patient year!')
+        dispatch(setErrorMessageTC('Ошибка при изменении года пациента!'))
     }
 }
 
