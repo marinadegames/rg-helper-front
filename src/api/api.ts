@@ -3,7 +3,8 @@ import axios from "axios";
 
 const instance = axios.create({
     withCredentials: false,
-    baseURL: process.env.REACT_APP_URL || "http://localhost:5000"
+    // baseURL: process.env.REACT_APP_URL || "http://localhost:5000"
+    baseURL: 'https://rg-helper-back.herokuapp.com/'
 })
 console.log(process.env)
 
