@@ -1,4 +1,5 @@
 .notification_error {
+    z-index: 1000;
     @apply
     absolute
     bottom-16
@@ -9,7 +10,9 @@
     px-5
     rounded-md
 }
+
 .notification_successful {
+    z-index: 1000;
     @apply
     absolute
     bottom-5
