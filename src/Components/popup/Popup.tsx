@@ -1,12 +1,14 @@
 import React, {Fragment, memo, useCallback, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
-import {PatientType, ResearchType, SexTypes} from "../../api/api";
+import {PatientType, ResearchesType, ResearchType, SexTypes, SizeFilmsType} from "../../api/api";
 import {useDispatch} from "react-redux";
 import {EditableSpan} from "../universal components/EditableSpan";
-import {EditAddressPatientTC, EditNamePatientTC, EditSexPatientTC, EditYearPatientTC} from "../../Redux/patientsReducer";
+import {EditAddressPatientTC, EditNamePatientTC, EditResearchesTC, EditSexPatientTC, EditYearPatientTC} from "../../Redux/patientsReducer";
 import {EditableSpanSex} from '../universal components/EditableSpanSex';
 import {InputMenuTypes} from '../InputMenuResearchType/InputMenuTypes';
 import {researchesTypes, sizeFilmsTypes} from "../../Utils/types";
+import {InputNumber} from "../universal components/InputNumber";
+import {Button} from "../universal components/Button";
 
 type PropsType = {
     patient: PatientType
@@ -22,20 +24,28 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
 
         const cancelButtonRef = useRef(null)
 
-        const [modeTypeResearch, setModeTypeResearch] = useState<boolean>(false)
-        const [modeFilms, setModeFilms] = useState<boolean>(false)
-        const [modeDose, setModeDose] = useState<boolean>(false)
+        const [editMode, setEditMode] = useState<boolean>(false)
+        const [newResearches, setNewResearches] = useState<Array<ResearchType>>([...researches])
 
-        const selectTypeRes = (value: string, idRes: string, idPat: number) => {
-            // dispatch(EditResearchTypePatient(value, idRes, idPat))
+        const changeTypeResearches = (newRes: ResearchesType, idRes: number) => {
+            setNewResearches(newResearches.map(res => res.idres === idRes ? {...res, typeres: newRes} : res))
+        }
+        const changeFilmsResearches = (newFilmSize: SizeFilmsType, idRes: number) => {
+            setNewResearches(newResearches.map(res => res.idres === idRes ? {...res, sizefilm: newFilmSize} : res))
         }
 
-        const changeModeTypeResearch = (e: any) => {
-            e.stopPropagation()
-            setModeTypeResearch(!modeTypeResearch)
+        const changeDoseResearches = (doseNumber: number, idRes: number) => {
+            setNewResearches(newResearches.map(res => res.idres === idRes ? {...res, dose: doseNumber} : res))
         }
-        const changeModeFilms = () => setModeFilms(!modeFilms)
-        const changeModeDose = () => setModeDose(!modeDose)
+
+        const editModeOn = () => {
+            setEditMode(!editMode)
+        }
+
+        const sendEditedResearches = () => {
+            setEditMode(false)
+            dispatch(EditResearchesTC(newResearches))
+        }
 
         const editName = useCallback((name: string) => {
             dispatch(EditNamePatientTC(patient.id, name))
@@ -53,13 +63,14 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
             dispatch(EditAddressPatientTC(patient.id, address))
         }, [dispatch, patient.id])
 
+
         return (
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="flex justify-center items-center fixed z-10 inset-0 overflow-y-auto"
                         initialFocus={cancelButtonRef}
                         onClose={() => setOpen(!open)}>
                     <div
-                        className="flex items-center justify-center pt-4 px-4 text-center w-full">
+                        className="flex items-center justify-center pt-2 px-2 text-center w-full">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -125,55 +136,61 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                                                     <div className="table-row-group">
                                                         <div className="table-row transition">
 
-                                                            <div className="table-cell border border-gray-500 text-left text-lg p-2 m-0 hover:bg-gray-600 cursor-pointer">
-                                                                {researches.map(typeRes => {
+                                                            <div className="table-cell border border-gray-500 text-left text-lg p-2 m-0">
+                                                                {newResearches.map(typeRes => {
                                                                     return (
-                                                                        modeTypeResearch
-                                                                            ? <InputMenuTypes callback={() => {
-                                                                            }} types={researchesTypes} key={typeRes.idres}/>
+                                                                        editMode
+                                                                            ? <InputMenuTypes callback={changeTypeResearches}
+                                                                                              id={typeRes.idres}
+                                                                                              types={researchesTypes}
+                                                                                              key={typeRes.idres}
+                                                                                              value={typeRes.typeres}/>
                                                                             : <p className={'text-2xl bg-gray-700 rounded-lg p-2 mb-2'}
-                                                                                 onClick={changeModeTypeResearch} key={typeRes.idres}>{typeRes.typeres}</p>)
+                                                                                 key={typeRes.idres}>{typeRes.typeres}</p>)
                                                                 })}
                                                             </div>
-                                                            <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
-                                                                {researches.map(films => {
+                                                            <div className="table-cell border border-gray-500 text-left text-lg p-3">
+                                                                {newResearches.map(films => {
                                                                     return (
-                                                                        modeFilms
-                                                                            ? <InputMenuTypes callback={() => {
-                                                                            }} types={sizeFilmsTypes} key={films.idres}/>
-                                                                            : <p onClick={changeModeFilms}
-                                                                                 className={'text-2xl bg-gray-700 rounded-lg p-2 mb-2'}
+                                                                        editMode
+                                                                            ? <InputMenuTypes id={films.idres}
+                                                                                              callback={changeFilmsResearches}
+                                                                                              types={sizeFilmsTypes} key={films.idres} value={films.sizefilm}/>
+                                                                            : <p className={'text-2xl bg-gray-700 rounded-lg p-2 mb-2'}
                                                                                  key={films.idres}>
                                                                                 {films.sizefilm} | {films.amount} | {films.projections}
                                                                             </p>
                                                                     )
                                                                 })}
                                                             </div>
-                                                            <div className="flex flex-row table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
-                                                                <div>
-                                                                    {researches.map(dose => modeDose
-                                                                        ? <input name={'dose'}
-                                                                                 type={'number'}
-                                                                                 value={dose.dose}
-                                                                                 onChange={() => {
-                                                                                 }}
-                                                                                 className={'text-gray-800 p-1'}/>
-                                                                        : <p onClick={changeModeDose}
-                                                                             className={'text-2xl bg-gray-700 rounded-lg p-2 mb-2'}
-                                                                             key={dose.idres}>{dose.dose} мЗв</p>
+                                                            <div className="flex flex-col table-cell border border-gray-500 text-left text-lg p-3">
+                                                                <div className={'flex flex-col'}>
+                                                                    {newResearches.map((dose, index) => editMode
+                                                                        ? <InputNumber id={dose.idres} callback={changeDoseResearches} key={index} value={dose.dose} />
+                                                                        : <p className={'text-2xl bg-gray-700 rounded-lg p-2 mb-2'}
+                                                                             key={dose.idres}>{dose.dose}мЗв</p>
                                                                     )}
                                                                 </div>
-                                                                {researches.length > 1 && <div className={'text-2xl bg-gray-500 rounded-lg p-3 mb-2'}>
+                                                                {newResearches.length > 1 && <div className={'text-2xl bg-gray-500 rounded-lg p-3 mb-2'}>
 
-                                                                    Суммарно: {researches.map(res => {
-                                                                    return Math.round(Number(res.dose) * 100)/100
+                                                                    Суммарно: {newResearches.map(res => {
+                                                                    return Math.round(Number(res.dose) * 100) / 100
                                                                 }).reduce((a: number, b: number) => a + b).toFixed(2)} мЗв
                                                                 </div>}
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="my-2 mb-3 text-2xl text-left flex flex-col">
+                                                {!editMode && <Button title={'Редактировать'}
+                                                                      customStyle={'float-right text-xl w-60 h-12 bg-red text-white mt-3'}
+                                                                      onClick={editModeOn}
+                                                                      callback={() => {
+                                                                      }}/>}
+                                                {editMode && <Button title={'Сохранить'}
+                                                                     customStyle={'float-right text-xl w-60 h-12 bg-red text-white mr-4 mt-3'}
+                                                                     onClick={sendEditedResearches}/>}
+
+                                                <div className="my-2 mb-3 text-2xl text-left flex flex-col ">
                                                     <b className='w-1/4 mr-5'>📝 Описание: </b>
                                                     {patient.description ? patient.description : 'НЕ ОПИСАНО'}
                                                 </div>

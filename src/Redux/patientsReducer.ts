@@ -123,6 +123,16 @@ export const EditAddressPatientTC = (idPatient: number, address: string) => asyn
         dispatch(setErrorMessageTC('Ошибка при изменении года пациента!'))
     }
 }
+export const EditResearchesTC = (newResearches: Array<ResearchType>) => async (dispatch: Dispatch<any>) => {
+    try {
+        await patientsAPI.editResearchesPatient(newResearches)
+        dispatch(setSuccessfulMessageTC('Исследования пациента успешно изменены!'))
+        dispatch(GetPatientsTC())
+    } catch {
+        console.warn('ERROR: fail change patient researches!')
+        dispatch(setErrorMessageTC('Ошибка при изменении исследований пациента!'))
+    }
+}
 
 
 export type PatientsStateType = {

@@ -12,7 +12,8 @@ export function Sidebar() {
                 <h1>☢️Rg-helper</h1>
             </div>
             <NavLink to={'/add-patient'}>
-                <Button title={'Новый пациент'} style={'h-10 w-full'}/>
+                <Button title={'Новый пациент'}
+                customStyle={`h-10 w-full`}/>
             </NavLink>
             <hr className={s.horizontalLine}/>
             <div className={s.sidebar_container_clock}>

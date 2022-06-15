@@ -5,13 +5,15 @@ type PropsType = {
     title: string
     icon?: any
     callback?: () => void
-    style?: string
+    customStyle?: string
     onClick?: any
 }
 
+
+
 export const Button = (props: PropsType) => {
     return (
-        <button className={`${s.button} + ${props.style}`}
+        <button className={`${s.buttonCustom} ${props.customStyle}`}
                 onSubmit={e => e.preventDefault()}
                 onClick={props.onClick}>
             {props.icon}

@@ -32,6 +32,10 @@ export const patientsAPI = {
     editAddressPatient(id: number, address: string) {
         return instance.put<ResponseType>(`patients/${id}/changeAddress`, {address})
     },
+
+    editResearchesPatient(newResearches: Array<ResearchType>) {
+        return instance.put<ResponseType>(`patients/researches`, {newResearches})
+    }
 }
 export type ResponseType = {
     status: number

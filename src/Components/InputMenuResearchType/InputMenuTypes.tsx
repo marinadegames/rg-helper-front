@@ -5,17 +5,19 @@ import {ResearchesType, SizeFilmsType} from "../../api/api";
 
 type PropsType = {
     types: any
-    callback: (value: ResearchesType | SizeFilmsType) => void
+    value: string | number | null
+    id: number
+    callback: (value: any, id: number) => void
 }
 
-export const InputMenuTypes = memo(({types, callback}: PropsType) => {
+export const InputMenuTypes = memo(({types, callback, value, id}: PropsType) => {
 
-    const [type, setType] = useState<ResearchesType | SizeFilmsType | 'Выбрать'>('Выбрать')
+    const [type, setType] = useState<any>(value)
 
     const selectType = useCallback((t: ResearchesType | SizeFilmsType) => {
         setType(t)
-        callback(t)
-    },[callback])
+        callback(t, id)
+    },[callback, id])
 
     return (
         <Menu as="div" className="relative inline-block text-left w-full ">

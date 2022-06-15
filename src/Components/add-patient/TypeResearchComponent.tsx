@@ -41,10 +41,10 @@ export const TypeResearchComponent = memo((props: PropsType) => {
         <div className="table-row-group">
             <div className="table-row">
                 <div className="table-cell p-2 text-start border border-gray-400">
-                    <InputMenuTypes callback={selectTypeRes} types={researchesTypes}/>
+                    <InputMenuTypes id={Math.random()} callback={selectTypeRes} types={researchesTypes} value={null}/>
                 </div>
                 <div className="table-cell p-2 text-center border border-gray-400">
-                    <InputMenuTypes callback={selectTypeFilm} types={sizeFilmsTypes}/>
+                    <InputMenuTypes id={Math.random()} callback={selectTypeFilm} types={sizeFilmsTypes} value={null}/>
                 </div>
                 <div className="table-cell p-2 text-center border border-gray-400">
                     <Counter callback={selectAmount}/>
