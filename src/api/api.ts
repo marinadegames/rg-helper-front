@@ -2,7 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
     withCredentials: false,
-    baseURL: process.env.REACT_APP_URL || "http://localhost:5000"
+    baseURL: "http://localhost:5000"
     // baseURL: 'https://rg-helper-back.herokuapp.com/'
 })
 
@@ -12,6 +12,9 @@ export const patientsAPI = {
     },
     getResearches(idPatient: number) {
         return instance.get<GetResearchesResponseType>(`patients/researches/${idPatient}`)
+    },
+    getAllResearches() {
+        return instance.get<ResponseType>(`patients/researches`)
     },
     addPatient(patient: PostNewPatientType) {
         return instance.post<ResponseType>('patients', patient)
@@ -32,9 +35,8 @@ export const patientsAPI = {
     editAddressPatient(id: number, address: string) {
         return instance.put<ResponseType>(`patients/${id}/changeAddress`, {address})
     },
-
-    editResearchesPatient(newResearches: Array<ResearchType>) {
-        return instance.put<ResponseType>(`patients/researches`, {newResearches})
+    editResearchesPatient(idPat: number, allResearches: Array<ResearchType>) {
+        return instance.put<ResponseType>(`patients/researches/${idPat}`, {allResearches})
     }
 }
 export type ResponseType = {

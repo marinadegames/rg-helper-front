@@ -123,9 +123,9 @@ export const EditAddressPatientTC = (idPatient: number, address: string) => asyn
         dispatch(setErrorMessageTC('Ошибка при изменении года пациента!'))
     }
 }
-export const EditResearchesTC = (newResearches: Array<ResearchType>) => async (dispatch: Dispatch<any>) => {
+export const EditResearchesTC = (idPat: number, newResearches: Array<ResearchType>) => async (dispatch: Dispatch<any>) => {
     try {
-        await patientsAPI.editResearchesPatient(newResearches)
+        await patientsAPI.editResearchesPatient(idPat, newResearches)
         dispatch(setSuccessfulMessageTC('Исследования пациента успешно изменены!'))
         dispatch(GetPatientsTC())
     } catch {
@@ -133,7 +133,6 @@ export const EditResearchesTC = (newResearches: Array<ResearchType>) => async (d
         dispatch(setErrorMessageTC('Ошибка при изменении исследований пациента!'))
     }
 }
-
 
 export type PatientsStateType = {
     patients: Array<PatientType>

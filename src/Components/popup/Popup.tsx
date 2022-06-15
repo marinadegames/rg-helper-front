@@ -44,7 +44,7 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
 
         const sendEditedResearches = () => {
             setEditMode(false)
-            dispatch(EditResearchesTC(newResearches))
+            dispatch(EditResearchesTC(patient.id, newResearches))
         }
 
         const editName = useCallback((name: string) => {
@@ -94,7 +94,7 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                         >
                             <div
                                 className="flex flex-col w-10/12 bg-gray-700 rounded-md text-left overflow-hidden shadow-xl transform transition-all">
-                                <div className="w-full bg-gray-800 px-4 pt-1 pb-4">
+                                <div className="w-full bg-gray-800 px-4 pt-1 pb-4 ">
                                     <div>
                                         <div className="mt-3 text-left">
                                             <Dialog.Title as="h3" className="text-3xl pb-3 text-left leading-6 font-medium text-white">
