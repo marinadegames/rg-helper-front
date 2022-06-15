@@ -2,8 +2,8 @@ import axios from "axios";
 
 const instance = axios.create({
     withCredentials: false,
-    baseURL: "http://localhost:5000"
-    // baseURL: 'https://rg-helper-back.herokuapp.com/'
+    // baseURL: "http://localhost:5000"
+    baseURL: 'https://rg-helper-back.herokuapp.com/'
 })
 
 export const patientsAPI = {
