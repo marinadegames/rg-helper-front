@@ -116,9 +116,9 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                                                 <div className="table w-full table bg-gray-800 rounded-md p-3 ">
                                                     <div className="table-header-group">
                                                         <div className="table-row">
-                                                            <div className="table-cell w-1/3 border border-gray-500 text-left text-xl font-bold p-3">Тип</div>
-                                                            <div className="table-cell w-1/3 border border-gray-500 text-left text-xl font-bold p-3">Пленка</div>
-                                                            <div className="table-cell w-1/3 border border-gray-500 text-left text-xl font-bold p-3">Доза</div>
+                                                            <div className="table-cell w-1/3 border border-gray-500 text-left text-xl font-bold p-3">🆔 Тип исследования:</div>
+                                                            <div className="table-cell w-1/3 border border-gray-500 text-left text-xl font-bold p-3">🎞️ Пленка (р | кол | пр)</div>
+                                                            <div className="table-cell w-1/3 border border-gray-500 text-left text-xl font-bold p-3">☢️ Доза, мЗв</div>
                                                         </div>
                                                     </div>
                                                     <div className="table-row-group">
@@ -129,9 +129,7 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                                                                     return (
                                                                         modeTypeResearch
                                                                             ? <InputMenuTypes callback={() => {
-                                                                            }}
-                                                                                              types={researchesTypes}
-                                                                                              key={typeRes.idres}/>
+                                                                            }} types={researchesTypes} key={typeRes.idres}/>
                                                                             : <p onClick={changeModeTypeResearch} key={typeRes.idres}>{typeRes.typeres}</p>)
                                                                 })}
                                                             </div>
@@ -140,8 +138,7 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                                                                     return (
                                                                         modeFilms
                                                                             ? <InputMenuTypes callback={() => {
-                                                                            }}
-                                                                                              types={sizeFilmsTypes} key={films.idres}/>
+                                                                            }} types={sizeFilmsTypes} key={films.idres}/>
                                                                             : <p onClick={changeModeFilms} key={films.idres}>{films.sizefilm} | {films.amount} | {films.projections}</p>
                                                                     )
                                                                 })}
@@ -160,11 +157,11 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                                                     </div>
                                                 </div>
                                                 <div className="my-2 mb-3 text-2xl text-left flex flex-col">
-                                                    <b className='w-1/4 mr-5'>Описание: </b>
+                                                    <b className='w-1/4 mr-5'>📝 Описание: </b>
                                                     {patient.description ? patient.description : 'НЕ ОПИСАНО'}
                                                 </div>
                                                 <div className="my-2 text-2xl text-left flex flex-col">
-                                                    <b className='w-1/4 mr-5'>Заключение: </b>
+                                                    <b className='w-1/4 mr-5'>✅ Заключение: </b>
                                                     {patient.conclusion ? patient.conclusion : 'НЕ ОПИСАНО'}
                                                 </div>
                                             </div>
