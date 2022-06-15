@@ -83,33 +83,33 @@ export const Popup = memo(({patient, open, setOpen}: PropsType) => {
                                     <div>
                                         <div className="mt-3 text-left">
                                             <Dialog.Title as="h3" className="text-3xl pb-3 text-left leading-6 font-medium text-white">
-                                                Пациент {patient.name}
+                                                📃 Пациент {patient.name}
                                             </Dialog.Title>
                                             <hr/>
                                             <div className='w-full'>
                                                 <div className="my-2 text-2xl text-left flex flex-row">
-                                                    <b className='w-1/4 mr-5'>Номер исследования: </b>
+                                                    <b className='w-1/4 mr-5'>🔢 Номер исследования: </b>
                                                     <label>{patient.id}</label>
                                                 </div>
                                                 <div className="my-2 text-2xl text-left flex flex-row">
-                                                    <b className='w-1/4 mr-5'>ФИО: </b>
+                                                    <b className='w-1/4 mr-5'>👤 ФИО: </b>
                                                     <EditableSpan title={patient.name} callback={editName}/>
                                                 </div>
                                                 <div className="my-2 text-2xl text-left flex flex-row">
-                                                    <b className='w-1/4 mr-5'>Год: </b>
+                                                    <b className='w-1/4 mr-5'>🚼 Год: </b>
                                                     <EditableSpan title={patient.birthyear.years} callback={editYear}/>
                                                 </div>
                                                 <div className="my-2 text-2xl text-left flex flex-row">
-                                                    <b className='w-1/4 mr-5'>Пол: </b>
+                                                    <b className='w-1/4 mr-5'>️♂️♀️ Пол: </b>
                                                     <EditableSpanSex sex={patient.sex} callback={editSex}/>
                                                 </div>
                                                 <div className="my-2 text-2xl text-left flex flex-row">
-                                                    <b className='w-1/4 mr-5'>Адрес: </b>
+                                                    <b className='w-1/4 mr-5'>🏠 Адрес: </b>
                                                     <EditableSpan title={patient.address} callback={editAddress}/>
                                                 </div>
-                                                {/*<div className="my-2 text-2xl text-left flex flex-row">*/}
-                                                {/*    <b className='w-1/4 mr-5'>Исследования: </b>*/}
-                                                {/*</div>*/}
+                                                <div className="my-2 text-2xl text-left flex flex-row">
+                                                    <b className='w-1/4 mr-5'>🔍 Исследования: ⬇️</b>
+                                                </div>
                                                 <div className="table w-full table bg-gray-800 rounded-md p-3 ">
                                                     <div className="table-header-group">
                                                         <div className="table-row">
