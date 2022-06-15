@@ -4,18 +4,18 @@ import {ChevronDownIcon} from '@heroicons/react/solid'
 import {ResearchesType, SizeFilmsType} from "../../api/api";
 
 type PropsType = {
-    types: Array<any>
+    types: any
     callback: (value: ResearchesType | SizeFilmsType) => void
 }
 
-export const InputMenuTypes = memo((props: PropsType) => {
+export const InputMenuTypes = memo(({types, callback}: PropsType) => {
 
     const [type, setType] = useState<ResearchesType | SizeFilmsType | 'Выбрать'>('Выбрать')
 
     const selectType = useCallback((t: ResearchesType | SizeFilmsType) => {
         setType(t)
-        props.callback(t)
-    },[props])
+        callback(t)
+    },[callback])
 
     return (
         <Menu as="div" className="relative inline-block text-left w-full ">
@@ -39,7 +39,7 @@ export const InputMenuTypes = memo((props: PropsType) => {
                 <Menu.Items
                     className="absolute w-56 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
                     <div className="py-1 ">
-                        {props.types.map(t => {
+                        {types.map((t: any) => {
                             return (
                                 <Menu.Item key={Math.random()}>
                                     <div

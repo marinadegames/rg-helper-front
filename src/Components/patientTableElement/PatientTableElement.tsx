@@ -24,9 +24,11 @@ export const PatientTableElement = memo(({patient}: PropsType) => {
         }
     }, [dispatch, patient.id])
 
+    const researchesTarget = researches.filter(res => res.idpatient === patient.id && res)
+
     return (
         <div className="table-row transition hover:bg-gray-600 cursor-pointer" onClick={() => setOpen(!open)}>
-            {open && <Popup patient={patient} open={open} setOpen={setOpen}/>}
+            {open && <Popup patient={patient} open={open} setOpen={setOpen} researches={researchesTarget}/>}
             <div className="table-cell border border-gray-500 text-center py-3">{patient.id}</div>
             <div className="table-cell border border-gray-500 text-center py-3">{formatDate}</div>
             <div className="table-cell border border-gray-500 text-left pl-3 py-3">{patient.name}</div>

@@ -1,18 +1,21 @@
 import React, {Fragment, memo, useCallback, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
-import {PatientType, SexTypes} from "../../api/api";
+import {PatientType, ResearchesType, ResearchType, SexTypes, SizeFilmsType} from "../../api/api";
 import {useDispatch} from "react-redux";
 import {EditableSpan} from "../universal components/EditableSpan";
 import {EditAddressPatientTC, EditNamePatientTC, EditSexPatientTC, EditYearPatientTC} from "../../Redux/patientsReducer";
 import {EditableSpanSex} from '../universal components/EditableSpanSex';
+import {InputMenuTypes} from '../InputMenuResearchType/InputMenuTypes';
+import {researchesTypes, sizeFilmsTypes} from "../../Utils/types";
 
 type PropsType = {
     patient: PatientType
+    researches: Array<ResearchType>
     open: boolean
     setOpen: (value: boolean) => void
 }
 
-export const Popup = memo(({patient, open, setOpen}: PropsType) => {
+export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
 
         // state
         const dispatch = useDispatch()
@@ -121,45 +124,48 @@ export const Popup = memo(({patient, open, setOpen}: PropsType) => {
                                                     <div className="table-row-group">
                                                         <div className="table-row transition">
 
-                                                            {/*<div className="table-cell border border-gray-500 text-left text-lg p-2 m-0 hover:bg-gray-600 cursor-pointer">*/}
-                                                            {/*    {patient.researches.map(typeRes => {*/}
-                                                            {/*        return (*/}
-                                                            {/*            modeTypeResearch*/}
-                                                            {/*                ? <InputMenuTypes callback={(value) => selectTypeRes(value, typeRes.idRes, patient.id)}*/}
-                                                            {/*                                  types={researchTypes}*/}
-                                                            {/*                                  key={typeRes.idRes}/>*/}
-                                                            {/*                : <p onClick={changeModeTypeResearch} key={typeRes.idRes}>{typeRes.typeRes}</p>)*/}
-                                                            {/*    })}*/}
-                                                            {/*</div>*/}
-                                                            {/*<div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">*/}
-                                                            {/*    {patient.researches.map(films => {*/}
-                                                            {/*        return (*/}
-                                                            {/*            modeFilms*/}
-                                                            {/*                ? <InputMenuTypes callback={() => {*/}
-                                                            {/*                }} types={sizeFilms} key={films.idRes}/>*/}
-                                                            {/*                : <p onClick={changeModeFilms} key={films.idRes}>{films.sizeFilm}/{films.amount}/{films.projections}</p>*/}
-                                                            {/*        )*/}
-                                                            {/*    })}*/}
-                                                            {/*</div>*/}
-                                                            {/*<div className="flex flex-row table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">*/}
-                                                            {/*    <div>*/}
-                                                            {/*        {patient.researches.map(dose => {*/}
-                                                            {/*            return <p key={dose.idRes}>{dose.dose} мЗв</p>*/}
-                                                            {/*        })}*/}
-                                                            {/*    </div>*/}
-                                                            {/*    {patient.researches.length > 1 && <div>*/}
-                                                            {/*        Суммарно: {patient.researches.reduce((a: any, b: any) => a.dose + b.dose)} мЗв*/}
-                                                            {/*    </div>}*/}
-                                                            {/*</div>*/}
+                                                            <div className="table-cell border border-gray-500 text-left text-lg p-2 m-0 hover:bg-gray-600 cursor-pointer">
+                                                                {researches.map(typeRes => {
+                                                                    return (
+                                                                        modeTypeResearch
+                                                                            ? <InputMenuTypes callback={() => {
+                                                                            }}
+                                                                                              types={researchesTypes}
+                                                                                              key={typeRes.idres}/>
+                                                                            : <p onClick={changeModeTypeResearch} key={typeRes.idres}>{typeRes.typeres}</p>)
+                                                                })}
+                                                            </div>
+                                                            <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
+                                                                {researches.map(films => {
+                                                                    return (
+                                                                        modeFilms
+                                                                            ? <InputMenuTypes callback={() => {
+                                                                            }}
+                                                                                              types={sizeFilmsTypes} key={films.idres}/>
+                                                                            : <p onClick={changeModeFilms} key={films.idres}>{films.sizefilm} | {films.amount} | {films.projections}</p>
+                                                                    )
+                                                                })}
+                                                            </div>
+                                                            <div className="flex flex-row table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
+                                                                <div>
+                                                                    {researches.map(dose => {
+                                                                        return <p key={dose.idres}>{dose.dose} мЗв</p>
+                                                                    })}
+                                                                </div>
+                                                                {researches.length > 1 && <div>
+                                                                    Суммарно: {researches.reduce((a: any, b: any) => a.dose + b.dose)} мЗв
+                                                                </div>}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="my-2 text-2xl text-left flex flex-row">
+                                                <div className="my-2 mb-3 text-2xl text-left flex flex-col">
                                                     <b className='w-1/4 mr-5'>Описание: </b>
+                                                    {patient.description ? patient.description : 'НЕ ОПИСАНО'}
                                                 </div>
-                                                <div className="my-2 text-2xl text-left flex flex-row">
-                                                    <b className='w-1/4 mr-5'>Описание: </b>
-
+                                                <div className="my-2 text-2xl text-left flex flex-col">
+                                                    <b className='w-1/4 mr-5'>Заключение: </b>
+                                                    {patient.conclusion ? patient.conclusion : 'НЕ ОПИСАНО'}
                                                 </div>
                                             </div>
 
