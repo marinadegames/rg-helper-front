@@ -166,8 +166,8 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                                                                 {researches.length > 1 && <div className={'text-2xl bg-gray-500 rounded-lg p-3 mb-2'}>
 
                                                                     Суммарно: {researches.map(res => {
-                                                                        return Number(res.dose)
-                                                                }).reduce((a: number, b: number) => a + b)} мЗв
+                                                                    return Math.round(Number(res.dose) * 100)/100
+                                                                }).reduce((a: number, b: number) => a + b).toFixed(2)} мЗв
                                                                 </div>}
                                                             </div>
                                                         </div>

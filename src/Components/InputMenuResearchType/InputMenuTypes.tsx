@@ -21,7 +21,7 @@ export const InputMenuTypes = memo(({types, callback}: PropsType) => {
         <Menu as="div" className="relative inline-block text-left w-full ">
             <div>
                 <Menu.Button
-                    className="inline-flex justify-between w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                    className="inline-flex justify-between w-full text-xl mb-2 rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
                     {type}
                     <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true"/>
                 </Menu.Button>
@@ -39,11 +39,11 @@ export const InputMenuTypes = memo(({types, callback}: PropsType) => {
                 <Menu.Items
                     className="absolute w-56 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
                     <div className="py-1 ">
-                        {types.map((t: any) => {
+                        {types.map((t: any, index: number) => {
                             return (
-                                <Menu.Item key={Math.random()}>
+                                <Menu.Item key={index}>
                                     <div
-                                        className={'bg-gray-100 text-gray-900 block px-4 py-2 hover:bg-gray-200 cursor-pointer text-sm'}
+                                        className={'bg-gray-100 text-gray-900 block px-4 py-2 hover:bg-gray-200 cursor-pointer text-md'}
                                         onClick={() => selectType(t)}>
                                         {t}
                                     </div>
