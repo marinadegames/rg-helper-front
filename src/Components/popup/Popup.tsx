@@ -9,6 +9,7 @@ import {InputMenuTypes} from '../InputMenuResearchType/InputMenuTypes';
 import {researchesTypes, sizeFilmsTypes} from "../../Utils/types";
 import {InputNumber} from "../universal components/InputNumber";
 import {Button} from "../universal components/Button";
+import {TextAreaComponent} from "./TextAreaComponent";
 
 type PropsType = {
     patient: PatientType
@@ -69,8 +70,7 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                 <Dialog as="div" className="flex justify-center items-center fixed z-10 inset-0 overflow-y-auto"
                         initialFocus={cancelButtonRef}
                         onClose={() => setOpen(!open)}>
-                    <div
-                        className="flex items-center justify-center pt-2 px-2 text-center w-full">
+                    <div className="flex items-center justify-center pt-40 pb-20 px-2 text-center w-full">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -78,8 +78,7 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                             enterTo="opacity-100"
                             leave="ease-in duration-200"
                             leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                        >
+                            leaveTo="opacity-0">
                             <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-75 transition-opacity"/>
                         </Transition.Child>
 
@@ -90,41 +89,41 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                             enterTo="opacity-100 translate-y-0"
                             leave="ease-in duration-200"
                             leaveFrom="opacity-100 translate-y-0"
-                            leaveTo="opacity-0 translate-y-4"
-                        >
-                            <div
-                                className="flex flex-col w-10/12 bg-gray-700 rounded-md text-left overflow-hidden shadow-xl transform transition-all">
-                                <div className="w-full bg-gray-800 px-4 pt-1 pb-4 ">
+                            leaveTo="opacity-0 translate-y-4">
+                            <div className="flex flex-col w-10/12 bg-gray-700 rounded-md text-left overflow-hidden shadow-xl transform transition-all">
+                                <div className="w-full h-full bg-gray-800 px-4 pt-2 pb-4">
                                     <div>
                                         <div className="mt-3 text-left">
-                                            <Dialog.Title as="h3" className="text-3xl pb-3 text-left leading-6 font-medium text-white">
-                                                📃 Пациент {patient.name}
+                                            <Dialog.Title as="h3" className="flex flex-row justify-between text-2xl py-3 mb-3 text-left leading-6 font-medium text-white">
+                                                <div>📃 Пациент {patient.name}</div>
+                                                {patient.description ? <div>ОПИСАНО ✅</div> : <div>НЕ ОПИСАНО 🚫</div>}
                                             </Dialog.Title>
                                             <hr/>
                                             <div className='w-full'>
-                                                <div className="my-2 text-2xl text-left flex flex-row">
+                                                <div className="my-2 text-xl text-left flex flex-row">
                                                     <b className='w-1/4 mr-5'>🔢 Номер исследования: </b>
                                                     <label>{patient.id}</label>
                                                 </div>
-                                                <div className="my-2 text-2xl text-left flex flex-row">
+                                                <div className="my-2 text-xl text-left flex flex-row">
                                                     <b className='w-1/4 mr-5'>👤 ФИО: </b>
                                                     <EditableSpan title={patient.name} callback={editName}/>
                                                 </div>
-                                                <div className="my-2 text-2xl text-left flex flex-row">
+                                                <div className="my-2 text-xl text-left flex flex-row">
                                                     <b className='w-1/4 mr-5'>🚼 Год: </b>
                                                     <EditableSpan title={patient.birthyear.years} callback={editYear}/>
                                                 </div>
-                                                <div className="my-2 text-2xl text-left flex flex-row">
+                                                <div className="my-2 text-xl text-left flex flex-row">
                                                     <b className='w-1/4 mr-5'>️♂️♀️ Пол: </b>
                                                     <EditableSpanSex sex={patient.sex} callback={editSex}/>
                                                 </div>
-                                                <div className="my-2 text-2xl text-left flex flex-row">
+                                                <div className="my-2 text-xl text-left flex flex-row">
                                                     <b className='w-1/4 mr-5'>🏠 Адрес: </b>
                                                     <EditableSpan title={patient.address} callback={editAddress}/>
                                                 </div>
-                                                <div className="my-2 text-2xl text-left flex flex-row">
+                                                <div className="my-2 text-xl text-left flex flex-row">
                                                     <b className='w-1/4 mr-5'>🔍 Исследования: ⬇️</b>
                                                 </div>
+
                                                 <div className="table w-full table bg-gray-800 rounded-md p-3 ">
                                                     <div className="table-header-group">
                                                         <div className="table-row">
@@ -145,7 +144,7 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                                                                                               types={researchesTypes}
                                                                                               key={typeRes.idres}
                                                                                               value={typeRes.typeres}/>
-                                                                            : <p className={'text-2xl bg-gray-700 rounded-lg p-2 mb-2'}
+                                                                            : <p className={'text-xl bg-gray-700 rounded-lg p-2 mb-2'}
                                                                                  key={typeRes.idres}>{typeRes.typeres}</p>)
                                                                 })}
                                                             </div>
@@ -156,7 +155,7 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                                                                             ? <InputMenuTypes id={films.idres}
                                                                                               callback={changeFilmsResearches}
                                                                                               types={sizeFilmsTypes} key={films.idres} value={films.sizefilm}/>
-                                                                            : <p className={'text-2xl bg-gray-700 rounded-lg p-2 mb-2'}
+                                                                            : <p className={'text-xl bg-gray-700 rounded-lg p-2 mb-2'}
                                                                                  key={films.idres}>
                                                                                 {films.sizefilm} | {films.amount} | {films.projections}
                                                                             </p>
@@ -166,12 +165,12 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                                                             <div className="flex flex-col table-cell border border-gray-500 text-left text-lg p-3">
                                                                 <div className={'flex flex-col'}>
                                                                     {newResearches.map((dose, index) => editMode
-                                                                        ? <InputNumber id={dose.idres} callback={changeDoseResearches} key={index} value={dose.dose} />
-                                                                        : <p className={'text-2xl bg-gray-700 rounded-lg p-2 mb-2'}
+                                                                        ? <InputNumber id={dose.idres} callback={changeDoseResearches} key={index} value={dose.dose}/>
+                                                                        : <p className={'text-xl bg-gray-700 rounded-lg p-2 mb-2'}
                                                                              key={dose.idres}>{dose.dose}мЗв</p>
                                                                     )}
                                                                 </div>
-                                                                {newResearches.length > 1 && <div className={'text-2xl bg-gray-500 rounded-lg p-3 mb-2'}>
+                                                                {newResearches.length > 1 && <div className={'text-xl bg-gray-500 rounded-lg p-3 mb-2'}>
 
                                                                     Суммарно: {newResearches.map(res => {
                                                                     return Math.round(Number(res.dose) * 100) / 100
@@ -190,16 +189,21 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                                                                      customStyle={'float-right text-xl w-60 h-12 bg-red text-white mr-4 mt-3'}
                                                                      onClick={sendEditedResearches}/>}
 
-                                                <div className="my-2 mb-3 text-2xl text-left flex flex-col ">
+                                                <div className="my-2 mb-3 text-xl text-left flex flex-col ">
                                                     <b className='w-1/4 mr-5'>📝 Описание: </b>
-                                                    {patient.description ? patient.description : 'НЕ ОПИСАНО'}
+                                                    <TextAreaComponent callback={() => {
+                                                    }}
+                                                                       patient={patient}
+                                                                       value={patient.description}/>
                                                 </div>
-                                                <div className="my-2 text-2xl text-left flex flex-col">
+                                                <div className="my-2 mb-3 text-xl text-left flex flex-col ">
                                                     <b className='w-1/4 mr-5'>✅ Заключение: </b>
-                                                    {patient.conclusion ? patient.conclusion : 'НЕ ОПИСАНО'}
+                                                    <TextAreaComponent callback={() => {
+                                                    }}
+                                                                       patient={patient}
+                                                                       value={patient.conclusion}/>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
