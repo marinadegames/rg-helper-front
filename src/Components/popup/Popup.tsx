@@ -1,6 +1,6 @@
 import React, {Fragment, memo, useCallback, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
-import {PatientType, ResearchesType, ResearchType, SexTypes, SizeFilmsType} from "../../api/api";
+import {PatientType, ResearchType, SexTypes} from "../../api/api";
 import {useDispatch} from "react-redux";
 import {EditableSpan} from "../universal components/EditableSpan";
 import {EditAddressPatientTC, EditNamePatientTC, EditSexPatientTC, EditYearPatientTC} from "../../Redux/patientsReducer";
@@ -35,6 +35,7 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
             setModeTypeResearch(!modeTypeResearch)
         }
         const changeModeFilms = () => setModeFilms(!modeFilms)
+        const changeModeDose = () => setModeDose(!modeDose)
 
         const editName = useCallback((name: string) => {
             dispatch(EditNamePatientTC(patient.id, name))
@@ -130,7 +131,8 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                                                                         modeTypeResearch
                                                                             ? <InputMenuTypes callback={() => {
                                                                             }} types={researchesTypes} key={typeRes.idres}/>
-                                                                            : <p onClick={changeModeTypeResearch} key={typeRes.idres}>{typeRes.typeres}</p>)
+                                                                            : <p className={'text-2xl bg-gray-700 rounded-lg p-2 mb-2'}
+                                                                                 onClick={changeModeTypeResearch} key={typeRes.idres}>{typeRes.typeres}</p>)
                                                                 })}
                                                             </div>
                                                             <div className="table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
@@ -139,18 +141,33 @@ export const Popup = memo(({patient, open, setOpen, researches}: PropsType) => {
                                                                         modeFilms
                                                                             ? <InputMenuTypes callback={() => {
                                                                             }} types={sizeFilmsTypes} key={films.idres}/>
-                                                                            : <p onClick={changeModeFilms} key={films.idres}>{films.sizefilm} | {films.amount} | {films.projections}</p>
+                                                                            : <p onClick={changeModeFilms}
+                                                                                 className={'text-2xl bg-gray-700 rounded-lg p-2 mb-2'}
+                                                                                 key={films.idres}>
+                                                                                {films.sizefilm} | {films.amount} | {films.projections}
+                                                                            </p>
                                                                     )
                                                                 })}
                                                             </div>
                                                             <div className="flex flex-row table-cell border border-gray-500 text-left text-lg p-3 hover:bg-gray-600 cursor-pointer">
                                                                 <div>
-                                                                    {researches.map(dose => {
-                                                                        return <p key={dose.idres}>{dose.dose} мЗв</p>
-                                                                    })}
+                                                                    {researches.map(dose => modeDose
+                                                                        ? <input name={'dose'}
+                                                                                 type={'number'}
+                                                                                 value={dose.dose}
+                                                                                 onChange={() => {
+                                                                                 }}
+                                                                                 className={'text-gray-800 p-1'}/>
+                                                                        : <p onClick={changeModeDose}
+                                                                             className={'text-2xl bg-gray-700 rounded-lg p-2 mb-2'}
+                                                                             key={dose.idres}>{dose.dose} мЗв</p>
+                                                                    )}
                                                                 </div>
-                                                                {researches.length > 1 && <div>
-                                                                    Суммарно: {researches.reduce((a: any, b: any) => a.dose + b.dose)} мЗв
+                                                                {researches.length > 1 && <div className={'text-2xl bg-gray-500 rounded-lg p-3 mb-2'}>
+
+                                                                    Суммарно: {researches.map(res => {
+                                                                        return Number(res.dose)
+                                                                }).reduce((a: number, b: number) => a + b)} мЗв
                                                                 </div>}
                                                             </div>
                                                         </div>
